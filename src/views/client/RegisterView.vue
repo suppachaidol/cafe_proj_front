@@ -13,7 +13,7 @@
                     </p>
 
                     <form class="mx-1 mx-md-4">
-                      <div class="d-flex flex-row align-items-center mb-4">                       
+                      <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
                           <input
                             v-model="state.u_name"
@@ -22,8 +22,10 @@
                             class="form-control"
                             placeholder="Your Name"
                           />
-                          
-                            <span v-if="v$.u_name.$error" class="text-danger">{{v$.u_name.$errors[0].$message}}</span>
+
+                          <span v-if="v$.u_name.$error" class="text-danger">{{
+                            v$.u_name.$errors[0].$message
+                          }}</span>
                         </div>
                       </div>
 
@@ -36,8 +38,12 @@
                             class="form-control"
                             placeholder="Your Username"
                           />
-                                        
-                            <span v-if="v$.u_username.$error" class="text-danger">{{v$.u_username.$errors[0].$message}}</span>                          
+
+                          <span
+                            v-if="v$.u_username.$error"
+                            class="text-danger"
+                            >{{ v$.u_username.$errors[0].$message }}</span
+                          >
                         </div>
                       </div>
 
@@ -50,12 +56,16 @@
                             class="form-control"
                             placeholder="Password"
                           />
-                                                   
-                            <span v-if="v$.u_password.$error" class="text-danger">{{v$.u_password.$errors[0].$message}}</span>                         
+
+                          <span
+                            v-if="v$.u_password.$error"
+                            class="text-danger"
+                            >{{ v$.u_password.$errors[0].$message }}</span
+                          >
                         </div>
                       </div>
 
-                      <div class="d-flex flex-row align-items-center mb-4">                       
+                      <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
                           <input
                             v-model="state.password_confirmation"
@@ -64,8 +74,14 @@
                             class="form-control"
                             placeholder="Repeat your password"
                           />
-                                                   
-                          <span v-if="v$.password_confirmation.$error" class="text-danger">{{v$.password_confirmation.$errors[0].$message}}</span>                          
+
+                          <span
+                            v-if="v$.password_confirmation.$error"
+                            class="text-danger"
+                            >{{
+                              v$.password_confirmation.$errors[0].$message
+                            }}</span
+                          >
                         </div>
                       </div>
 
@@ -78,8 +94,10 @@
                             class="form-control"
                             placeholder="Email"
                           />
-                          
-                          <span v-if="v$.u_email.$error" class="text-danger">{{v$.u_email.$errors[0].$message}}</span>                 
+
+                          <span v-if="v$.u_email.$error" class="text-danger">{{
+                            v$.u_email.$errors[0].$message
+                          }}</span>
                         </div>
                       </div>
 
@@ -92,15 +110,41 @@
                             class="form-control"
                             placeholder="Phone"
                           />
-                          
-                          <span v-if="v$.u_phone.$error" class="text-danger">{{v$.u_phone.$errors[0].$message}}</span>  
+
+                          <span v-if="v$.u_phone.$error" class="text-danger">{{
+                            v$.u_phone.$errors[0].$message
+                          }}</span>
                         </div>
                       </div>
+
+                      <div class="mb-2">Upload Profile</div>
+                      <div class="d-flex flex-row align-items-center">
+                        <div class="uploadImg file">
+                          <label class="file-label">
+                            <input
+                              name="photo"
+                              class="file-input"
+                              type="file"                             
+                              @change="onFileSelected"                              
+                            />
+                          </label>
+                          <p class="img mt-2" v-if="state.urlImage">
+                            <img class="img-thumbnail" :src="state.urlImage" />
+                          </p>
+                        </div>
+                      </div>
+                      <span v-if="v$.selectedFile.$error" class="text-danger">{{
+                            v$.selectedFile.$errors[0].$message
+                          }}</span>
 
                       <div
                         class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
                       >
-                        <button @click="signUp" type="button" class="btn btn-primary btn-lg">
+                        <button
+                          @click="signUp"
+                          type="button"
+                          class="btn btn-primary btn-lg mt-3"
+                        >
                           Register
                         </button>
                       </div>
@@ -126,80 +170,103 @@
 </template>
 
 <script>
-import AuthUser from "@/store/AuthUser"
-import Swal from 'sweetalert2'
-import useValidate from '@vuelidate/core'
-import { required, email, minLength, sameAs} from '@vuelidate/validators'
-import {reactive, computed} from 'vue'
+import AuthUser from "@/store/AuthUser";
+import Swal from "sweetalert2";
+import useValidate from "@vuelidate/core";
+import { required, email, minLength, sameAs } from "@vuelidate/validators";
+import { reactive, computed } from "vue";
+import Axios from "axios"
 
 export default {
   name: "Register",
-  setup(){
+  setup() {
     const state = reactive({
-        u_name: "",
-        u_username: "",
-        u_password: "",
-        password_confirmation: "",
-        u_email: "",
-        u_phone: "",  
-    })
-    const rules = computed(()=>{
-      return{ 
-        u_name: {required},
-        u_username: {required},
-        u_password: {required, minLength: minLength(6)},
-        password_confirmation: {required, sameAs: sameAs(state.u_password)},
-        u_email: {required, email},
-        u_phone: {required},
-      }
-    })
-    const v$ = useValidate(rules, state)
+      u_name: "",
+      u_username: "",
+      u_password: "",
+      password_confirmation: "",
+      u_email: "",
+      u_phone: "",
+      selectedFile: null,
+      urlImage: "",
+    });   
+    const rules = computed(() => {
+      return {
+        u_name: { required },
+        u_username: { required },
+        u_password: { required, minLength: minLength(6) },
+        password_confirmation: { required, sameAs: sameAs(state.u_password) },
+        u_email: { required, email },
+        u_phone: { required },
+        selectedFile: {required}
+      };
+    });
+    const v$ = useValidate(rules, state);
 
-    return{
+    return {
       state,
-      v$
-    }
+      v$,
+    };
   },
   // data(){
   //   return{
-      
+
   //   }
   // },
-  methods:{
-    async signUp(){
-      this.v$.$validate()
-      if(this.v$.$error){
+  methods: {
+    onFileSelected(event) {
+      this.state.selectedFile = event.target.files[0];
+      this.state.urlImage = URL.createObjectURL(this.state.selectedFile);
+    },
+
+    async signUp() {
+      this.v$.$validate();
+      if (this.v$.$error) {
         Swal.fire({
-          icon: 'error',
-          text: 'Please fill in the correct information.',
-          confirmButtonColor: '#dd6b55'
-        })
-      }else{
+          icon: "error",
+          text: "Please fill in the correct information.",
+          confirmButtonColor: "#dd6b55",
+        });
+      } else {
         let res = await AuthUser.dispatch("register", this.state);
-        if(res.success){
+        if (res.success) {
           let loginForm = {
             u_username: this.state.u_username,
-            u_password: this.state.u_password
-          }
+            u_password: this.state.u_password,
+          };
+
+          //upload image
+          const fd = new FormData();
+          fd.append("u_image", this.state.selectedFile);
+          fd.append("u_id",res.u_id)
+          const api_endpoint = "http://localhost:5000"
+          Axios.put(api_endpoint+"/api/user/upload-img", fd)
+                
+
           Swal.fire({
-            icon: 'success',
-            title: 'Registration successful',
+            icon: "success",
+            title: "Registration successful",
             showConfirmButton: false,
-            timer: 1500
-          })
+            timer: 1500,
+          });
           await AuthUser.dispatch("login", loginForm);
           this.$router.push("/");
-        }else{
+        } else {
           Swal.fire({
-          icon: 'error',
-          text: res.message,
-          confirmButtonColor: '#dd6b55'
-        })
+            icon: "error",
+            text: res.message,
+            confirmButtonColor: "#dd6b55",
+          });
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style></style>
+<style scoped>
+.img-thumbnail{
+  height: 30%;
+  width: 30%;
+}
+</style>
