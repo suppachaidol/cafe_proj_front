@@ -12,4 +12,5 @@ import VueAxios from 'vue-axios'
 
 
 
+
 createApp(App).use(bootstrap).use(store).use(router).use(VueSweetalert2).use(VueAxios, axios).mount('#app')
