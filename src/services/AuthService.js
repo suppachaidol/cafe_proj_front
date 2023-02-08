@@ -93,10 +93,10 @@ export default {
             }
             let res = await Axios.post(url, body)
             if (res.status === 200 || res.status === 201) {
-                console.log(res.data)
                 localStorage.setItem(auth_key, JSON.stringify(res.data))
                 return {
                     success: true,
+                    u_id: res.data.u_id,
                     user: res.data.user,
                     jwt: res.data.access_token
                 }
