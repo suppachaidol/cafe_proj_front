@@ -1,94 +1,84 @@
 <template>
-  <div>
-    <section class="vh-100" style="background-color: #eee">
-      <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col col-xl-10">
-            <div class="card" style="border-radius: 1rem">
-              <!-- <div class="row g-0"> -->
+<div class="bg-image" 
+     style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+            height: 100vh">
+  <section class="pt-5 pb-5 mt-0 align-items-center d-flex text-light">
+    <div class="container-fluid ">
+      <div class="row align-items-center justify-content-center  text-center">
+        <div class="col-12 col-md-5  ">
+          <h1 class="display-3   mb-2 mt-5 text-white"><strong>Cafe Search</strong> </h1>
+          <p class="lead   mb-5">Where do you want to go <strong>?</strong></p>
 
-                <!-- <div class="col-md-6 col-lg-7 d-flex align-items-center"> -->
-                  <div class="card-body p-4 p-lg-5 text-black  ">
-                    <form>
-                      <div class="d-flex align-items-center mb-3 pb-1">
-                        <span class="h1 fw-bold mb-0">Cafe Search</span>
-                      </div>
+          <span
+            class="text-center w-100 d-block text-center d-flex justify-content-center ">
+            <form class="form-inline d-block  w-100" style="min-width:250px;">
 
+              <input class="form-control form-control-lg mr-sm-2 mb-2 w-100"
+                type="search" placeholder="Search" aria-label="Search">
 
-                      <div class="form-outline mb-4">
-                        <input
-                          type="text"
-                          class="form-control form-control-lg"
-                          required
-                        />
-                        <label class="form-label" 
-                          >Name</label
-                        >
-                      </div>
+              <input class="form-control form-control-lg mr-sm-2 mb-2 w-100"
+                type="search" placeholder="Search" aria-label="Search">
 
-                        <div class="dropdown">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                Location or Near by
-                            </a>
+                <div class="dropdown mb-2" >
+                  <a class="btn btn-secondary dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                      Location or Near by
+                  </a>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
+                  <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
 
-                          <div class="dropdown">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                Style
-                            </a>
+                </div>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
+                <div class="dropdown mb-2" >
+                  <a class="btn btn-secondary dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                      Style
+                  </a>
 
+                  <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
 
-                        <div class="dropdown">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                Service
-                            </a>
+                </div>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
+                <div class="dropdown mb-2" >
+                  <a class="btn btn-secondary dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                      Service
+                  </a>
+
+                  <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+
+                </div>
 
 
-                     
-
-                      <div class="pt-1 mb-4">
-                        <button
-                          @click="login"
-                          class="btn btn-info btn-lg btn-block"
-                          type="button"
-                        >
-                          Search
-                        </button>
-                      </div>
-
-                      
-                    </form>
-                  </div>
                 
-                <!-- </div> -->
-    
-              <!-- </div> -->
+              <button class="btn btn-primary w-100 btn-lg  mt-2  "
+                type="submit">Search</button>
+            </form>
+          </span>
+
+          <div class="btn-container-wrapper p-relative d-block  ">
+            <div
+              class="btn-container-velocity justify-content-center d-flex mt-1 mb-3 text-center">
+              <a class="btn btn-link btn-lg   mt-md-3 mb-4 scroll align-self-center text-light"
+                href="#section-1">
+                <i class="fa fa-angle-down fa-2x text-light"></i>
+              </a>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
+</div>
 </template>
 
 <script>
