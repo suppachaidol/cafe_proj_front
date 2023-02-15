@@ -59,24 +59,62 @@
                   </button>
                 </div>
               </section>
-              <form class="btn btn-secondary mb-2  ">
-                          <div class="d-flex flex-row align-items-center">
-                              <div class="uploadImg file">
-                                  <label class="file-label">
-                                  <input
-                                      name="photo"
-                                      class="file-input"
-                                      type="file"                             
-                                      @change="onFileSelected"                              
-                                  />
-                                    <i class="bi bi-cloud-upload "></i>
-                                  </label>
-                                  <p class="img mt-2" v-if="state.urlImage">
-                                  <img class="img-thumbnail" :src="state.urlImage" />
-                                  </p>
+              <div class = "row">
+                <div class= "col">
+                  <form class="btn btn-secondary mb-2  ">
+                              <div class="d-flex flex-row align-items-center">
+                                  <div class="uploadImg file">
+                                      <label class="file-label">
+                                      <input
+                                          name="photo"
+                                          class="file-input"
+                                          type="file"                             
+                                          @change="onFileSelected"                              
+                                      />
+                                        <i class="bi bi-cloud-upload "></i>
+                                      </label>
+                                      <p class="img mt-2" v-if="state.urlImage">
+                                      <img class="img-thumbnail" :src="state.urlImage" />
+                                      </p>
+                                  </div>
                               </div>
+                  </form>
+                </div>
+                <div class ="col">
+                  <div class="container-fluid">
+                        <h5>Service</h5>
+
+                        <div class="row">
+
+                          <div class="col-6">
+                              <input type="checkbox" name="pets" value="Other"> Creative Space<br>
+                              <input type="checkbox" name="pets" value="Other"> Screening Room<br>
+                              <input type="checkbox" name="pets" value="Other"> Karaoke<br>
+                              <input type="checkbox" name="pets" value="Other"> Good for Group<br>
+                              <input type="checkbox" name="pets" value="Other"> Pet Friendly<br>
+                              <input type="checkbox" name="pets" value="Other"> Kids Friendly<br>
+                              <input type="checkbox" name="pets" value="Other"> Creative Space<br>
                           </div>
-              </form>
+
+
+                          <div class="col-6">
+                            <input type="checkbox" name="pets" value="Other"> Screening Room<br>
+                            <input type="checkbox" name="pets" value="Other"> Take Away<br>
+                            <input type="checkbox" name="pets" value="Other"> No Reservations<br>
+                            <input type="checkbox" name="pets" value="Other"> Cash Only<br>
+                            <input type="checkbox" name="pets" value="Other"> Art Gallery<br>
+                            <input type="checkbox" name="pets" value="Other"> Art Space<br>
+                            <input type="checkbox" name="pets" value="Other"> Co-Working Space<br>
+                          </div>
+
+
+
+                        </div>
+                        
+
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="col-12 col-md-4 offset-md-1  ">
@@ -117,6 +155,112 @@
                   </div>
                 </div>
 
+                <div class=" w-100 pb-3">
+                  <h5>Time</h5>
+                  <div class ="row pb-2">
+                    <div class="col-3">
+                      Monday
+                    </div>
+                    <div class="col">
+                      <div class ="row">
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          AM
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          PM
+                      </div>
+                    </div>
+                  </div>
+                  <div class ="row pb-2">
+                    <div class="col-3">
+                      Tuesday
+                    </div>
+                    <div class="col">
+                      <div class ="row">
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          AM
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          PM
+                      </div>
+                    </div>
+                  </div>
+                  <div class ="row pb-2">
+                    <div class="col-3">
+                      Wednesday
+                    </div>
+                    <div class="col">
+                      <div class ="row">
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          AM
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          PM
+                      </div>
+                    </div>
+                  </div>
+                  <div class ="row pb-2">
+                    <div class="col-3">
+                      Thursday
+                    </div>
+                    <div class="col">
+                      <div class ="row">
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          AM
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          PM
+                      </div>
+                    </div>
+                  </div>
+                  <div class ="row pb-2">
+                    <div class="col-3">
+                      Friday
+                    </div>
+                    <div class="col">
+                      <div class ="row">
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          AM
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          PM
+                      </div>
+                    </div>
+                  </div>
+                  <div class ="row pb-2">
+                    <div class="col-3">
+                     Saturday
+                    </div>
+                    <div class="col">
+                      <div class ="row">
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          AM
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          PM
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class=" w-100 pb-2">
                   <h5>Detail</h5>
                   <div class="form-outline mb-4 justify-content-center align-items-center h-100" >
@@ -140,43 +284,6 @@
                   </div>
                 </div> -->
                 
-
-                <div class="container-fluid">
-                      <h5>Service</h5>
-
-                      <div class="row">
-
-                        <div class="col-6">
-                            <input type="checkbox" name="pets" value="Other"> Creative Space<br>
-                            <input type="checkbox" name="pets" value="Other"> Screening Room<br>
-                            <input type="checkbox" name="pets" value="Other"> Karaoke<br>
-                            <input type="checkbox" name="pets" value="Other"> Good for Group<br>
-                            <input type="checkbox" name="pets" value="Other"> Pet Friendly<br>
-                            <input type="checkbox" name="pets" value="Other"> Kids Friendly<br>
-                            <input type="checkbox" name="pets" value="Other"> Creative Space<br>
-                            <input type="checkbox" name="pets" value="Other"> Screening Room<br>
-                            <input type="checkbox" name="pets" value="Other"> Karaoke<br>
-                        </div>
-
-
-                        <div class="col-6">
-                          <input type="checkbox" name="pets" value="Other"> Good for Group<br>
-                          <input type="checkbox" name="pets" value="Other"> Pet Friendly<br>
-                          <input type="checkbox" name="pets" value="Other"> Kids Friendly<br>
-                          <input type="checkbox" name="pets" value="Other"> Take Away<br>
-                          <input type="checkbox" name="pets" value="Other"> No Reservations<br>
-                          <input type="checkbox" name="pets" value="Other"> Cash Only<br>
-                          <input type="checkbox" name="pets" value="Other"> Art Gallery<br>
-                          <input type="checkbox" name="pets" value="Other"> Art Space<br>
-                          <input type="checkbox" name="pets" value="Other"> Co-Working Space<br>
-                        </div>
-
-
-
-                      </div>
-                      
-
-                </div>
 
 
             

@@ -58,6 +58,7 @@
               >
             </li> -->
           </ul>
+
           <div>
             <button
               v-if="isAuthen()"
@@ -68,6 +69,12 @@
               Sign out
             </button>
           </div>
+          <img
+              src="https://icon-library.com/images/profile-icon-white/profile-icon-white-22.jpg"
+              class="img-fluid mx-2"
+              alt="..."
+              style="height: 3rem "
+            />
           <div>
             <button
               v-if="!isAuthen()"
@@ -78,13 +85,13 @@
               Sign In
             </button>
           </div>
-            <button 
-              @click="searchBtn"
-              class="btn btn-outline-light" 
-              type="submit"
-            >
-              Search
-            </button>
+          <button 
+            @click="searchBtn"
+            class="btn btn-outline-light" 
+            type="submit"
+          >
+            Search
+          </button>
         </div>
       </div>
     </nav>

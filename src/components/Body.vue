@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="title"><h1>Cafe Hopper</h1></div>
+    <div class="title"><h1>CAFE HOPPER</h1></div>
     <section class="py-5 text-center container">
       <div
         id="carouselExampleControls"
@@ -53,9 +53,10 @@
         </button>
       </div>
     </section>
+    <div class="container">
+      <h3 class=" mb-2 mt-5 zindex-1"><strong> Cafe Recommend </strong></h3>
+    </div>
 
-    <h3 class=" mb-2 mt-5 zindex-1"><strong> Cafe Recommend </strong></h3>
-    
     <div class="album py-5 " >
       <div class="container">
         <div class="row  g-3">
@@ -223,7 +224,9 @@
         </div>
       </div>
     </div>
- <h3 class=" mb-2 mt-5 zindex-1"><strong> New Cafe  </strong></h3>
+    <div class="container">
+      <h3 class=" mb-2 mt-5 zindex-1"><strong> New Cafe  </strong></h3>
+    </div>
     
     <div class="album py-5 " >
       <div class="container">
