@@ -1,11 +1,11 @@
 <template>
   <div>
-    <section class="vh-100" style="background-color: #eee">
+    <section class="vh-100" id="section-all">
       <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-lg-12 col-xl-11">
             <div class="card text-black" style="border-radius: 25px">
-              <div class="card-body p-md-5">
+              <div class="card-body p-md-5" >
                 <div class="row justify-content-center">
                   <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                     <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
@@ -119,20 +119,24 @@
 
                       <div class="mb-2">Upload Profile</div>
                       <div class="d-flex flex-row align-items-center">
+                        <form class="btn btn-secondary mb-2">
                         <div class="uploadImg file">
                           <label class="file-label">
                             <input
                               name="photo"
                               class="file-input"
                               type="file"                             
-                              @change="onFileSelected"                              
+                              @change="onFileSelected"
+                              style="display:none"                              
                             />
+                            Click to upload profile
                           </label>
-                          <p class="img mt-2" v-if="state.urlImage">
-                            <img class="img-thumbnail" :src="state.urlImage" />
-                          </p>
                         </div>
+                        </form>
                       </div>
+                          <p class="img mt-2" v-if="state.urlImage">
+                            <img class="img-thumbnail" :src="state.urlImage" style="width: 100px; height: 100px;"/>
+                          </p>
                       <span v-if="v$.selectedFile.$error" class="text-danger">{{
                             v$.selectedFile.$errors[0].$message
                           }}</span>
@@ -150,15 +154,7 @@
                       </div>
                     </form>
                   </div>
-                  <div
-                    class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2"
-                  >
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                      class="img-fluid"
-                      alt="Sample image"
-                    />
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -268,5 +264,12 @@ export default {
 .img-thumbnail{
   height: 30%;
   width: 30%;
+}
+#section-all{
+  background-image: url(https://www.ryoiireview.com/upload/article/202210/1665482521_18e2999891374a475d0687ca9f989d83.jpg);
+}
+.card{
+  background-color: #eee;
+  opacity: 97%;
 }
 </style>

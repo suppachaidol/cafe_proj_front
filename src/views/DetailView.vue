@@ -47,11 +47,7 @@
                   >
                     Go to Google Map
                   </a>
-                    <!-- <iframe class="map"
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13276.130589485732!2d-122.42226015576097!3d37.76700381519751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c6c8f4459%3A0xb10ed6d9b5050fa5!2sTwitter+HQ!5e0!3m2!1sru!2sru!4v1532164770673"
-                      width="100%" height="600" frameborder="0" style="border:0"
-                      allowfullscreen="">
-                    </iframe>   -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3552.38725126451!2d100.57268192602788!3d13.844694666112678!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29d8e6ceb6111%3A0x897f574b5877462e!2sStarbucks!5e0!3m2!1sth!2sth!4v1676524633789!5m2!1sth!2sth" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> 
                 </p>
 
            

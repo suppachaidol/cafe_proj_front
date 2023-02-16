@@ -56,32 +56,31 @@
     <div class="container">
       <h3 class=" mb-2 mt-5 zindex-1"><strong> Cafe Recommend </strong></h3>
     </div>
-
+    
     <div class="album py-5 " >
       <div class="container">
         <div class="row  g-3">
-          <div class="col-3">
+          <div class="col-md-3 col-sm-6 col-12" v-for="(cafe, index) in displayedCafes" :key="index">
             <div class="card shadow-sm">
-              <svg
+              <img
                 class="bd-placeholder-img card-img-top"
                 width="100%"
                 height="225"
-                xmlns="http://www.w3.org/2000/svg"
+                :src="`http://localhost:5000/api/images/cafe/${cafe.c_image}`"
                 role="img"
                 aria-label="Placeholder: Thumbnail"
                 preserveAspectRatio="xMidYMid slice"
                 focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" />
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-              </svg>
+              />
+                
+              
 
               <div class="card-body">
+                <div>
+                  <h5>{{cafe.c_name}}</h5>
+                </div>
                 <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
+                  
                 </p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
@@ -95,132 +94,18 @@
                     </button>
                    
                   </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg
-                class="bd-placeholder-img card-img-top"
-                width="100%"
-                height="225"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Thumbnail"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" />
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-              </svg>
-
-              <div class="card-body">
-                <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-
-                    <button
-                      @click="detailBTN"
-                      type="button"
-                      class="btn btn-sm btn-outline-secondary"
-                    >
-                      View 
-                    </button>
-                   
-                  </div>
-                  <small class="text-muted">9 mins</small>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg
-                class="bd-placeholder-img card-img-top"
-                width="100%"
-                height="225"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Thumbnail"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" />
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-              </svg>
-
-              <div class="card-body">
-                <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-
-                    <button
-                      @click="detailBTN"
-                      type="button"
-                      class="btn btn-sm btn-outline-secondary"
-                    >
-                      View 
-                    </button>
-                   
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
+          <div>
+            <button @click="previousPage">Previous</button>
+            <span>Page {{ currentPage }} of {{ totalPages }}</span>
+            <button @click="nextPage">Next</button>
           </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg
-                class="bd-placeholder-img card-img-top"
-                width="100%"
-                height="225"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Thumbnail"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" />
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-              </svg>
-
-              <div class="card-body">
-                <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-
-                    <button
-                      @click="detailBTN"
-                      type="button"
-                      class="btn btn-sm btn-outline-secondary"
-                    >
-                      View 
-                    </button>
-                   
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
+          
+          
+         
         </div>
       </div>
     </div>
@@ -231,28 +116,26 @@
     <div class="album py-5 " >
       <div class="container">
         <div class="row  g-3">
-          <div class="col-3">
+          <div class="col-md-3 col-sm-6 col-12" v-for="(cafe, index) in cafe_date" :key="index">
             <div class="card shadow-sm">
-              <svg
+              <img
                 class="bd-placeholder-img card-img-top"
                 width="100%"
                 height="225"
-                xmlns="http://www.w3.org/2000/svg"
+                :src="`http://localhost:5000/api/images/cafe/${cafe.c_image}`"
                 role="img"
                 aria-label="Placeholder: Thumbnail"
                 preserveAspectRatio="xMidYMid slice"
                 focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" />
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-              </svg>
+              />
+                
 
               <div class="card-body">
+                <div>
+                  <h5>{{cafe.c_name}}</h5>
+                </div>
                 <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
+                  
                 </p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
@@ -266,130 +149,9 @@
                     </button>
                    
                   </div>
-                  <small class="text-muted">9 mins</small>
                 </div>
               </div>
 
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg
-                class="bd-placeholder-img card-img-top"
-                width="100%"
-                height="225"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Thumbnail"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" />
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-              </svg>
-
-              <div class="card-body">
-                <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-
-                    <button
-                      @click="detailBTN"
-                      type="button"
-                      class="btn btn-sm btn-outline-secondary"
-                    >
-                      View 
-                    </button>
-                   
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg
-                class="bd-placeholder-img card-img-top"
-                width="100%"
-                height="225"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Thumbnail"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" />
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-              </svg>
-
-              <div class="card-body">
-                <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-
-                    <button
-                      @click="detailBTN"
-                      type="button"
-                      class="btn btn-sm btn-outline-secondary"
-                    >
-                      View 
-                    </button>
-                   
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg
-                class="bd-placeholder-img card-img-top"
-                width="100%"
-                height="225"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Thumbnail"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" />
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-              </svg>
-
-              <div class="card-body">
-                <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-
-                    <button
-                      @click="detailBTN"
-                      type="button"
-                      class="btn btn-sm btn-outline-secondary"
-                    >
-                      View 
-                    </button>
-                   
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -402,6 +164,7 @@
       </div>
 
     </div>
+    
     <a
       href="#"
       class="scroll-top d-flex align-items-center justify-content-center"
@@ -411,17 +174,71 @@
 </template>
 
 <script>
+import CafeStore from "@/store/cafe";
+import AuthUser from "@/store/AuthUser"
+
 export default {
   name: "Body",
   data() {
-    return {};
+    return {
+      cafe_star:null,
+      cafe_date:null,
+      currentPage: 1,
+      pageSize: 4
+    };
+  },
+  created() {
+    this.fetchCafeStarData();
+    this.fetchCafeDateData();
   },
    methods:{
+    async fetchCafeStarData() {
+      await CafeStore.dispatch("fetchCafe");
+      this.cafe_star = await CafeStore.getters.cafe;
+      //console.log(this.cafe_star)
+    },
+    async fetchCafeDateData(){
+      await CafeStore.dispatch("fetchCafeByDate");
+      this.cafe_date = await CafeStore.getters.cafe;
+    },
+
     async detailBTN(){
         this.$router.push("/detail");
     },
     async addBTN(){
       this.$router.push("/add");
+    },
+    previousPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
+    // async findMtstate(){
+    //   const success = (position)=>{
+    //     console.log(position)
+    //     const latitude = position.coords.latitude
+    //     const longtitude = position.coords.longtitude
+        
+    //   }
+    //   const error = () =>{
+    //     this.location = 'Unable to retrieve your location'
+    //   }
+    //   navigator.geolocation.getCurrentPosition(success,error)
+    // }
+  },
+  computed: {
+    displayedCafes() {
+      const start = (this.currentPage - 1) * this.pageSize;
+      const end = start + this.pageSize;
+      return this.cafe_star ? this.cafe_star.slice(start, end) : [];
+    },
+    totalPages() {
+      return this.cafe_star ? Math.ceil(this.cafe_star.length / this.pageSize) : 0;
     }
   }
 };
@@ -459,4 +276,5 @@ export default {
   text-align: center;
   margin-top: 30px;
 }
+
 </style>

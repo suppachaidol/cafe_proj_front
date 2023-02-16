@@ -116,7 +116,7 @@ export default {
     },
     async logout() {
       await AuthUser.dispatch("logout");
-      this.$router.push("/");
+      location.replace("/")
     },
     searchBtn() {
       this.$router.push("/search");
