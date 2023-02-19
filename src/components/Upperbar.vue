@@ -58,6 +58,14 @@
               >
             </li> -->
           </ul>
+          <button class="profile-button" v-if="isAuthen()" @click="goToProfile(userId)">
+          <img
+              src="https://icon-library.com/images/profile-icon-white/profile-icon-white-22.jpg"
+              class="img-fluid mx-2"
+              alt="..."
+              style="height: 2.5rem "
+            />
+          </button>
 
           <div>
             <button
@@ -69,12 +77,6 @@
               Sign out
             </button>
           </div>
-          <img
-              src="https://icon-library.com/images/profile-icon-white/profile-icon-white-22.jpg"
-              class="img-fluid mx-2"
-              alt="..."
-              style="height: 3rem "
-            />
           <div>
             <button
               v-if="!isAuthen()"
@@ -105,7 +107,9 @@ export default {
   name: "Upperbar",
   components: {},
   data() {
-    return {};
+    return {
+      userId: AuthUser.getters.user.u_id,
+    };
   },
   methods: {
     signInBtn() {
@@ -113,6 +117,9 @@ export default {
     },
     isAuthen() {
       return AuthUser.getters.isAuthen;
+    },
+    goToProfile(id){
+      this.$router.push({ path: "/profile/" + id, params: { id: id } });
     },
     async logout() {
       await AuthUser.dispatch("logout");
@@ -125,4 +132,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.profile-button { 
+  border: none;
+  background-color: #212529;
+  cursor: pointer;
+  }
+</style>
+

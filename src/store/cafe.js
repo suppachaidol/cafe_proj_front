@@ -8,14 +8,19 @@ Axios.defaults.headers.common = { 'Authorization': `bearer ${AuthUser.getters.jw
 
 export default new Vuex.Store({
     state: {
-        cafe: []
+        cafe: [],
+        images:[]
     },
     getters: {
         cafe: (state) => state.cafe,
+        images: (state) => state.images,
     },
     mutations: {
         fetch(state, { res }) {
             state.cafe = res.data
+        },
+        fetchImage(state, { res }) {
+            state.images = res.data
         },
         add(state, { payload }) {
             state.cafe.push(payload)
@@ -33,6 +38,10 @@ export default new Vuex.Store({
         async fetchCafeById({ commit }, id) {
             let res = await Axios.get(api_endpoint + '/api/cafe/' + id)
             commit('fetch', { res })
+        },
+        async fetchCafeImageById({commit},id){
+            let res = await Axios.get(api_endpoint + '/api/cafe_image/' + id)
+            commit('fetchImage', { res })
         },
         async addCafe({ commit }, payload) {
             try{
@@ -74,6 +83,42 @@ export default new Vuex.Store({
                 }
             }
         },
+        async updateStar({ commit }, payload){
+            try{
+                let url = api_endpoint + '/api/cafe/update_star'
+                let body = {
+                    oldStar: payload.oldStar,
+                    newStar: payload.newStar,
+                    numReview: payload.numReview,
+                    c_id: payload.c_id
+                }
+                
+                let res = await Axios.put(url, body)
+                if (res.status === 200 || res.status === 201) {
+                    return {
+                        success: true,                    
+                    }
+                } else {
+                    console.log("NOT 200", res)
+                }
+            }catch(e){
+                if (e.response.status === 400) {
+                    console.log(e)
+                    console.log("ERROR  " + e.response.status + " |   " + e.response.statusText)
+                    return {
+                        success: false,
+                        message: e.response.data.error,
+                    }
+                } else {
+                    console.error(e)
+                    console.log("ERROR  " + e.response.status + " |   " + e.response.statusText)
+                    return {
+                        success: false,
+                        message: e.response.data,
+                    }
+                }
+            }
+        }
     },
     modules: {}
 })

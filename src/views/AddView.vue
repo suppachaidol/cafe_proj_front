@@ -171,6 +171,112 @@
                 ></textarea>
               </div>
             </div>
+
+            <!-- <div class=" w-100 pb-3">
+                  <h5>Time</h5>
+                  <div class ="row pb-2">
+                    <div class="col-3">
+                      Monday
+                    </div>
+                    <div class="col">
+                      <div class ="row">
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          AM
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          PM
+                      </div>
+                    </div>
+                  </div>
+                  <div class ="row pb-2">
+                    <div class="col-3">
+                      Tuesday
+                    </div>
+                    <div class="col">
+                      <div class ="row">
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          AM
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          PM
+                      </div>
+                    </div>
+                  </div>
+                  <div class ="row pb-2">
+                    <div class="col-3">
+                      Wednesday
+                    </div>
+                    <div class="col">
+                      <div class ="row">
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          AM
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          PM
+                      </div>
+                    </div>
+                  </div>
+                  <div class ="row pb-2">
+                    <div class="col-3">
+                      Thursday
+                    </div>
+                    <div class="col">
+                      <div class ="row">
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          AM
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          PM
+                      </div>
+                    </div>
+                  </div>
+                  <div class ="row pb-2">
+                    <div class="col-3">
+                      Friday
+                    </div>
+                    <div class="col">
+                      <div class ="row">
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          AM
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          PM
+                      </div>
+                    </div>
+                  </div>
+                  <div class ="row pb-2">
+                    <div class="col-3">
+                     Saturday
+                    </div>
+                    <div class="col">
+                      <div class ="row">
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          AM
+                          <div class="col">    
+                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                          </div>
+                          PM
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
             
 
             <div class="w-100 pb-2">
@@ -535,6 +641,7 @@ export default {
         { value: "Kids Friendly", text: "Kids Friendly" },
         { value: "Art Gallery", text: "Art Gallery" },
         { value: "Co-Working Space", text: "Co-Working Space" },
+        { value: "Meeting", text: "Meeting" },
       ],
       selectedValues: [],
 

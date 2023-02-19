@@ -60,7 +60,7 @@
     <div class="album py-5 " >
       <div class="container">
         <div class="row  g-3">
-          <div class="col-md-3 col-sm-6 col-12" v-for="(cafe, index) in displayedCafes" :key="index">
+          <div class="col-md-3 col-sm-6 col-12" v-for="(cafe, index) in cafe_star" :key="index">
             <div class="card shadow-sm">
               <img
                 class="bd-placeholder-img card-img-top"
@@ -86,7 +86,7 @@
                   <div class="btn-group">
 
                     <button
-                      @click="detailBTN"
+                      @click="detailBTN(cafe.c_id)"
                       type="button"
                       class="btn btn-sm btn-outline-secondary"
                     >
@@ -98,11 +98,11 @@
               </div>
             </div>
           </div>
-          <div>
+          <!-- <div>
             <button @click="previousPage">Previous</button>
             <span>Page {{ currentPage }} of {{ totalPages }}</span>
             <button @click="nextPage">Next</button>
-          </div>
+          </div> -->
           
           
          
@@ -141,7 +141,7 @@
                   <div class="btn-group">
 
                     <button
-                      @click="detailBTN"
+                      @click="detailBTN(cafe.c_id)"
                       type="button"
                       class="btn btn-sm btn-outline-secondary"
                     >
@@ -202,8 +202,9 @@ export default {
       this.cafe_date = await CafeStore.getters.cafe;
     },
 
-    async detailBTN(){
-        this.$router.push("/detail");
+    detailBTN(id){
+      this.$router.push({ path: "/detail/" + id, params: { id: id } });
+        
     },
     async addBTN(){
       this.$router.push("/add");

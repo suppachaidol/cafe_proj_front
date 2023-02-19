@@ -25,7 +25,7 @@ const routes = [
     component: RegisterView
   },
   {
-    path: '/detail',
+    path: '/detail/:id',
     name: 'Detail',
     component: DetailView
   },
@@ -35,7 +35,7 @@ const routes = [
     component: AddView
   },
   {
-    path: '/profile',
+    path: '/profile/:id',
     name: 'Profile',
     component: ProfileView
   },
