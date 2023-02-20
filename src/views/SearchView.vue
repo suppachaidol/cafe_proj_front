@@ -21,7 +21,7 @@
 
                 <div class="dropdown mb-2" >
                   <a class="btn btn-secondary dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                      Style
+                      Star
                   </a>
 
                   <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuLink">

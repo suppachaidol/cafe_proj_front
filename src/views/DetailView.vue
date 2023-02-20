@@ -58,7 +58,7 @@
           <div class="mt-2">
             <p>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3552.38725126451!2d100.57268192602788!3d13.844694666112678!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29dc9a78e9015%3A0xc5f6eb68ce39a57f!2sXYZT%20Cafe!5e0!3m2!1sth!2sth!4v1676539313206!5m2!1sth!2sth"
+                :src="iframe"
                 width="600"
                 height="450"
                 style="border: 0"
@@ -142,7 +142,11 @@
 
               <div class="col-6 mt-2 word-spacing: 5px;">
                 <h5>
-                  <i class="bi bi-star ml-1"></i> <strong>Favorite</strong>
+                  <div class="star-rating" v-if="isAuthen()">
+                    <span class="star" @click="toggleFavorite">
+                      <i :class="favoriteClass"></i> </span
+                    ><strong> Favorite</strong>
+                  </div>
                 </h5>
               </div>
             </div>
@@ -170,13 +174,13 @@ This is my DIV element.
             <strong>Hours:</strong>
             <div class="container">
               <div class="col">
-                <div>Sunday 9 AM - 5 PM</div>
-                <div>Monday 9 AM - 5 PM</div>
-                <div>Tuesday 9 AM - 5 PM</div>
-                <div>Wednesday 9 AM - 5 PM</div>
-                <div>Thursday 9 AM - 5 PM</div>
-                <div>Friday 9 AM - 5 PM</div>
-                <div>Saturday Closed</div>
+                <div>Monday: {{ time ? time[0].monday : ""}}</div>
+                <div>tuesday: {{ time ? time[0].tuesday : ""}}</div>
+                <div>Wednesday: {{ time ? time[0].wednesday : ""}}</div>
+                <div>Thursday: {{ time ? time[0].thursday : ""}}</div>
+                <div>Friday: {{ time ? time[0].friday : ""}}</div>
+                <div>Saturday: {{ time ? time[0].saturday : ""}}</div>
+                <div>Sunday: {{ time ? time[0].sunday : ""}}</div>
               </div>
             </div>
 
@@ -301,7 +305,6 @@ This is my DIV element.
                   <h5 v-if="isAuthen()">
                     Your first-hand experiences really help other. Thanks!
                   </h5>
-                  
 
                   <i class="mx-2" v-if="isAuthen()"
                     >Your overall rating of this Cafe :
@@ -468,6 +471,7 @@ This is my DIV element.
 <script>
 import CafeStore from "@/store/cafe";
 import ReviewStore from "@/store/review";
+import UserCafeStore from "@/store/user_cafe";
 import AuthUser from "@/store/AuthUser";
 import Swal from "sweetalert2";
 
@@ -493,6 +497,9 @@ export default {
       review_5star: 0,
       currentPage: 1,
       pageSize: 6,
+      iframe: null,
+      isFavorite: null,
+      time:null,
     };
   },
   created() {
@@ -500,12 +507,15 @@ export default {
     this.fetchCafeData();
     this.fetchCafeImage();
     this.fetchReview();
+    this.fetchFavorite();
+    this.fetchCafeTime();
   },
   methods: {
     async fetchCafeData() {
       await CafeStore.dispatch("fetchCafeById", this.c_id);
       this.cafe = await CafeStore.getters.cafe;
       this.cafe_star = this.cafe[0].c_star.toFixed(1);
+      await this.splitIframe(this.cafe[0].c_map);
     },
     async fetchCafeImage() {
       await CafeStore.dispatch("fetchCafeImageById", this.c_id);
@@ -517,6 +527,23 @@ export default {
       this.reviews = await ReviewStore.getters.review;
       this.numAllReview = this.reviews.length;
       this.countStar();
+    },
+    async fetchFavorite(){
+      let payload = {
+          u_id: this.u_id,
+          c_id: this.c_id,
+        };
+      await UserCafeStore.dispatch("fetchUserCafe", payload);
+      if(UserCafeStore.getters.user_cafe.length==1){
+        this.isFavorite = true
+      }else{
+        this.isFavorite = false
+      }
+    },
+    async fetchCafeTime(){
+      let id = this.c_id
+      await CafeStore.dispatch("fetchCafeTime", id);
+      this.time = await CafeStore.getters.times;
     },
     filterImg(images) {
       for (let i = 0; i < images.length; i++) {
@@ -586,6 +613,31 @@ export default {
     isAuthen() {
       return AuthUser.getters.isAuthen;
     },
+    splitIframe(data) {
+      let arr = data.split(" ");
+      this.iframe = arr[1].slice(5, -1);
+      //console.log(typeof(arr[1].slice(5,-1)))
+    },
+    async toggleFavorite() {
+      let payload = {
+          u_id: this.u_id,
+          c_id: this.c_id,
+        };
+        console.log(UserCafeStore.getters.user_cafe)
+      if(UserCafeStore.getters.user_cafe.length==0){
+        let res = await UserCafeStore.dispatch("addUserCafe", payload);
+        console.log(res)
+        this.isFavorite = !this.isFavorite;
+        this.fetchFavorite()       
+      }else if(UserCafeStore.getters.user_cafe.length==1){
+        let id = UserCafeStore.getters.user_cafe[0].uc_id
+        let res = await UserCafeStore.dispatch("removeUserCafe", id);
+        console.log(res)
+        this.isFavorite = !this.isFavorite;
+        this.fetchFavorite()
+      }
+
+    },
   },
   computed: {
     formattedDatetime() {
@@ -603,6 +655,9 @@ export default {
     },
     totalPages() {
       return this.reviews ? Math.ceil(this.reviews.length / this.pageSize) : 0;
+    },
+    favoriteClass() {
+      return this.isFavorite ? 'bi bi-star-fill text-warning ml-1' : 'bi bi-star ml-1';
     },
   },
 };

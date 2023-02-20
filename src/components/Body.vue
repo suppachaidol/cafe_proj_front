@@ -157,7 +157,7 @@
         </div>
       </div>
 
-      <div class="container-xxl mt-5">
+      <div class="container-xxl mt-5" v-if="isAuthen()">
         <button @click="addBTN" type="button" class="btn btn-sm btn-outline-secondary" >
         Add Cafe 
         </button>
@@ -218,6 +218,9 @@ export default {
       if (this.currentPage < this.totalPages) {
         this.currentPage++;
       }
+    },
+    isAuthen() {
+      return AuthUser.getters.isAuthen;
     },
     // async findMtstate(){
     //   const success = (position)=>{

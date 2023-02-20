@@ -2,7 +2,7 @@
   <div style="background-color: #eee">
     <section class="pt-5">
       <div class="container">
-        <div class="row align-items-center">
+        <div class="row ">
           <div class="col-12 col-md-7 mt-4 mt-md-0">
             <section class="py-5 text-center container">
               <div v-if="!state.s1">
@@ -109,7 +109,7 @@
             </div>
 
             <div class="w-100">
-              <h5>Location in Google Map (Latitude)</h5>
+              <h5>Location in Google Map (Latitude,Longtitude)</h5>
               <div
                 class="form-outline mb-4 justify-content-center align-items-center h-100"
                 placeholder="Name of Cafe"
@@ -120,13 +120,13 @@
                   placeholder=""
                   class="form-control form-control-lg"
                   required
-                  v-model="state.c_lat"
+                  v-model="state.c_latlon"
                 />
               </div>
             </div>
 
             <div class="w-100">
-              <h5>Location in Google Map (Longitude)</h5>
+              <h5>Link to show map</h5>
               <div
                 class="form-outline mb-4 justify-content-center align-items-center h-100"
                 placeholder="Name of Cafe"
@@ -137,7 +137,7 @@
                   placeholder=""
                   class="form-control form-control-lg"
                   required
-                  v-model="state.c_lon"
+                  v-model="state.c_map"
                 />
               </div>
             </div>
@@ -172,7 +172,7 @@
               </div>
             </div>
 
-            <!-- <div class=" w-100 pb-3">
+            <div class=" w-100 pb-3">
                   <h5>Time</h5>
                   <div class ="row pb-2">
                     <div class="col-3">
@@ -181,11 +181,11 @@
                     <div class="col">
                       <div class ="row">
                           <div class="col">    
-                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                            <input v-model="state.mondayAM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
                           </div>
                           AM
                           <div class="col">    
-                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                            <input v-model="state.mondayPM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
                           </div>
                           PM
                       </div>
@@ -198,11 +198,11 @@
                     <div class="col">
                       <div class ="row">
                           <div class="col">    
-                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                            <input v-model="state.tuesdayAM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
                           </div>
                           AM
                           <div class="col">    
-                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                            <input v-model="state.tuesdayPM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
                           </div>
                           PM
                       </div>
@@ -215,11 +215,11 @@
                     <div class="col">
                       <div class ="row">
                           <div class="col">    
-                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                            <input v-model="state.wednesdayAM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
                           </div>
                           AM
                           <div class="col">    
-                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                            <input v-model="state.wednesdayPM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
                           </div>
                           PM
                       </div>
@@ -232,11 +232,11 @@
                     <div class="col">
                       <div class ="row">
                           <div class="col">    
-                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                            <input v-model="state.thursdayAM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
                           </div>
                           AM
                           <div class="col">    
-                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                            <input v-model="state.thursdayPM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
                           </div>
                           PM
                       </div>
@@ -249,11 +249,11 @@
                     <div class="col">
                       <div class ="row">
                           <div class="col">    
-                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                            <input v-model="state.fridayAM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
                           </div>
                           AM
                           <div class="col">    
-                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                            <input v-model="state.fridayPM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
                           </div>
                           PM
                       </div>
@@ -266,17 +266,34 @@
                     <div class="col">
                       <div class ="row">
                           <div class="col">    
-                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                            <input v-model="state.saturdayAM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
                           </div>
                           AM
                           <div class="col">    
-                            <input type="text" placeholder="" class="form-control form-control-sm" required/> 
+                            <input v-model="state.saturdayPM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
                           </div>
                           PM
                       </div>
                     </div>
                   </div>
-                </div> -->
+                  <div class ="row pb-2">
+                    <div class="col-3">
+                     Sunday
+                    </div>
+                    <div class="col">
+                      <div class ="row">
+                          <div class="col">    
+                            <input v-model="state.sundayAM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
+                          </div>
+                          AM
+                          <div class="col">    
+                            <input v-model="state.sundayPM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
+                          </div>
+                          PM
+                      </div>
+                    </div>
+                  </div>
+                </div>
             
 
             <div class="w-100 pb-2">
@@ -628,9 +645,25 @@ export default {
       c_location: "",
       c_detail: "",
       c_service: "",
-      c_status: "pass",
-      c_lat: "",
-      c_lon: "",
+      c_status: "",
+      c_latlon: "",
+      c_map: "",
+
+      mondayAM:"",
+      tuesdayAM:"",
+      wednesdayAM:"",
+      thursdayAM:"",
+      fridayAM:"",
+      saturdayAM:"",
+      sundayAM:"",
+
+      mondayPM:"",
+      tuesdayPM:"",
+      wednesdayPM:"",
+      thursdayPM:"",
+      fridayPM:"",
+      saturdayPM:"",
+      sundayPM:"",
 
       items: [
         { value: "Creative Space", text: "Creative Space" },
@@ -672,8 +705,8 @@ export default {
         c_location: { required },
         c_detail: { required },
         selectedFile: { required },
-        c_lat: { required },
-        c_lon: { required },
+        c_latlon: { required },
+        c_map: { required },
         i_menu_name1: { required },
         i_price1: { required },
         i_menu_name2: { required },
@@ -686,6 +719,20 @@ export default {
         selectedFileDish2: { required },
         selectedFileDish3: { required },
         selectedFileDish4: { required },
+        mondayAM:{ required },
+        tuesdayAM:{ required },
+        wednesdayAM:{ required },
+        thursdayAM:{ required },
+        fridayAM:{ required },
+        saturdayAM:{ required },
+        sundayAM:{ required },
+        mondayPM:{ required },
+        tuesdayPM:{ required },
+        wednesdayPM:{ required },
+        thursdayPM:{ required },
+        fridayPM:{ required },
+        saturdayPM:{ required },
+        sundayPM:{ required },
       };
     });
     const v$ = useValidate(rules, state);
@@ -736,6 +783,13 @@ export default {
     addImgUrl(img) {
       return URL.createObjectURL(img);
     },
+    async checkRole(){
+      if(AuthUser.getters.user.u_role === "admin"){
+        this.state.c_status = "pass"
+      }else{
+        this.state.c_status = "notpass"
+      }
+    },
     async addCafe() {
       this.v$.$validate();
       if (this.v$.$error) {
@@ -745,10 +799,14 @@ export default {
           confirmButtonColor: "#dd6b55",
         });
       } else {
+        await this.checkRole()
         this.state.c_service = this.state.selectedValues.join(",")
         let res = await CafeStore.dispatch("addCafe", this.state);
         this.$router.push("/");
         if(res.success){
+        //upload time open-closed
+        let res_time = await this.uploadTime(res.c_id)
+        
         //upload image cafe profile
         const fdprofile = new FormData();
         fdprofile.append("c_image", this.state.selectedFile[0]);
@@ -784,6 +842,20 @@ export default {
           });
         }
       }
+    },
+    async uploadTime(c_id){
+      let payload = {
+        c_id: c_id,
+        monday: this.state.mondayAM + " AM to " + this.state.mondayPM + " PM",
+        tuesday: this.state.tuesdayAM + " AM to " + this.state.tuesdayPM + " PM",
+        wednesday: this.state.wednesdayAM + " AM to " + this.state.wednesdayPM + " PM",
+        thursday: this.state.thursdayAM + " AM to " + this.state.thursdayPM + " PM",
+        friday: this.state.fridayAM + " AM to " + this.state.fridayPM + " PM",
+        saturday: this.state.saturdayAM + " AM to " + this.state.saturdayPM + " PM",
+        sunday: this.state.sundayAM + " AM to " + this.state.sundayPM + " PM",
+      }
+      let res = await CafeStore.dispatch("addTime", payload);
+      console.log(res)
     },
     async uploadDish(c_id){
       const api_endpoint = "http://localhost:5000"
