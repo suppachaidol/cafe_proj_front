@@ -7,6 +7,7 @@ import AddView from '../views/AddView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import FilterView from '../views/FilterView.vue'
 import SearchView from '../views/SearchView.vue'
+import ContactView from '../views/ContactView.vue'
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: '/search',
     name: 'Search',
     component: SearchView
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: ContactView
   },
 ]
 

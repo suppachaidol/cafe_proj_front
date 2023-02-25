@@ -2,7 +2,13 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Cafe Hopper</a>
+        <a class="navbar-brand" href="#"><img
+        src="https://cdn-icons-png.flaticon.com/512/2069/2069532.png"
+        class="img-fluid mx-2"
+        alt="..."
+        style="height: 2rem"
+      />Cafe Hopper</a>
+        
         <button
           class="navbar-toggler"
           type="button"
@@ -17,10 +23,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <a class="nav-link active" aria-current="page" href="/"><i class="bi bi-house"></i> Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link active" aria-current="page" href="/contact">Contact</a>
             </li>
             <!-- <li class="nav-item dropdown">
               <a
@@ -87,13 +93,11 @@
               Sign In
             </button>
           </div>
-          <button 
-            @click="searchBtn"
-            class="btn btn-outline-light" 
-            type="submit"
-          >
-            Search
-          </button>
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" style="color: white " aria-current="page" href="/search"><i class="bi bi-search"></i></a>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
@@ -124,9 +128,6 @@ export default {
     async logout() {
       await AuthUser.dispatch("logout");
       location.replace("/")
-    },
-    searchBtn() {
-      this.$router.push("/search");
     },
   },
 };

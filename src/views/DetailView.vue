@@ -394,10 +394,10 @@ This is my DIV element.
                       _______________________________________________________________________________________________________
                     </div>
                   </div>
-                  <div>
-                    <button @click="previousPage">Previous</button>
-                    <span>Page {{ currentPage }} of {{ totalPages }}</span>
-                    <button @click="nextPage">Next</button>
+                  <div class="mb-2">
+                    <button type="button" class="btn btn-dark" @click="previousPage"><i class="bi bi-caret-left-fill"></i></button>
+                    <span class="mx-2">Page {{ currentPage }} of {{ totalPages }}</span>
+                    <button type="button" class="btn btn-dark" @click="nextPage"><i class="bi bi-caret-right-fill"></i></button>
                   </div>
                 </div>
               </div>
@@ -688,7 +688,7 @@ export default {
 }
 .fakeimg {
   height: 300px;
-  background: #aaa;
+  background: #5f4545;
 }
 .col-5-1 {
   background-color: #bab0b0;

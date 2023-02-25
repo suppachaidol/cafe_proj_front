@@ -1,7 +1,17 @@
 <template>
   <div>
-    <div class="title"><h1>CAFE HOPPER</h1></div>
-    <section class="py-5 text-center container">
+    <div class="title mt-5">
+      <h1>CAFE HOPPER
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqBFAvlcnBTyqZdg8ClpCTnU3G_fTAOlm5aA&usqp=CAU"
+        class="img-fluid"
+        alt="..."
+        style="height: 4rem"
+      />
+      </h1>
+
+    </div>
+    <section class="py-4 text-center container">
       <div
         id="carouselExampleControls"
         class="carousel slide"
@@ -54,7 +64,7 @@
       </div>
     </section>
     <div class="container">
-      <h3 class=" mb-2 mt-5 zindex-1"><strong> Cafe Recommend </strong></h3>
+      <h3 class=" mb-2 mt-5 zindex-1"><strong> Cafe Recommend <i class="bi bi-fire" style="color:#D43614 "></i> </strong></h3>
     </div>
     
     <div class="album py-5 " >
@@ -110,7 +120,14 @@
       </div>
     </div>
     <div class="container">
-      <h3 class=" mb-2 mt-5 zindex-1"><strong> New Cafe  </strong></h3>
+      <h3 class=" mb-0 mt-5 zindex-1"><strong> New Cafe   
+       <img
+          src="https://zeevector.com/wp-content/uploads/New-Transparent-Logo-label@zeevector.png"
+          class="img-fluid mx-2"
+          alt="..."
+          style="height: 3rem "
+        />
+        </strong></h3>
     </div>
     
     <div class="album py-5 " >
