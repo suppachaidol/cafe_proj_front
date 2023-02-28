@@ -8,6 +8,8 @@ import ProfileView from '../views/ProfileView.vue'
 import FilterView from '../views/FilterView.vue'
 import SearchView from '../views/SearchView.vue'
 import ContactView from '../views/ContactView.vue'
+import ApproveView from '../views/admin/ApproveView.vue'
+import DetailApproveView from '../views/admin/DetailApproveView.vue'
 
 const routes = [
   {
@@ -54,6 +56,16 @@ const routes = [
     path: '/contact',
     name: 'Contact',
     component: ContactView
+  },
+  {
+    path: '/approve',
+    name: 'Approve',
+    component: ApproveView
+  },
+  {
+    path: '/detailApprove',
+    name: 'DetailApprove',
+    component: DetailApproveView
   },
 ]
 
