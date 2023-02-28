@@ -28,6 +28,9 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/contact">Contact</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/approve">Admin</a>
+            </li>
             <!-- <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle"
@@ -72,7 +75,9 @@
               style="height: 2.5rem "
             />
           </button>
-
+          <button class="profile-button me-2 pt-2" v-if="isAuthen()" @click="goToProfile(userId)">
+            <h3  style="color:white" >Admin</h3>
+          </button>
           <div>
             <button
               v-if="isAuthen()"
