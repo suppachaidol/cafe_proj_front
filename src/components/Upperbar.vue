@@ -28,8 +28,8 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/contact">Contact</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/approve">Admin</a>
+            <li v-if="role=='admin' && isAuthen()" class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/approve">Manage Cafe</a>
             </li>
             <!-- <li class="nav-item dropdown">
               <a
@@ -67,7 +67,7 @@
               >
             </li> -->
           </ul>
-          <button class="profile-button" v-if="isAuthen()" @click="goToProfile(userId)">
+          <button class="profile-button" v-if="role=='user' && isAuthen()" @click="goToProfile(userId)">
           <img
               src="https://icon-library.com/images/profile-icon-white/profile-icon-white-22.jpg"
               class="img-fluid mx-2"
@@ -75,7 +75,7 @@
               style="height: 2.5rem "
             />
           </button>
-          <button class="profile-button me-2 pt-2" v-if="isAuthen()" @click="goToProfile(userId)">
+          <button class="profile-button me-2 pt-2" v-if="role=='admin' && isAuthen()" @click="goToProfile(userId)">
             <h3  style="color:white" >Admin</h3>
           </button>
           <div>
@@ -118,6 +118,7 @@ export default {
   data() {
     return {
       userId: AuthUser.getters.user.u_id,
+      role: AuthUser.getters.user.u_role
     };
   },
   methods: {
