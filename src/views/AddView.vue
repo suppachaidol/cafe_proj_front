@@ -181,11 +181,11 @@
                     <div class="col">
                       <div class ="row">
                           <div class="col">    
-                            <input v-model="state.mondayAM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
+                            <input v-model="state.mondayAM" type="text" placeholder="" class="form-control form-control-sm" required/> 
                           </div>
                           AM
                           <div class="col">    
-                            <input v-model="state.mondayPM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
+                            <input v-model="state.mondayPM" type="text" placeholder="" class="form-control form-control-sm" required/> 
                           </div>
                           PM
                       </div>
@@ -198,11 +198,11 @@
                     <div class="col">
                       <div class ="row">
                           <div class="col">    
-                            <input v-model="state.tuesdayAM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
+                            <input v-model="state.tuesdayAM" type="text" placeholder="" class="form-control form-control-sm" required/> 
                           </div>
                           AM
                           <div class="col">    
-                            <input v-model="state.tuesdayPM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
+                            <input v-model="state.tuesdayPM" type="text" placeholder="" class="form-control form-control-sm" required/> 
                           </div>
                           PM
                       </div>
@@ -215,11 +215,11 @@
                     <div class="col">
                       <div class ="row">
                           <div class="col">    
-                            <input v-model="state.wednesdayAM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
+                            <input v-model="state.wednesdayAM" type="text" placeholder="" class="form-control form-control-sm" required/> 
                           </div>
                           AM
                           <div class="col">    
-                            <input v-model="state.wednesdayPM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
+                            <input v-model="state.wednesdayPM" type="text" placeholder="" class="form-control form-control-sm" required/> 
                           </div>
                           PM
                       </div>
@@ -232,11 +232,11 @@
                     <div class="col">
                       <div class ="row">
                           <div class="col">    
-                            <input v-model="state.thursdayAM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
+                            <input v-model="state.thursdayAM" type="text" placeholder="" class="form-control form-control-sm" required/> 
                           </div>
                           AM
                           <div class="col">    
-                            <input v-model="state.thursdayPM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
+                            <input v-model="state.thursdayPM" type="text" placeholder="" class="form-control form-control-sm" required/> 
                           </div>
                           PM
                       </div>
@@ -249,11 +249,11 @@
                     <div class="col">
                       <div class ="row">
                           <div class="col">    
-                            <input v-model="state.fridayAM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
+                            <input v-model="state.fridayAM" type="text" placeholder="" class="form-control form-control-sm" required/> 
                           </div>
                           AM
                           <div class="col">    
-                            <input v-model="state.fridayPM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
+                            <input v-model="state.fridayPM" type="text" placeholder="" class="form-control form-control-sm" required/> 
                           </div>
                           PM
                       </div>
@@ -266,11 +266,11 @@
                     <div class="col">
                       <div class ="row">
                           <div class="col">    
-                            <input v-model="state.saturdayAM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
+                            <input v-model="state.saturdayAM" type="text" placeholder="" class="form-control form-control-sm" required/> 
                           </div>
                           AM
                           <div class="col">    
-                            <input v-model="state.saturdayPM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
+                            <input v-model="state.saturdayPM" type="text" placeholder="" class="form-control form-control-sm" required/> 
                           </div>
                           PM
                       </div>
@@ -283,16 +283,17 @@
                     <div class="col">
                       <div class ="row">
                           <div class="col">    
-                            <input v-model="state.sundayAM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
+                            <input v-model="state.sundayAM" type="text" placeholder="" class="form-control form-control-sm" required/> 
                           </div>
                           AM
                           <div class="col">    
-                            <input v-model="state.sundayPM" type="text" placeholder="fill - if closed" class="form-control form-control-sm" required/> 
+                            <input v-model="state.sundayPM" type="text" placeholder="" class="form-control form-control-sm" required/> 
                           </div>
                           PM
                       </div>
                     </div>
                   </div>
+                    If your cafe is closed fill " - " in time
                 </div>
             
 
@@ -327,7 +328,7 @@
                 </div> -->
 
             <div class="container-fluid">
-              <h5>Service (Optional)</h5>
+              <h5>Service</h5>
 
               <div class="row">
                 <div
@@ -345,6 +346,7 @@
                 
               </div>
             </div>
+            
           </div>
         </div>
       </div>
@@ -666,6 +668,11 @@ export default {
       sundayPM:"",
 
       items: [
+        { value: "Dine-in", text: "Dine-in" },
+        { value: "Takeaway", text: "Takeaway" },
+        { value: "Co-Working Space", text: "Co-Working Space" },
+        { value: "Meeting", text: "Meeting" },
+        { value: "Toilets", text: "Toilets" },
         { value: "Creative Space", text: "Creative Space" },
         { value: "Screening Room", text: "Screening Room" },
         { value: "Karaoke", text: "Karaoke" },
@@ -673,8 +680,6 @@ export default {
         { value: "Pet Friendly", text: "Pet Friendly" },
         { value: "Kids Friendly", text: "Kids Friendly" },
         { value: "Art Gallery", text: "Art Gallery" },
-        { value: "Co-Working Space", text: "Co-Working Space" },
-        { value: "Meeting", text: "Meeting" },
       ],
       selectedValues: [],
 
@@ -802,7 +807,7 @@ export default {
         await this.checkRole()
         this.state.c_service = this.state.selectedValues.join(",")
         let res = await CafeStore.dispatch("addCafe", this.state);
-        this.$router.push("/");
+        //this.$router.push("/");
         if(res.success){
         //upload time open-closed
         let res_time = await this.uploadTime(res.c_id)

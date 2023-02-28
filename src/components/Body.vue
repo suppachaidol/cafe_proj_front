@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="title mt-5">
-      <h1>CAFE HOPPER
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqBFAvlcnBTyqZdg8ClpCTnU3G_fTAOlm5aA&usqp=CAU"
-        class="img-fluid"
-        alt="..."
-        style="height: 4rem"
-      />
+      <h1>
+        CAFE HOPPER
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqBFAvlcnBTyqZdg8ClpCTnU3G_fTAOlm5aA&usqp=CAU"
+          class="img-fluid"
+          alt="..."
+          style="height: 4rem"
+        />
       </h1>
-
     </div>
     <section class="py-4 text-center container">
       <div
@@ -64,13 +64,21 @@
       </div>
     </section>
     <div class="container">
-      <h3 class=" mb-2 mt-5 zindex-1"><strong> Cafe Recommend <i class="bi bi-fire" style="color:#D43614 "></i> </strong></h3>
+      <h3 class="mb-2 mt-5 zindex-1">
+        <strong>
+          Cafe Recommend <i class="bi bi-fire" style="color: #d43614"></i>
+        </strong>
+      </h3>
     </div>
-    
-    <div class="album py-5 " >
+
+    <div class="album py-5">
       <div class="container">
-        <div class="row  g-3">
-          <div class="col-md-3 col-sm-6 col-12" v-for="(cafe, index) in cafe_star" :key="index">
+        <div class="row g-3">
+          <div
+            class="col-md-3 col-sm-6 col-12"
+            v-for="(cafe, index) in displayedCafesStar"
+            :key="index"
+          >
             <div class="card shadow-sm">
               <img
                 class="bd-placeholder-img card-img-top"
@@ -82,58 +90,64 @@
                 preserveAspectRatio="xMidYMid slice"
                 focusable="false"
               />
-                
-              
 
               <div class="card-body">
                 <div>
-                  <h5>{{cafe.c_name}}</h5>
+                  <h5>{{ cafe.c_name }}</h5>
+                  <div>
+                    <i class="bi bi-star-fill" style="color: #ff9529"></i>
+                    {{ cafe.c_star.toFixed(1) }} ({{ cafe.c_review }} reviews)
+                  </div>
                 </div>
-                <p class="card-text">
-                  
-                </p>
+                <p class="card-text"></p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-
                     <button
                       @click="detailBTN(cafe.c_id)"
                       type="button"
                       class="btn btn-sm btn-outline-secondary"
                     >
-                      View 
+                      View
                     </button>
-                   
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- <div>
-            <button @click="previousPage">Previous</button>
-            <span>Page {{ currentPage }} of {{ totalPages }}</span>
-            <button @click="nextPage">Next</button>
-          </div> -->
-          
-          
-         
+          <div class="mb-2 mt-5" style="text-align:center" v-if="cafe_star.length>8">
+            <button type="button" class="btn btn-dark" @click="previousPageStar">
+              <i class="bi bi-caret-left-fill"></i>
+            </button>
+            <span class="mx-2">Page {{ currentPageStar }} of {{ totalPagesStar }}</span>
+            <button type="button" class="btn btn-dark" @click="nextPageStar">
+              <i class="bi bi-caret-right-fill"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
     <div class="container">
-      <h3 class=" mb-0 mt-5 zindex-1"><strong> New Cafe   
-       <img
-          src="https://zeevector.com/wp-content/uploads/New-Transparent-Logo-label@zeevector.png"
-          class="img-fluid mx-2"
-          alt="..."
-          style="height: 3rem "
-        />
-        </strong></h3>
+      <h3 class="mb-0 mt-5 zindex-1">
+        <strong>
+          New Cafe
+          <img
+            src="https://zeevector.com/wp-content/uploads/New-Transparent-Logo-label@zeevector.png"
+            class="img-fluid mx-2"
+            alt="..."
+            style="height: 3rem"
+          />
+        </strong>
+      </h3>
     </div>
-    
-    <div class="album py-5 " >
+
+    <div class="album py-5">
       <div class="container">
-        <div class="row  g-3">
-          <div class="col-md-3 col-sm-6 col-12" v-for="(cafe, index) in cafe_date" :key="index">
+        <div class="row g-3">
+          <div
+            class="col-md-3 col-sm-6 col-12"
+            v-for="(cafe, index) in displayedCafesDate"
+            :key="index"
+          >
             <div class="card shadow-sm">
               <img
                 class="bd-placeholder-img card-img-top"
@@ -145,43 +159,55 @@
                 preserveAspectRatio="xMidYMid slice"
                 focusable="false"
               />
-                
 
               <div class="card-body">
                 <div>
-                  <h5>{{cafe.c_name}}</h5>
+                  <h5>{{ cafe.c_name }}</h5>
+                  <div>
+                    <i class="bi bi-star-fill" style="color: #ff9529"></i>
+                    {{ cafe.c_star.toFixed(1) }} ({{ cafe.c_review }} reviews)
+                  </div>
                 </div>
-                <p class="card-text">
-                  
-                </p>
+                <p class="card-text"></p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-
                     <button
                       @click="detailBTN(cafe.c_id)"
                       type="button"
                       class="btn btn-sm btn-outline-secondary"
                     >
-                      View 
+                      View
                     </button>
-                   
                   </div>
                 </div>
               </div>
-
             </div>
+            
           </div>
         </div>
       </div>
 
+      <div class="mb-2 mt-5" style="text-align:center" v-if="cafe_date.length>8">
+            <button type="button" class="btn btn-dark" @click="previousPageDate">
+              <i class="bi bi-caret-left-fill"></i>
+            </button>
+            <span class="mx-2">Page {{ currentPageDate }} of {{ totalPagesDate }}</span>
+            <button type="button" class="btn btn-dark" @click="nextPageDate">
+              <i class="bi bi-caret-right-fill"></i>
+            </button>
+          </div>
+
       <div class="container-xxl mt-5" v-if="isAuthen()">
-        <button @click="addBTN" type="button" class="btn btn-sm btn-outline-secondary" >
-        Add Cafe 
+        <button
+          @click="addBTN"
+          type="button"
+          class="btn btn-sm btn-outline-secondary"
+        >
+          Add Cafe
         </button>
       </div>
-
     </div>
-    
+
     <a
       href="#"
       class="scroll-top d-flex align-items-center justify-content-center"
@@ -192,76 +218,92 @@
 
 <script>
 import CafeStore from "@/store/cafe";
-import AuthUser from "@/store/AuthUser"
+import AuthUser from "@/store/AuthUser";
 
 export default {
   name: "Body",
   data() {
     return {
-      cafe_star:null,
-      cafe_date:null,
-      currentPage: 1,
-      pageSize: 4
+      cafe_star: [],
+      cafe_date: [],
+      currentPageStar: 1,
+      currentPageDate: 1,
+      pageSize: 8,
     };
   },
   created() {
     this.fetchCafeStarData();
     this.fetchCafeDateData();
   },
-   methods:{
+  methods: {
     async fetchCafeStarData() {
       await CafeStore.dispatch("fetchCafe");
       this.cafe_star = await CafeStore.getters.cafe;
       //console.log(this.cafe_star)
     },
-    async fetchCafeDateData(){
+    async fetchCafeDateData() {
       await CafeStore.dispatch("fetchCafeByDate");
       this.cafe_date = await CafeStore.getters.cafe;
     },
 
-    detailBTN(id){
-      this.$router.push({ path: "/detail/" + id, params: { id: id } });
-        
+    detailBTN(id) {
+      this.$router
+        .push({ path: "/detail/" + id, params: { id: id } })
+        .then(() => {
+          window.scrollTo(0, 0);
+        });
     },
-    async addBTN(){
-      this.$router.push("/add");
+    async addBTN() {
+      this.$router.push("/add").then(() => {
+        window.scrollTo(0, 0);
+      });
     },
-    previousPage() {
-      if (this.currentPage > 1) {
-        this.currentPage--;
+    previousPageStar() {
+      if (this.currentPageStar > 1) {
+        this.currentPageStar--;
       }
     },
-    nextPage() {
-      if (this.currentPage < this.totalPages) {
-        this.currentPage++;
+    nextPageStar() {
+      if (this.currentPageStar < this.totalPagesStar) {
+        this.currentPageStar++;
+      }
+    },
+    previousPageDate() {
+      if (this.currentPageDate > 1) {
+        this.currentPageDate--;
+      }
+    },
+    nextPageDate() {
+      if (this.currentPageDate < this.totalPagesDate) {
+        this.currentPageDate++;
       }
     },
     isAuthen() {
       return AuthUser.getters.isAuthen;
     },
-    // async findMtstate(){
-    //   const success = (position)=>{
-    //     console.log(position)
-    //     const latitude = position.coords.latitude
-    //     const longtitude = position.coords.longtitude
-        
-    //   }
-    //   const error = () =>{
-    //     this.location = 'Unable to retrieve your location'
-    //   }
-    //   navigator.geolocation.getCurrentPosition(success,error)
-    // }
   },
   computed: {
-    displayedCafes() {
-      const start = (this.currentPage - 1) * this.pageSize;
+    displayedCafesStar() {
+      const start = (this.currentPageStar - 1) * this.pageSize;
       const end = start + this.pageSize;
       return this.cafe_star ? this.cafe_star.slice(start, end) : [];
     },
-    totalPages() {
-      return this.cafe_star ? Math.ceil(this.cafe_star.length / this.pageSize) : 0;
-    }
-  }
+    totalPagesStar() {
+      return this.cafe_star
+        ? Math.ceil(this.cafe_star.length / this.pageSize)
+        : 0;
+    },
+    displayedCafesDate() {
+      const start = (this.currentPageDate - 1) * this.pageSize;
+      const end = start + this.pageSize;
+      return this.cafe_date ? this.cafe_date.slice(start, end) : [];
+    },
+    totalPagesDate() {
+      return this.cafe_date
+        ? Math.ceil(this.cafe_date.length / this.pageSize)
+        : 0;
+    },
+  },
 };
 </script>
 
@@ -293,9 +335,8 @@ export default {
   visibility: visible;
   opacity: 1;
 }
-.title{
+.title {
   text-align: center;
   margin-top: 30px;
 }
-
 </style>

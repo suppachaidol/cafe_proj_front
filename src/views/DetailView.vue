@@ -56,8 +56,9 @@
             </button>
           </div>
           <div class="mt-2">
-            <p>
-              <iframe
+            <!-- <p v-if="cafe[0] ? cafe[0] : null"> -->
+              <p v-html="iframe"></p>
+              <!-- <iframe
                 :src="iframe"
                 width="600"
                 height="450"
@@ -65,8 +66,9 @@
                 allowfullscreen=""
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </p>
+              ></iframe> -->
+              <!-- <GoogleMap :destLat="cafe[0].c_lat" :destLng="cafe[0].c_lon"/> -->
+            <!-- </p> -->
           </div>
         </div>
 
@@ -80,7 +82,7 @@
                 <div v-if="cafe[0] ? cafe[0] : null">
                   <span
                     class="star-comment"
-                    v-if="cafe[0].c_star >= 0 && cafe[0].c_star < 1"
+                    v-if="cafe[0].c_star >= 0 && cafe[0].c_star < 0.5"
                   >
                     <i class="bi bi-star"></i>
                     <i class="bi bi-star"></i>
@@ -90,7 +92,17 @@
                   </span>
                   <span
                     class="star-comment"
-                    v-if="cafe[0].c_star >= 1 && cafe[0].c_star < 2"
+                    v-if="cafe[0].c_star >= 0.5 && cafe[0].c_star < 1"
+                  >
+                    <i class="bi bi-star-half"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                  </span>                   
+                  <span
+                    class="star-comment"
+                    v-if="cafe[0].c_star >= 1 && cafe[0].c_star < 1.5"
                   >
                     <i class="bi bi-star-fill"></i>
                     <i class="bi bi-star"></i>
@@ -100,7 +112,17 @@
                   </span>
                   <span
                     class="star-comment"
-                    v-if="cafe[0].c_star >= 2 && cafe[0].c_star < 3"
+                    v-if="cafe[0].c_star >= 1.5 && cafe[0].c_star < 2"
+                  >
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                  </span>
+                  <span
+                    class="star-comment"
+                    v-if="cafe[0].c_star >= 2 && cafe[0].c_star < 2.5"
                   >
                     <i class="bi bi-star-fill"></i>
                     <i class="bi bi-star-fill"></i>
@@ -110,7 +132,17 @@
                   </span>
                   <span
                     class="star-comment"
-                    v-if="cafe[0].c_star >= 3 && cafe[0].c_star < 4"
+                    v-if="cafe[0].c_star >= 2.5 && cafe[0].c_star < 3"
+                  >
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                  </span>
+                  <span
+                    class="star-comment"
+                    v-if="cafe[0].c_star >= 3 && cafe[0].c_star < 3.5"
                   >
                     <i class="bi bi-star-fill"></i>
                     <i class="bi bi-star-fill"></i>
@@ -120,7 +152,17 @@
                   </span>
                   <span
                     class="star-comment"
-                    v-if="cafe[0].c_star >= 4 && cafe[0].c_star < 5"
+                    v-if="cafe[0].c_star >= 3.5 && cafe[0].c_star < 4"
+                  >
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                    <i class="bi bi-star"></i>
+                  </span>
+                  <span
+                    class="star-comment"
+                    v-if="cafe[0].c_star >= 4 && cafe[0].c_star < 4.5"
                   >
                     <i class="bi bi-star-fill"></i>
                     <i class="bi bi-star-fill"></i>
@@ -128,7 +170,17 @@
                     <i class="bi bi-star-fill"></i>
                     <i class="bi bi-star"></i>
                   </span>
-                  <span class="star-comment" v-if="cafe[0].c_star == 5">
+                  <span
+                    class="star-comment"
+                    v-if="cafe[0].c_star >= 4.5 && cafe[0].c_star < 5"
+                  >
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                  </span>
+                  <span class="star-comment" v-if="cafe[0].c_star >= 5">
                     <i class="bi bi-star-fill"></i>
                     <i class="bi bi-star-fill"></i>
                     <i class="bi bi-star-fill"></i>
@@ -394,7 +446,7 @@ This is my DIV element.
                       _______________________________________________________________________________________________________
                     </div>
                   </div>
-                  <div class="mb-2">
+                  <div class="mb-2 mt-3" v-if="numAllReview>6" style="text-align:center">
                     <button type="button" class="btn btn-dark" @click="previousPage"><i class="bi bi-caret-left-fill"></i></button>
                     <span class="mx-2">Page {{ currentPage }} of {{ totalPages }}</span>
                     <button type="button" class="btn btn-dark" @click="nextPage"><i class="bi bi-caret-right-fill"></i></button>
@@ -474,8 +526,10 @@ import ReviewStore from "@/store/review";
 import UserCafeStore from "@/store/user_cafe";
 import AuthUser from "@/store/AuthUser";
 import Swal from "sweetalert2";
+import GoogleMap from '../components/GoogleMap.vue';
 
 export default {
+  //components: { GoogleMap },
   data() {
     return {
       cafe: [],
@@ -507,15 +561,30 @@ export default {
     this.fetchCafeData();
     this.fetchCafeImage();
     this.fetchReview();
-    this.fetchFavorite();
     this.fetchCafeTime();
+    if(this.isAuthen()){
+      this.fetchFavorite();
+    }
   },
   methods: {
+    // async findMtstate(){
+    //   const success = (position)=>{
+    //     console.log(position)
+    //     const latitude = position.coords.latitude
+    //     const longtitude = position.coords.longtitude
+        
+    //   }
+    //   const error = () =>{
+    //     this.location = 'Unable to retrieve your location'
+    //   }
+    //   navigator.geolocation.getCurrentPosition(success,error)
+    // },
     async fetchCafeData() {
       await CafeStore.dispatch("fetchCafeById", this.c_id);
       this.cafe = await CafeStore.getters.cafe;
       this.cafe_star = this.cafe[0].c_star.toFixed(1);
-      await this.splitIframe(this.cafe[0].c_map);
+      this.iframe = this.cafe[0].c_map   
+      //await this.splitIframe(this.cafe[0].c_map);
     },
     async fetchCafeImage() {
       await CafeStore.dispatch("fetchCafeImageById", this.c_id);
@@ -613,26 +682,26 @@ export default {
     isAuthen() {
       return AuthUser.getters.isAuthen;
     },
-    splitIframe(data) {
-      let arr = data.split(" ");
-      this.iframe = arr[1].slice(5, -1);
-      //console.log(typeof(arr[1].slice(5,-1)))
-    },
+    // splitIframe(data) {
+    //   let arr = data.split(" ");
+    //   this.iframe = arr[1].slice(5, -1);
+    //   console.log(this.iframe)
+    // },
     async toggleFavorite() {
       let payload = {
           u_id: this.u_id,
           c_id: this.c_id,
         };
-        console.log(UserCafeStore.getters.user_cafe)
+        //console.log(UserCafeStore.getters.user_cafe)
       if(UserCafeStore.getters.user_cafe.length==0){
         let res = await UserCafeStore.dispatch("addUserCafe", payload);
-        console.log(res)
+        //console.log(res)
         this.isFavorite = !this.isFavorite;
         this.fetchFavorite()       
       }else if(UserCafeStore.getters.user_cafe.length==1){
         let id = UserCafeStore.getters.user_cafe[0].uc_id
         let res = await UserCafeStore.dispatch("removeUserCafe", id);
-        console.log(res)
+        //console.log(res)
         this.isFavorite = !this.isFavorite;
         this.fetchFavorite()
       }

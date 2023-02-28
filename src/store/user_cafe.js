@@ -9,14 +9,18 @@ Axios.defaults.headers.common = { 'Authorization': `bearer ${AuthUser.getters.jw
 export default new Vuex.Store({
     state: {
         user_cafe: [],
+        favorite_cafe:[],
     },
     getters: {
         user_cafe: (state) => state.user_cafe,
-        
+        favorite_cafe: (state) => state.favorite_cafe,
     },
     mutations: {
         fetch(state, { res }) {
             state.user_cafe = res.data
+        },
+        fetchFavoriteCafe(state, { res }) {
+            state.favorite_cafe = res.data
         },
         add(state, { payload }) {
             state.user_cafe.push(payload)
@@ -37,6 +41,37 @@ export default new Vuex.Store({
                 let res = await Axios.post(url, body)
                 if (res.status === 200 || res.status === 201) {
                     commit('fetch', { res })
+                    return {
+                        success: true,                     
+                    }
+                } else {
+                    console.log("NOT 200", res)
+                }
+            }catch(e){
+                if (e.response.status === 400) {
+                    console.log(e)
+                    console.log("ERROR  " + e.response.status + " |   " + e.response.statusText)
+                    return {
+                        success: false,
+                        message: e.response.data.error,
+                    }
+                } else {
+                    console.error(e)
+                    console.log("ERROR  " + e.response.status + " |   " + e.response.statusText)
+                    return {
+                        success: false,
+                        message: e.response.data,
+                    }
+                }
+            }
+        },
+        async fetchFavoriteCafe({ commit }, id) {
+            try{
+                let url = api_endpoint + '/api/user_cafe/u/' + id
+            
+                let res = await Axios.get(url)
+                if (res.status === 200 || res.status === 201) {
+                    commit('fetchFavoriteCafe', { res })
                     return {
                         success: true,                     
                     }

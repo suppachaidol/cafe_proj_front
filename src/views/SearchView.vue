@@ -12,18 +12,34 @@
             class="text-center w-100 d-block text-center d-flex justify-content-center ">
             <form class="form-inline d-block  w-100" style="min-width:250px;">
 
-              <input class="form-control form-control-lg mr-sm-2 mb-2 w-100"
-                type="search" placeholder="Search" aria-label="Search">
+              <input v-model="name" class="form-control form-control-lg mr-sm-2 mb-2 w-100"
+                type="search" placeholder="Name" aria-label="Search">
 
-                <div class ="pb-2" >
-                  <input type="checkbox" name="pets" value="Other"><i class ="mx-2"  >Near by</i><br>
+                <h4>or</h4>
+                <div class ="pb-2">
+                  <label id="container">
+                    <input v-model="nearBy" type="checkbox" @change="getCurrentLocation">
+                    <span class="ms-2" id="checkmark">Near by</span>
+                  </label>
                 </div>
+                
 
                 <div class="dropdown mb-2" >
+                  <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ selectedStarOption ? selectedStarOption : 'Star' }} <i class="bi bi-star-fill"></i>
+                  </button>
+                  <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+                    <li v-for="(option, index) in starOptions" :key="index">
+                    <a class="dropdown-item"  @click="selectStarOption(option)">{{ option }} <i class="bi bi-star-fill"></i></a>
+                    </li>
+                  </ul>
+
+                </div>
+
+                <!-- <div class="dropdown mb-2" >
                   <a class="btn btn-secondary dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                       Star
                   </a>
-
                   <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuLink">
                     <li><a class="dropdown-item" href="#">
                       <div class="row">
@@ -72,35 +88,22 @@
                     </a></li>
                   </ul>
 
-                </div>
+                </div> -->
 
                 <div class="dropdown mb-2" >
-                  <a class="btn btn-secondary dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                      Service
-                  </a>
-
-                  <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuLink">
-                      <li><a class="dropdown-item" href="#">Creative Space</a></li>
-                      <li><a class="dropdown-item" href="#">Screening Room</a></li>
-                      <li><a class="dropdown-item" href="#"> Karaoke</a></li>
-                      <li><a class="dropdown-item" href="#"> Good for Group</a></li>
-                      <li><a class="dropdown-item" href="#"> Pet Friendly</a></li>
-                      <li><a class="dropdown-item" href="#"> Kids Friendly</a></li>
-                      <li><a class="dropdown-item" href="#"> Creative Space</a></li>
-                      <li><a class="dropdown-item" href="#"> Screening Room</a></li>
-                      <li><a class="dropdown-item" href="#"> Take Away</a></li>
-                      <li><a class="dropdown-item" href="#"> No Reservations</a></li>
-                      <li><a class="dropdown-item" href="#"> Cash Only</a></li>
-                      <li><a class="dropdown-item" href="#"> Art Gallery</a></li>
-                      <li><a class="dropdown-item" href="#"> Art Space</a></li>
-                      <li><a class="dropdown-item" href="#"> Co-Working Space</a></li>
+                  <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ selectedServiceOption ? selectedServiceOption : 'Service' }}
+                  </button>
+                  <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+                    <li v-for="(option, index) in serviceOptions" :key="index">
+                    <a class="dropdown-item"  @click="selectServiceOption(option)">{{ option }}</a>
+                    </li>
                   </ul>
 
                 </div>
 
-
                 
-              <button class="btn btn-primary w-100 btn-lg  mt-2  "
+              <button @click="goToFilter" class="btn btn-primary w-100 btn-lg  mt-2  "
                 type="submit">Search</button>
             </form>
           </span>
@@ -123,6 +126,64 @@
 
 <script>
 
+export default {
+  data(){
+    return{
+      name:null,
+      nearBy:false,
+      latitude:0,
+      longitude:0,
+      serviceOptions: ['Dine-in','Takeaway', 'Co-Working Space', 'Meeting','Toilets','Creative Space','Screening Room','Karaoke','Good for Group',
+      'Pet Friendly','Kids Friendly','Art Gallery'],
+      selectedServiceOption: null,
+      starOptions:[5,4,3,2,1],
+      selectedStarOption: 0,
+      hideComponent:false
+    }
+  },
+  methods:{
+     selectServiceOption(option) {
+      this.selectedServiceOption = option;
+    },
+    selectStarOption(option) {
+      this.selectedStarOption = option;
+    },
+    async getCurrentLocation(){
+      if(this.nearBy == true){
+        const success = (position)=>{
+          console.log(position.coords)
+          this.latitude = position.coords.latitude
+          this.longitude = position.coords.longitude    
+        }
+        const error = () =>{
+          console.log('Unable to retrieve your location')
+        }
+        await navigator.geolocation.getCurrentPosition(success,error)  
+      }else{
+        this.latitude = 0
+        this.longitude = 0
+      }
+    },
+    goToFilter(){
+      this.$router.push({ 
+        path: '/filter', 
+        query: { 
+          name: this.name,
+          latitude: this.latitude,
+          longitude: this.longitude,
+          star: this.selectedStarOption,
+          service: this.selectedServiceOption
+        } 
+})
+    },
+
+  }
+}
 </script>
 
-<style></style>
+<style scoped>
+.bi-star-fill{
+  color: #ff9529;
+}
+
+</style>
