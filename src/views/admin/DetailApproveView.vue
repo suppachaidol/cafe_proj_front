@@ -3,52 +3,32 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-6">
-          <div id="carouselExampleIndicators"  class="carousel slide" data-bs-ride="carouselDetail" style="margin-top: 1em">
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img
-                src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGFyaXMlMjBjYWZlfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
-                class="img-fluid w-100"
-                alt="..."
-                style="height: 32rem"
-              />
-            </div>
-            <div class="carousel-item">
-              <img
-                src="https://s.isanook.com/tr/0/ui/285/1427369/Molyn-Cafe-02.jpg"
-                class="img-fluid w-100"
-                alt="..."
-                style="height: 32rem"
-              />
-            </div>
-            <div class="carousel-item">
-              <img
-                src="https://media-cdn.tripadvisor.com/media/photo-s/10/e5/73/92/photo1jpg.jpg"
-                class="img-fluid w-100"
-                alt="..."
-                style="height: 32rem"
-              />
-            </div>
+          <div
+            id="carouselExampleIndicators"
+            class="carousel slide"
+            data-bs-ride="carouselDetail"
+            style="margin-top: 1em"
+          >
+            <div class="carousel-inner">
+              <div
+                class="carousel-item active"
+                v-for="(img, index) in cafe_images_place"
+                :key="index"
+              >
+                <img
+                  :src="`http://localhost:5000/api/images/cafe/${img.i_name}`"
+                  class="img-fluid w-100"
+                  alt="..."
+                  style="height: 25rem"
+                />
               </div>
-              <button
-                class="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleControls"
-                data-bs-slide="prev"
-              >
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button
-                class="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleControls"
-                data-bs-slide="next"
-              >
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
+              <!-- <div class="carousel-item  ">
+                <div class="ratio ratio-16x9 shadow-lg">
+                  <iframe class="ratio ratio-16x9"
+                    src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
+                    allowfullscreen=""></iframe>
+                </div>
+              </div> -->
             </div>
             <button
               class="carousel-control-prev"
@@ -76,47 +56,29 @@
             </button>
           </div>
           <div class="mt-2">
-            <p>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15495.729736793946!2d100.5711486!3d13.8430942!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x8f2ce13b8f5ed7c3!2zVHJ1ZSBDb2ZmZWUg4LihLuC5gOC4geC4qeC4leC4ow!5e0!3m2!1sen!2sth!4v1677569938706!5m2!1sen!2sth" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </p>
+            <p v-html="iframe"></p>
           </div>
         </div>
 
         <div class="col-lg-6">
           <div class="row">
             <div class="col-lg mb-3 ">
-                <h2>True Coffee @ku</h2>
-                <span class="star-comment">
-                  <i class="bi bi-star-fill"></i>
-                  <i class="bi bi-star-fill"></i>
-                  <i class="bi bi-star"></i>
-                  <i class="bi bi-star"></i>
-                  <i class="bi bi-star"></i>
-                </span>
+                <h2>{{ cafe ? cafe[0].c_name : "" }}</h2>             
             </div>
 
-            <div class="col-6 mt-2 word-spacing: 5px;">
-              <h5>
-                <div class="star-rating">
-                  <span class="star" >
-                    <i class="bi bi-star-fill"></i> </span
-                  ><strong> Favorite</strong>
-                </div>
-              </h5>
-            </div>
           </div>
 
           <strong>Address</strong>
           <div class="container">
             <div class="col">
-              Kasetsart University, อาคารทวีญาณสุคนธ์ คณะวิทยาศาสตร์
+              {{ cafe ? cafe[0].c_location : "" }}
             </div>
           </div>
 
           <strong>Service</strong>
           <div class="container">
             <div class="col">
-              Meeting,Co-Working Space
+              {{ cafe ? cafe[0].c_service : "" }}
             </div>
           </div>
 
@@ -125,20 +87,20 @@
           <strong>Hours:</strong>
           <div class="container">
             <div class="col">
-              <div> Monday: 8.30 AM to 5.30 PM </div>
-              <div> tuesday: 8.30 AM to 5.30 PM </div>
-              <div> Wednesday: 8.30 AM to 5.30 PM </div>
-              <div> Thursday: 8.30 AM to 5.30 PM </div>
-              <div> Friday: 8.30 AM to 5.30 PM </div>
-              <div> Saturday: 8.30 AM to 5.30 PM </div>
-              <div> Sunday: 8.30 AM to 5.30 PM </div>
+              <div>Monday: {{ time ? time[0].monday : ""}}</div>
+              <div>tuesday: {{ time ? time[0].tuesday : ""}}</div>
+              <div>Wednesday: {{ time ? time[0].wednesday : ""}}</div>
+              <div>Thursday: {{ time ? time[0].thursday : ""}}</div>
+              <div>Friday: {{ time ? time[0].friday : ""}}</div>
+              <div>Saturday: {{ time ? time[0].saturday : ""}}</div>
+              <div>Sunday: {{ time ? time[0].sunday : ""}}</div>
             </div>
           </div>
 
           <strong>Detail</strong>
           <div class="container">
             <div class="col">
-              XYZT ไม่ใช่เพียงแค่คาเฟ่ แต่คือพื้นที่สร้างสรรที่สะดวกครบครันเหมาะสำหรับคนรุ่นใหม่ ด้วยขนาดที่กว้างขวาง ใจกลางมหาวิทยาลัยเกษตรทำให้พื้นที่แห่งนี้เป็นเสมือนบ้านอีกหลังที่สามารถเข้ามาพักผ่อน และพบปะกัน โดยเป็นทั้งคาเฟ่และ co-working space เหมาะแก่การอ่านหนังสือและนั่งทำงานแบบชิลๆ และยังมีห้องประชุมให้เช่า
+              {{ cafe ? cafe[0].c_detail : "" }}
             </div>
           </div>
         </div>
@@ -152,9 +114,13 @@
     <h2><strong> Popular Dishes</strong></h2>
     </div>
   </div>
-  <div class="container pb-5">
+  <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-        <div class="col">
+        <div
+          class="col mb-4"
+          v-for="(img, index) in cafe_images_dish"
+          :key="index"
+        >
           <div class="card shadow">
             <div class="card-body">
               <img
@@ -162,108 +128,117 @@
                 width="100%"
                 height="225"
                 class="bd-placeholder-img card-img-top"
-                src="https://fastly.4sqi.net/img/general/200x200/139701459_-k2KVYxW_1cIkozUx4zcwa1hD74_JYqaKY5u0uXbbEY.jpg"
+                :src="`http://localhost:5000/api/images/cafe/${img.i_name}`"
               />
+              <hr>
               <div class="row mt-2">
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <h5 style="direction: ltl">menu</h5>
-                  </div>
-                  <div>
-                    <h4 style="direction: ltl">฿ 50</h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> 
-        <div class="col">
-          <div class="card shadow">
-            <div class="card-body">
-              <img
-                alt="image"
-                width="100%"
-                height="225"
-                class="bd-placeholder-img card-img-top"
-                src="https://fastly.4sqi.net/img/general/200x200/139701459_-k2KVYxW_1cIkozUx4zcwa1hD74_JYqaKY5u0uXbbEY.jpg"
-              />
-              <div class="row mt-2">
-                 <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <h5 style="direction: ltl">menu</h5>
-                  </div>
-                  <div>
-                    <h4 style="direction: ltl">฿ 50</h4>
-                  </div>
+                <div class="col">
+                  <h5 style="direction: ltl">{{ img.i_menu_name }}</h5>
+                  <h4 style="direction: ltl">฿ {{ img.i_price }}</h4>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="card shadow">
-            <div class="card-body">
-              <img
-                alt="image"
-                width="100%"
-                height="225"
-                class="bd-placeholder-img card-img-top"
-                src="https://fastly.4sqi.net/img/general/200x200/139701459_-k2KVYxW_1cIkozUx4zcwa1hD74_JYqaKY5u0uXbbEY.jpg"
-              />
-              <div class="row mt-2">
-                 <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <h5 style="direction: ltl">menu</h5>
-                  </div>
-                  <div>
-                    <h4 style="direction: ltl">฿ 50</h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow">
-            <div class="card-body">
-              <img
-                alt="image"
-                width="100%"
-                height="225"
-                class="bd-placeholder-img card-img-top"
-                src="https://fastly.4sqi.net/img/general/200x200/139701459_-k2KVYxW_1cIkozUx4zcwa1hD74_JYqaKY5u0uXbbEY.jpg"
-              />
-              <div class="row mt-2">
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <h5 style="direction: ltl">menu</h5>
-                  </div>
-                  <div>
-                    <h4 style="direction: ltl">฿ 50</h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> 
-  </div>
+      </div>
+    </div>
 
-  <div class="d-flex row align-items-center mb-5">
+  <div class="d-flex row align-items-center mb-5 mt-5">
       <div class="col " align = 'right'>
-          <button type="button" class="btn btn-success">Approve</button>
+          <button type="button" class="btn btn-success" @click="approve">Approve</button>
       </div>
       <div class="col ">
-        <button type="button" class="btn btn-danger" @click="RejectBtn">Reject</button>
+        <button type="button" class="btn btn-danger" @click="reject">Reject</button>
       </div>
   </div>
 </template>
 <script>
+import CafeStore from "@/store/cafe";
+import Swal from "sweetalert2";
 export default {
+  data() {
+    return {
+      cafe: null,
+      c_id: 0,
+      iframe: null,
+      cafe_images: [],
+      cafe_images_place: [],
+      cafe_images_dish: [],
+      time:null,
+    };
+  },
+  created() {
+    this.c_id = this.$route.query.id
+    this.fetchCafeData()
+    this.fetchCafeImage()
+    this.fetchCafeTime();
+  },
   methods: {
-    RejectBtn() {
-      this.$router.push("/approve");
+    async fetchCafeData() {
+      await CafeStore.dispatch("fetchCafeById", this.c_id);
+      this.cafe = await CafeStore.getters.cafe;
+      this.iframe = this.cafe[0].c_map  
+      console.log(this.cafe) 
     },
+    async fetchCafeTime(){
+      let id = this.c_id
+      await CafeStore.dispatch("fetchCafeTime", id);
+      this.time = await CafeStore.getters.times;
+    },
+    async fetchCafeImage() {
+      await CafeStore.dispatch("fetchCafeImageById", this.c_id);
+      this.cafe_images = await CafeStore.getters.images;
+      console.log(this.cafe_images)
+      this.filterImg(this.cafe_images);
+    },
+    filterImg(images) {
+      for (let i = 0; i < images.length; i++) {
+        if (images[i].i_popular === null) {
+          this.cafe_images_place.push(images[i]);
+        } else {
+          this.cafe_images_dish.push(images[i]);
+        }
+      }
+    },
+    async approve() {
+        Swal.fire({
+        title: "Are you sure to approve cafe?",
+        showCancelButton: true,
+        confirmButtonColor: "green",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, approve cafe!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+            let payload = {
+            c_id: this.c_id,
+            };
+            let res = await CafeStore.dispatch("updateStatus", payload);
+            console.log(res);
+            await Swal.fire({title:"Approved!",text:"cafe has been approved.",icon:"success",showConfirmButton: false,timer: 1000,});
+            this.$router.push("/approve");
+        }
+      });
+    },
+    async reject() {
+        Swal.fire({
+        title: "Are you sure to reject?",
+        text: "You won't be able to revert this!",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, reject cafe!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          let res = await CafeStore.dispatch("rejectCafe", this.c_id);
+          console.log(res);
+          await Swal.fire({title:"Rejected!",text:"cafe has been deleted.",icon:"success",showConfirmButton: false,timer: 1000,});
+          this.$router.push("/approve");
+        }
+      });
+    },
+  },
+  computed:{
+
   }
 }
 </script>

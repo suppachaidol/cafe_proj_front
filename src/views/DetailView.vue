@@ -267,6 +267,7 @@ This is my DIV element.
                 class="bd-placeholder-img card-img-top"
                 :src="`http://localhost:5000/api/images/cafe/${img.i_name}`"
               />
+              <hr>
               <div class="row mt-2">
                 <div class="col">
                   <h5 style="direction: ltl">{{ img.i_menu_name }}</h5>

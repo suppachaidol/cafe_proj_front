@@ -11,11 +11,13 @@ export default new Vuex.Store({
         cafe: [],
         images:[],
         times:[],
+        cafe_notpass:[],
     },
     getters: {
         cafe: (state) => state.cafe,
         images: (state) => state.images,
         times: (state) => state.times,
+        cafe_notpass: (state) => state.cafe_notpass,
     },
     mutations: {
         fetch(state, { res }) {
@@ -26,6 +28,9 @@ export default new Vuex.Store({
         },
         fetchTime(state, { res }) {
             state.times = res.data
+        },
+        fetchNotpass(state, { res }) {
+            state.cafe_notpass = res.data
         },
         add(state, { payload }) {
             state.cafe.push(payload)
@@ -39,6 +44,10 @@ export default new Vuex.Store({
         async fetchCafeByDate({ commit }) {
             let res = await Axios.get(api_endpoint + '/api/cafe_date')
             commit('fetch', { res })
+        },
+        async fetchNotpassCafe({ commit }) {
+            let res = await Axios.get(api_endpoint + '/api/cafe_notpass')
+            commit('fetchNotpass', { res })
         },
         async fetchCafeById({ commit }, id) {
             let res = await Axios.get(api_endpoint + '/api/cafe/' + id)
@@ -171,7 +180,70 @@ export default new Vuex.Store({
                     }
                 }
             }
-        }
+        },
+        async updateStatus({ commit }, payload){
+            try{
+                let url = api_endpoint + '/api/cafe/update_status'
+                let body = {
+                    c_id: payload.c_id
+                }
+                
+                let res = await Axios.put(url, body)
+                if (res.status === 200 || res.status === 201) {
+                    return {
+                        success: true,                    
+                    }
+                } else {
+                    console.log("NOT 200", res)
+                }
+            }catch(e){
+                if (e.response.status === 400) {
+                    console.log(e)
+                    console.log("ERROR  " + e.response.status + " |   " + e.response.statusText)
+                    return {
+                        success: false,
+                        message: e.response.data.error,
+                    }
+                } else {
+                    console.error(e)
+                    console.log("ERROR  " + e.response.status + " |   " + e.response.statusText)
+                    return {
+                        success: false,
+                        message: e.response.data,
+                    }
+                }
+            }
+        },
+        async rejectCafe({ commit }, id) {
+            try{
+                let url = api_endpoint + '/api/cafe/reject/'+id
+                   
+                let res = await Axios.delete(url)
+                if (res.status === 200 || res.status === 201) {
+                    return {
+                        success: true,                     
+                    }
+                } else {
+                    console.log("NOT 200", res)
+                }
+            }catch(e){
+                if (e.response.status === 400) {
+                    console.log(e)
+                    console.log("ERROR  " + e.response.status + " |   " + e.response.statusText)
+                    return {
+                        success: false,
+                        message: e.response.data.error,
+                    }
+                } else {
+                    console.error(e)
+                    console.log("ERROR  " + e.response.status + " |   " + e.response.statusText)
+                    return {
+                        success: false,
+                        message: e.response.data,
+                    }
+                }
+            }
+        },
     },
     modules: {}
 })
