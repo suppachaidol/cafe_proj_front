@@ -10,8 +10,13 @@ import SearchView from '../views/SearchView.vue'
 import ContactView from '../views/ContactView.vue'
 import ApproveView from '../views/admin/ApproveView.vue'
 import DetailApproveView from '../views/admin/DetailApproveView.vue'
-
+import MapView from '../components/MapMark.vue'
 const routes = [
+  {
+    path: '/map',
+    name: 'map',
+    component: MapView
+  },
   {
     path: '/',
     name: 'home',

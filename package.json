@@ -20,6 +20,7 @@
     "vue-axios": "^3.5.2",
     "vue-router": "^4.0.3",
     "vue-sweetalert2": "^5.0.5",
+    "vue2-google-maps": "^0.10.7",
     "vue3-google-map": "^0.15.0",
     "vuex": "^4.0.0"
   },
