@@ -143,8 +143,7 @@
     <div class="album py-5">
       <div class="container">
         <div class="row g-3">
-          <div
-            class="col-md-3 col-sm-6 col-12"
+          <div class="col-md-3 col-sm-6 col-12"
             v-for="(cafe, index) in displayedCafesDate"
             :key="index"
           >
@@ -188,14 +187,14 @@
       </div>
 
       <div class="mb-2 mt-5" style="text-align:center" v-if="cafe_date.length>8">
-            <button type="button" class="btn btn-dark" @click="previousPageDate">
-              <i class="bi bi-caret-left-fill"></i>
-            </button>
-            <span class="mx-2">Page {{ currentPageDate }} of {{ totalPagesDate }}</span>
-            <button type="button" class="btn btn-dark" @click="nextPageDate">
-              <i class="bi bi-caret-right-fill"></i>
-            </button>
-          </div>
+        <button type="button" class="btn btn-dark" @click="previousPageDate">
+          <i class="bi bi-caret-left-fill"></i>
+        </button>
+        <span class="mx-2">Page {{ currentPageDate }} of {{ totalPagesDate }}</span>
+        <button type="button" class="btn btn-dark" @click="nextPageDate">
+          <i class="bi bi-caret-right-fill"></i>
+        </button>
+      </div>
 
       <div class="container-xxl mt-5" v-if="isAuthen()">
         <button

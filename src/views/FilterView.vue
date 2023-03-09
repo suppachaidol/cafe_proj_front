@@ -1,9 +1,7 @@
 <template>
     <h2>Filter</h2>
     <div>
-    <!-- <ul>
-      <li v-for="cafe in filteredCafe" :key="cafe.c_id">{{ cafe.c_name }}</li>
-    </ul> -->
+
     </div>
 </template>
 
