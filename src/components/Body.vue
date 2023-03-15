@@ -79,7 +79,7 @@
             v-for="(cafe, index) in displayedCafesStar"
             :key="index"
           >
-            <div class="card shadow-sm">
+            <div class="card shadow-sm h-100">
               <img
                 class="bd-placeholder-img card-img-top"
                 width="100%"
@@ -147,7 +147,7 @@
             v-for="(cafe, index) in displayedCafesDate"
             :key="index"
           >
-            <div class="card shadow-sm">
+            <div class="card shadow-sm h-100">
               <img
                 class="bd-placeholder-img card-img-top"
                 width="100%"

@@ -105,6 +105,11 @@ export default new Vuex.Store({
             let c_latlon = payload.c_latlon.split(", ")
             let c_lat = c_latlon[0]
             let c_lon = c_latlon[1]
+            if(c_lat == null || c_lon == null ){
+                return {
+                    success: false,                     
+                }
+            }
             try{
                 let url = api_endpoint + '/api/cafe/create'
                 let body = {

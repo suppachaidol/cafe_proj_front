@@ -2,7 +2,7 @@
   <div style="background-color: #eee">
     <section class="pt-5">
       <div class="container">
-        <div class="row ">
+        <div class="row">
           <div class="col-12 col-md-7 mt-4 mt-md-0">
             <section class="py-5 text-center container">
               <div v-if="!state.s1">
@@ -36,7 +36,7 @@
                     :key="index"
                   >
                     <img
-                      :src="`${img}`"
+                      :src="`${img.url}`"
                       class="img-fluid w-100"
                       alt="..."
                       style="height: 32rem"
@@ -79,7 +79,7 @@
                       type="file"
                       multiple
                       @change="onFileSelected"
-                      style="display:none;"
+                      style="display: none"
                     />
                     Click to upload images
                     <i class="ms-2 bi bi-cloud-upload"></i>
@@ -87,6 +87,25 @@
                 </div>
               </div>
             </form>
+            <h4 class="mt-4">Select cafe profile photo below</h4>
+            <div class="row row-cols-3 g-3 mb-3 mt-3">
+              <div
+                v-for="(img, index) in state.urlImage"
+                :key="index"
+                class="col"
+              >
+                <div class="card">
+                  <img
+                    :src="`${img.url}`"
+                    class="card-img-top"
+                    alt="..."
+                    style="height: 150px"
+                    :class="{ selected: img.url === state.selectedImageId }"
+                    @click="selectImage(img)"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="col-12 col-md-4 offset-md-1">
@@ -109,19 +128,84 @@
             </div>
 
             <div class="w-100">
-              <h5>Location in Google Map (Latitude,Longtitude)</h5>
+              <h5>Location in Google Map (Latitude,Longitude)</h5>
               <div
                 class="form-outline mb-4 justify-content-center align-items-center h-100"
                 placeholder="Name of Cafe"
                 aria-label="Name of Cafe"
               >
-                <input
-                  type="text"
-                  placeholder=""
-                  class="form-control form-control-lg"
-                  required
-                  v-model="state.c_latlon"
-                />
+                <div class="input-group mb-4">
+                  <input
+                    type="text"
+                    placeholder=""
+                    class="form-control form-control-lg"
+                    required
+                    v-model="state.c_latlon"
+                  />
+                  <button
+                    type="button"
+                    class="ms-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    style="border: none"
+                  >
+                    <i class="bi bi-info-circle-fill"></i>
+                  </button>
+
+                  <!-- Modal -->
+                  <div
+                    class="modal fade"
+                    id="exampleModal"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div
+                      class="modal-dialog modal-dialog-scrollable modal-xl"
+                    >
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">
+                            How to get latitude longitude from google map
+                          </h5>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div class="modal-body" style="font-size:1.2em">
+                          Search your cafe in the google map  <a href="https://www.google.co.th/maps" target="_blank">https://www.google.co.th/maps</a><br><br>
+                          When google map show your cafe like this <br><br>
+                          <img
+                            :src="`http://localhost:5000/api/images/tutorial/search.png`"
+                            class="w-75"
+                            alt="..."
+                            style="height: 450px"
+                          /> <br><br>
+                          right click on red mark to show latitude longitude <br><br>
+                          <img
+                            :src="`http://localhost:5000/api/images/tutorial/latlon.png`"
+                            class="w-75"
+                            alt="..."
+                            style="height: 450px"
+                          /> <br><br>
+                          left click on latitude longitude to copy
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -132,13 +216,78 @@
                 placeholder="Name of Cafe"
                 aria-label="Name of Cafe"
               >
-                <input
-                  type="text"
-                  placeholder=""
-                  class="form-control form-control-lg"
-                  required
-                  v-model="state.c_map"
-                />
+                <div class="input-group mb-4">
+                  <input
+                    type="text"
+                    placeholder=""
+                    class="form-control form-control-lg"
+                    required
+                    v-model="state.c_map"
+                  />
+                  <button
+                    type="button"
+                    class="ms-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal2"
+                    style="border: none"
+                  >
+                    <i class="bi bi-info-circle-fill"></i>
+                  </button>
+
+                  <!-- Modal -->
+                  <div
+                    class="modal fade"
+                    id="exampleModal2"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div
+                      class="modal-dialog modal-dialog-scrollable modal-xl"
+                    >
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">
+                            How to get link to show your cafe from google map
+                          </h5>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div class="modal-body" style="font-size:1.2em">
+                          Search your cafe in the google map  <a href="https://www.google.co.th/maps" target="_blank">https://www.google.co.th/maps</a><br><br>
+                          When google map show your cafe click Share button <br><br>
+                          <img
+                            :src="`http://localhost:5000/api/images/tutorial/getmap1.png`"
+                            class="w-75"
+                            alt="..."
+                            style="height: 450px"
+                          /> <br><br>
+                          click "Embed a map" and click "COPY HTML" to copy<br><br>
+                          <img
+                            :src="`http://localhost:5000/api/images/tutorial/getmap2.png`"
+                            class="w-75"
+                            alt="..."
+                            style="height: 450px"
+                          /> <br><br>
+            
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -172,130 +321,199 @@
               </div>
             </div>
 
-            <div class=" w-100 pb-3">
-                  <h5>Time</h5>
-                  <div class ="row pb-2">
-                    <div class="col-3">
-                      Monday
-                    </div>
+            <div class="w-100 pb-3">
+              <h5>Time</h5>
+              <div class="row pb-2">
+                <div class="col-3">Monday</div>
+                <div class="col">
+                  <div class="row">
                     <div class="col">
-                      <div class ="row">
-                          <div class="col">    
-                            <input v-model="state.mondayAM" type="text" placeholder="" class="form-control form-control-sm" required/> 
-                          </div>
-                          AM
-                          <div class="col">    
-                            <input v-model="state.mondayPM" type="text" placeholder="" class="form-control form-control-sm" required/> 
-                          </div>
-                          PM
-                      </div>
+                      <input
+                        v-model="state.mondayAM"
+                        type="text"
+                        placeholder=""
+                        class="form-control form-control-sm"
+                        required
+                      />
                     </div>
-                  </div>
-                  <div class ="row pb-2">
-                    <div class="col-3">
-                      Tuesday
-                    </div>
+                    AM
                     <div class="col">
-                      <div class ="row">
-                          <div class="col">    
-                            <input v-model="state.tuesdayAM" type="text" placeholder="" class="form-control form-control-sm" required/> 
-                          </div>
-                          AM
-                          <div class="col">    
-                            <input v-model="state.tuesdayPM" type="text" placeholder="" class="form-control form-control-sm" required/> 
-                          </div>
-                          PM
-                      </div>
+                      <input
+                        v-model="state.mondayPM"
+                        type="text"
+                        placeholder=""
+                        class="form-control form-control-sm"
+                        required
+                      />
                     </div>
+                    PM
                   </div>
-                  <div class ="row pb-2">
-                    <div class="col-3">
-                      Wednesday
-                    </div>
-                    <div class="col">
-                      <div class ="row">
-                          <div class="col">    
-                            <input v-model="state.wednesdayAM" type="text" placeholder="" class="form-control form-control-sm" required/> 
-                          </div>
-                          AM
-                          <div class="col">    
-                            <input v-model="state.wednesdayPM" type="text" placeholder="" class="form-control form-control-sm" required/> 
-                          </div>
-                          PM
-                      </div>
-                    </div>
-                  </div>
-                  <div class ="row pb-2">
-                    <div class="col-3">
-                      Thursday
-                    </div>
-                    <div class="col">
-                      <div class ="row">
-                          <div class="col">    
-                            <input v-model="state.thursdayAM" type="text" placeholder="" class="form-control form-control-sm" required/> 
-                          </div>
-                          AM
-                          <div class="col">    
-                            <input v-model="state.thursdayPM" type="text" placeholder="" class="form-control form-control-sm" required/> 
-                          </div>
-                          PM
-                      </div>
-                    </div>
-                  </div>
-                  <div class ="row pb-2">
-                    <div class="col-3">
-                      Friday
-                    </div>
-                    <div class="col">
-                      <div class ="row">
-                          <div class="col">    
-                            <input v-model="state.fridayAM" type="text" placeholder="" class="form-control form-control-sm" required/> 
-                          </div>
-                          AM
-                          <div class="col">    
-                            <input v-model="state.fridayPM" type="text" placeholder="" class="form-control form-control-sm" required/> 
-                          </div>
-                          PM
-                      </div>
-                    </div>
-                  </div>
-                  <div class ="row pb-2">
-                    <div class="col-3">
-                     Saturday
-                    </div>
-                    <div class="col">
-                      <div class ="row">
-                          <div class="col">    
-                            <input v-model="state.saturdayAM" type="text" placeholder="" class="form-control form-control-sm" required/> 
-                          </div>
-                          AM
-                          <div class="col">    
-                            <input v-model="state.saturdayPM" type="text" placeholder="" class="form-control form-control-sm" required/> 
-                          </div>
-                          PM
-                      </div>
-                    </div>
-                  </div>
-                  <div class ="row pb-2">
-                    <div class="col-3">
-                     Sunday
-                    </div>
-                    <div class="col">
-                      <div class ="row">
-                          <div class="col">    
-                            <input v-model="state.sundayAM" type="text" placeholder="" class="form-control form-control-sm" required/> 
-                          </div>
-                          AM
-                          <div class="col">    
-                            <input v-model="state.sundayPM" type="text" placeholder="" class="form-control form-control-sm" required/> 
-                          </div>
-                          PM
-                      </div>
-                    </div>
-                  </div>
-                    If your cafe is closed fill " - " in time
                 </div>
-            
+              </div>
+              <div class="row pb-2">
+                <div class="col-3">Tuesday</div>
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      <input
+                        v-model="state.tuesdayAM"
+                        type="text"
+                        placeholder=""
+                        class="form-control form-control-sm"
+                        required
+                      />
+                    </div>
+                    AM
+                    <div class="col">
+                      <input
+                        v-model="state.tuesdayPM"
+                        type="text"
+                        placeholder=""
+                        class="form-control form-control-sm"
+                        required
+                      />
+                    </div>
+                    PM
+                  </div>
+                </div>
+              </div>
+              <div class="row pb-2">
+                <div class="col-3">Wednesday</div>
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      <input
+                        v-model="state.wednesdayAM"
+                        type="text"
+                        placeholder=""
+                        class="form-control form-control-sm"
+                        required
+                      />
+                    </div>
+                    AM
+                    <div class="col">
+                      <input
+                        v-model="state.wednesdayPM"
+                        type="text"
+                        placeholder=""
+                        class="form-control form-control-sm"
+                        required
+                      />
+                    </div>
+                    PM
+                  </div>
+                </div>
+              </div>
+              <div class="row pb-2">
+                <div class="col-3">Thursday</div>
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      <input
+                        v-model="state.thursdayAM"
+                        type="text"
+                        placeholder=""
+                        class="form-control form-control-sm"
+                        required
+                      />
+                    </div>
+                    AM
+                    <div class="col">
+                      <input
+                        v-model="state.thursdayPM"
+                        type="text"
+                        placeholder=""
+                        class="form-control form-control-sm"
+                        required
+                      />
+                    </div>
+                    PM
+                  </div>
+                </div>
+              </div>
+              <div class="row pb-2">
+                <div class="col-3">Friday</div>
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      <input
+                        v-model="state.fridayAM"
+                        type="text"
+                        placeholder=""
+                        class="form-control form-control-sm"
+                        required
+                      />
+                    </div>
+                    AM
+                    <div class="col">
+                      <input
+                        v-model="state.fridayPM"
+                        type="text"
+                        placeholder=""
+                        class="form-control form-control-sm"
+                        required
+                      />
+                    </div>
+                    PM
+                  </div>
+                </div>
+              </div>
+              <div class="row pb-2">
+                <div class="col-3">Saturday</div>
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      <input
+                        v-model="state.saturdayAM"
+                        type="text"
+                        placeholder=""
+                        class="form-control form-control-sm"
+                        required
+                      />
+                    </div>
+                    AM
+                    <div class="col">
+                      <input
+                        v-model="state.saturdayPM"
+                        type="text"
+                        placeholder=""
+                        class="form-control form-control-sm"
+                        required
+                      />
+                    </div>
+                    PM
+                  </div>
+                </div>
+              </div>
+              <div class="row pb-2">
+                <div class="col-3">Sunday</div>
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      <input
+                        v-model="state.sundayAM"
+                        type="text"
+                        placeholder=""
+                        class="form-control form-control-sm"
+                        required
+                      />
+                    </div>
+                    AM
+                    <div class="col">
+                      <input
+                        v-model="state.sundayPM"
+                        type="text"
+                        placeholder=""
+                        class="form-control form-control-sm"
+                        required
+                      />
+                    </div>
+                    PM
+                  </div>
+                </div>
+              </div>
+              If your cafe is closed fill " - " in time
+            </div>
 
             <div class="w-100 pb-2">
               <h5>Detail</h5>
@@ -343,17 +561,15 @@
                   />
                   {{ item.text }}
                 </div>
-                
               </div>
             </div>
-            
           </div>
         </div>
       </div>
     </section>
 
     <div class="container">
-      <h3 class="mt-150px mb-5">Popular dishes</h3>
+      <h3 class="mt-150px mb-5">Popular Dishes</h3>
     </div>
 
     <section class="pb-2">
@@ -364,18 +580,18 @@
               <div class="card-body p-md-3">
                 <div v-if="!state.urlImageDish1">
                   <img
-                  class="img-fluid"
+                    class="img-fluid"
                     alt="img"
                     src="https://alxgroup.com.au/wp-content/uploads/2016/04/dummy-post-horisontal.jpg"
-                    style="width: 250px; height: 250px;"
+                    style="width: 250px; height: 250px"
                   />
                 </div>
                 <div v-else>
                   <img
-                  class="img-fluid"
+                    class="img-fluid"
                     alt="img"
                     :src="state.urlImageDish1"
-                    style="width: 250px; height: 250px;"
+                    style="width: 250px; height: 250px"
                   />
                 </div>
 
@@ -388,7 +604,7 @@
                           class="file-input"
                           type="file"
                           @change="onFileSelectedDish($event, 1)"
-                          style="display:none;"
+                          style="display: none"
                         />
                         Click to upload image
                         <i class="ms-2 bi bi-cloud-upload"></i>
@@ -412,7 +628,7 @@
                       type="text"
                       class="form-control form-control-lg mt-2"
                       placeholder="Name"
-                      required                     
+                      required
                       v-model="state.i_menu_name1"
                     />
                   </div>
@@ -426,18 +642,18 @@
               <div class="card-body p-md-3">
                 <div v-if="!state.urlImageDish2">
                   <img
-                  class="img-fluid"           
+                    class="img-fluid"
                     alt="img"
                     src="https://alxgroup.com.au/wp-content/uploads/2016/04/dummy-post-horisontal.jpg"
-                    style="width: 250px; height: 250px;"
+                    style="width: 250px; height: 250px"
                   />
                 </div>
                 <div v-else>
                   <img
-                  class="img-fluid"             
+                    class="img-fluid"
                     alt="img"
                     :src="state.urlImageDish2"
-                    style="width: 250px; height: 250px;"
+                    style="width: 250px; height: 250px"
                   />
                 </div>
 
@@ -450,7 +666,7 @@
                           class="file-input"
                           type="file"
                           @change="onFileSelectedDish($event, 2)"
-                          style="display:none;"
+                          style="display: none"
                         />
                         Click to upload image
                         <i class="ms-2 bi bi-cloud-upload"></i>
@@ -488,18 +704,18 @@
               <div class="card-body p-md-3">
                 <div v-if="!state.urlImageDish3">
                   <img
-                  class="img-fluid"
+                    class="img-fluid"
                     alt="img"
                     src="https://alxgroup.com.au/wp-content/uploads/2016/04/dummy-post-horisontal.jpg"
-                    style="width: 250px; height: 250px;"
+                    style="width: 250px; height: 250px"
                   />
                 </div>
                 <div v-else>
                   <img
-                  class="img-fluid"
+                    class="img-fluid"
                     alt="img"
                     :src="state.urlImageDish3"
-                    style="width: 250px; height: 250px;"
+                    style="width: 250px; height: 250px"
                   />
                 </div>
 
@@ -512,7 +728,7 @@
                           class="file-input"
                           type="file"
                           @change="onFileSelectedDish($event, 3)"
-                          style="display:none;"
+                          style="display: none"
                         />
                         Click to upload image
                         <i class="ms-2 bi bi-cloud-upload"></i>
@@ -550,18 +766,18 @@
               <div class="card-body p-md-3">
                 <div v-if="!state.urlImageDish4">
                   <img
-                  class="img-fluid"
+                    class="img-fluid"
                     alt="img"
                     src="https://alxgroup.com.au/wp-content/uploads/2016/04/dummy-post-horisontal.jpg"
-                    style="width: 250px; height: 250px;"
+                    style="width: 250px; height: 250px"
                   />
                 </div>
                 <div v-else>
                   <img
-                  class="img-fluid"
+                    class="img-fluid"
                     alt="img"
                     :src="state.urlImageDish4"
-                    style="width: 250px; height: 250px;"
+                    style="width: 250px; height: 250px"
                   />
                 </div>
 
@@ -574,7 +790,7 @@
                           class="file-input"
                           type="file"
                           @change="onFileSelectedDish($event, 4)"
-                          style="display:none;"
+                          style="display: none"
                         />
                         Click to upload image
                         <i class="ms-2 bi bi-cloud-upload"></i>
@@ -638,7 +854,9 @@ import { required } from "@vuelidate/validators";
 import { reactive, computed } from "vue";
 import CafeStore from "@/store/cafe";
 import Axios from "axios";
-Axios.defaults.headers.common = { 'Authorization': `bearer ${AuthUser.getters.jwt}` };
+Axios.defaults.headers.common = {
+  Authorization: `bearer ${AuthUser.getters.jwt}`,
+};
 export default {
   name: "AddCafe",
   setup() {
@@ -651,21 +869,21 @@ export default {
       c_latlon: "",
       c_map: "",
 
-      mondayAM:"",
-      tuesdayAM:"",
-      wednesdayAM:"",
-      thursdayAM:"",
-      fridayAM:"",
-      saturdayAM:"",
-      sundayAM:"",
+      mondayAM: "",
+      tuesdayAM: "",
+      wednesdayAM: "",
+      thursdayAM: "",
+      fridayAM: "",
+      saturdayAM: "",
+      sundayAM: "",
 
-      mondayPM:"",
-      tuesdayPM:"",
-      wednesdayPM:"",
-      thursdayPM:"",
-      fridayPM:"",
-      saturdayPM:"",
-      sundayPM:"",
+      mondayPM: "",
+      tuesdayPM: "",
+      wednesdayPM: "",
+      thursdayPM: "",
+      fridayPM: "",
+      saturdayPM: "",
+      sundayPM: "",
 
       items: [
         { value: "Dine-in", text: "Dine-in" },
@@ -703,6 +921,8 @@ export default {
       selectedFileDish4: null,
       urlImgDish4: null,
       s1: false,
+      selectedImageId: null,
+      profile_upload: null,
     });
     const rules = computed(() => {
       return {
@@ -724,20 +944,22 @@ export default {
         selectedFileDish2: { required },
         selectedFileDish3: { required },
         selectedFileDish4: { required },
-        mondayAM:{ required },
-        tuesdayAM:{ required },
-        wednesdayAM:{ required },
-        thursdayAM:{ required },
-        fridayAM:{ required },
-        saturdayAM:{ required },
-        sundayAM:{ required },
-        mondayPM:{ required },
-        tuesdayPM:{ required },
-        wednesdayPM:{ required },
-        thursdayPM:{ required },
-        fridayPM:{ required },
-        saturdayPM:{ required },
-        sundayPM:{ required },
+        mondayAM: { required },
+        tuesdayAM: { required },
+        wednesdayAM: { required },
+        thursdayAM: { required },
+        fridayAM: { required },
+        saturdayAM: { required },
+        sundayAM: { required },
+        mondayPM: { required },
+        tuesdayPM: { required },
+        wednesdayPM: { required },
+        thursdayPM: { required },
+        fridayPM: { required },
+        saturdayPM: { required },
+        sundayPM: { required },
+        selectedImageId: { required },
+        profile_upload: { required },
       };
     });
     const v$ = useValidate(rules, state);
@@ -749,9 +971,15 @@ export default {
   },
 
   methods: {
+    selectImage(id) {
+      this.state.selectedImageId = id.url;
+      this.state.profile_upload = id.file;
+      console.log(this.state.profile_upload);
+    },
     onFileSelectedDish(event, num) {
       if (num == 1) {
         this.state.selectedFileDish1 = event.target.files[0];
+        console.log(this.state.selectedFileDish1);
         this.state.urlImageDish1 = URL.createObjectURL(
           this.state.selectedFileDish1
         );
@@ -781,18 +1009,21 @@ export default {
       this.state.selectedFile = event.target.files;
       // console.log(event.target.files);
       for (let i = 0; i < this.state.selectedFile.length; i++) {
-        this.state.urlImage.push(this.addImgUrl(this.state.selectedFile[i]));
+        this.state.urlImage.push({
+          url: this.addImgUrl(this.state.selectedFile[i]),
+          file: this.state.selectedFile[i],
+        });
       }
       this.state.s1 = true;
     },
     addImgUrl(img) {
       return URL.createObjectURL(img);
     },
-    async checkRole(){
-      if(AuthUser.getters.user.u_role === "admin"){
-        this.state.c_status = "pass"
-      }else{
-        this.state.c_status = "notpass"
+    async checkRole() {
+      if (AuthUser.getters.user.u_role === "admin") {
+        this.state.c_status = "pass";
+      } else {
+        this.state.c_status = "notpass";
       }
     },
     async addCafe() {
@@ -804,104 +1035,130 @@ export default {
           confirmButtonColor: "#dd6b55",
         });
       } else {
-        await this.checkRole()
-        this.state.c_service = this.state.selectedValues.join(",")
+        await this.checkRole();
+        this.state.c_service = this.state.selectedValues.join(",");
         let res = await CafeStore.dispatch("addCafe", this.state);
         //this.$router.push("/");
-        if(res.success){
-        //upload time open-closed
-        let res_time = await this.uploadTime(res.c_id)
-        
-        //upload image cafe profile
-        const fdprofile = new FormData();
-        fdprofile.append("c_image", this.state.selectedFile[0]);
-        fdprofile.append("c_id",res.c_id)
-        const api_endpoint = "http://localhost:5000"
-        let res_profile = await Axios.put(api_endpoint+"/api/cafe/upload_profile", fdprofile)
-        // console.log(res_profile)
+        if (res.success) {
+          //upload time open-closed
+          let res_time = await this.uploadTime(res.c_id);
 
-        //upload image cafe
-        const fdmul = new FormData();
-        fdmul.append("c_id", res.c_id);
-        for (let i = 0; i < this.state.selectedFile.length; i++) {
-          fdmul.append("i_name", this.state.selectedFile[i]);
-        }
-        let res_mul = await Axios.post(api_endpoint + "/api/cafe/uploadmul-img",fdmul);
-        // console.log(res_mul);
+          //upload image cafe profile
+          const fdprofile = new FormData();
+          fdprofile.append("c_image", this.state.profile_upload);
+          fdprofile.append("c_id", res.c_id);
+          const api_endpoint = "http://localhost:5000";
+          let res_profile = await Axios.put(
+            api_endpoint + "/api/cafe/upload_profile",
+            fdprofile
+          );
+          // console.log(res_profile)
 
-        //upload image dish1-4
-        await this.uploadDish(res.c_id)
+          //upload image cafe
+          const fdmul = new FormData();
+          fdmul.append("c_id", res.c_id);
+          for (let i = 0; i < this.state.selectedFile.length; i++) {
+            fdmul.append("i_name", this.state.selectedFile[i]);
+          }
+          let res_mul = await Axios.post(
+            api_endpoint + "/api/cafe/uploadmul-img",
+            fdmul
+          );
+          // console.log(res_mul);
 
-        Swal.fire({
+          //upload image dish1-4
+          await this.uploadDish(res.c_id);
+
+          Swal.fire({
             icon: "success",
             title: "Add cafe successful",
             showConfirmButton: false,
             timer: 1500,
           });
-        this.$router.push("/");
-        }else{
+          this.$router.push("/");
+        } else {
           Swal.fire({
             icon: "error",
-            text: res.message,
+            text: "Please check your data",
             confirmButtonColor: "#dd6b55",
           });
         }
       }
     },
-    async uploadTime(c_id){
+    async uploadTime(c_id) {
       let payload = {
         c_id: c_id,
         monday: this.state.mondayAM + " AM to " + this.state.mondayPM + " PM",
-        tuesday: this.state.tuesdayAM + " AM to " + this.state.tuesdayPM + " PM",
-        wednesday: this.state.wednesdayAM + " AM to " + this.state.wednesdayPM + " PM",
-        thursday: this.state.thursdayAM + " AM to " + this.state.thursdayPM + " PM",
+        tuesday:
+          this.state.tuesdayAM + " AM to " + this.state.tuesdayPM + " PM",
+        wednesday:
+          this.state.wednesdayAM + " AM to " + this.state.wednesdayPM + " PM",
+        thursday:
+          this.state.thursdayAM + " AM to " + this.state.thursdayPM + " PM",
         friday: this.state.fridayAM + " AM to " + this.state.fridayPM + " PM",
-        saturday: this.state.saturdayAM + " AM to " + this.state.saturdayPM + " PM",
+        saturday:
+          this.state.saturdayAM + " AM to " + this.state.saturdayPM + " PM",
         sunday: this.state.sundayAM + " AM to " + this.state.sundayPM + " PM",
-      }
+      };
       let res = await CafeStore.dispatch("addTime", payload);
-      console.log(res)
+      //console.log(res);
     },
-    async uploadDish(c_id){
-      const api_endpoint = "http://localhost:5000"
+    async uploadDish(c_id) {
+      const api_endpoint = "http://localhost:5000";
       const fddish1 = new FormData();
-        fddish1.append("c_id",c_id)
-        fddish1.append("i_name", this.state.selectedFileDish1);
-        fddish1.append("i_menu_name",this.state.i_menu_name1)
-        fddish1.append("i_price",this.state.i_price1)
-        fddish1.append("i_popular","yes")
-  
-        const fddish2 = new FormData();
-        fddish2.append("c_id",c_id)
-        fddish2.append("i_name", this.state.selectedFileDish2);
-        fddish2.append("i_menu_name",this.state.i_menu_name2)
-        fddish2.append("i_price",this.state.i_price2)
-        fddish2.append("i_popular","yes")
-  
-        const fddish3 = new FormData();
-        fddish3.append("c_id",c_id)
-        fddish3.append("i_name", this.state.selectedFileDish3);
-        fddish3.append("i_menu_name",this.state.i_menu_name3)
-        fddish3.append("i_price",this.state.i_price3)
-        fddish3.append("i_popular","yes")
-  
-        const fddish4 = new FormData();
-        fddish4.append("c_id",c_id)
-        fddish4.append("i_name", this.state.selectedFileDish4);
-        fddish4.append("i_menu_name",this.state.i_menu_name4)
-        fddish4.append("i_price",this.state.i_price4)
-        fddish4.append("i_popular","yes")
-  
-        let res_dish1 = await Axios.post(api_endpoint+"/api/cafe/upload-img", fddish1)
-        let res_dish2 = await Axios.post(api_endpoint+"/api/cafe/upload-img", fddish2)
-        let res_dish3 = await Axios.post(api_endpoint+"/api/cafe/upload-img", fddish3)
-        let res_dish4 = await Axios.post(api_endpoint+"/api/cafe/upload-img", fddish4)
-        // console.log(res_dish1)
-        // console.log(res_dish2)
-        // console.log(res_dish3)
-        // console.log(res_dish4)
-    }
+      fddish1.append("c_id", c_id);
+      fddish1.append("i_name", this.state.selectedFileDish1);
+      fddish1.append("i_menu_name", this.state.i_menu_name1);
+      fddish1.append("i_price", this.state.i_price1);
+      fddish1.append("i_popular", "yes");
+
+      const fddish2 = new FormData();
+      fddish2.append("c_id", c_id);
+      fddish2.append("i_name", this.state.selectedFileDish2);
+      fddish2.append("i_menu_name", this.state.i_menu_name2);
+      fddish2.append("i_price", this.state.i_price2);
+      fddish2.append("i_popular", "yes");
+
+      const fddish3 = new FormData();
+      fddish3.append("c_id", c_id);
+      fddish3.append("i_name", this.state.selectedFileDish3);
+      fddish3.append("i_menu_name", this.state.i_menu_name3);
+      fddish3.append("i_price", this.state.i_price3);
+      fddish3.append("i_popular", "yes");
+
+      const fddish4 = new FormData();
+      fddish4.append("c_id", c_id);
+      fddish4.append("i_name", this.state.selectedFileDish4);
+      fddish4.append("i_menu_name", this.state.i_menu_name4);
+      fddish4.append("i_price", this.state.i_price4);
+      fddish4.append("i_popular", "yes");
+
+      let res_dish1 = await Axios.post(
+        api_endpoint + "/api/cafe/upload-img",
+        fddish1
+      );
+      let res_dish2 = await Axios.post(
+        api_endpoint + "/api/cafe/upload-img",
+        fddish2
+      );
+      let res_dish3 = await Axios.post(
+        api_endpoint + "/api/cafe/upload-img",
+        fddish3
+      );
+      let res_dish4 = await Axios.post(
+        api_endpoint + "/api/cafe/upload-img",
+        fddish4
+      );
+      // console.log(res_dish1)
+      // console.log(res_dish2)
+      // console.log(res_dish3)
+      // console.log(res_dish4)
+    },
   },
 };
 </script>
-<style></style>
+<style scoped>
+.selected {
+  border: 2px solid red;
+}
+</style>

@@ -35,7 +35,7 @@ const routes = [
   {
     path: '/detail/:id',
     name: 'Detail',
-    component: DetailView
+    component: DetailView,
   },
   {
     path: '/add',

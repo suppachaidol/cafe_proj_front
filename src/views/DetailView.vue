@@ -57,8 +57,8 @@
           </div>
           <div class="mt-2">
             <!-- <p v-if="cafe[0] ? cafe[0] : null"> -->
-              <p v-html="iframe"></p>
-              <!-- <iframe
+            <p v-html="iframe"></p>
+            <!-- <iframe
                 :src="iframe"
                 width="600"
                 height="450"
@@ -67,7 +67,7 @@
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
               ></iframe> -->
-              <!-- <GoogleMap :destLat="cafe[0].c_lat" :destLng="cafe[0].c_lon"/> -->
+            <!-- <GoogleMap :destLat="cafe[0].c_lat" :destLng="cafe[0].c_lon"/> -->
             <!-- </p> -->
           </div>
         </div>
@@ -99,7 +99,7 @@
                     <i class="bi bi-star"></i>
                     <i class="bi bi-star"></i>
                     <i class="bi bi-star"></i>
-                  </span>                   
+                  </span>
                   <span
                     class="star-comment"
                     v-if="cafe[0].c_star >= 1 && cafe[0].c_star < 1.5"
@@ -226,13 +226,13 @@ This is my DIV element.
             <strong>Hours:</strong>
             <div class="container">
               <div class="col">
-                <div>Monday: {{ time ? time[0].monday : ""}}</div>
-                <div>tuesday: {{ time ? time[0].tuesday : ""}}</div>
-                <div>Wednesday: {{ time ? time[0].wednesday : ""}}</div>
-                <div>Thursday: {{ time ? time[0].thursday : ""}}</div>
-                <div>Friday: {{ time ? time[0].friday : ""}}</div>
-                <div>Saturday: {{ time ? time[0].saturday : ""}}</div>
-                <div>Sunday: {{ time ? time[0].sunday : ""}}</div>
+                <div>Monday: {{ time ? time[0].monday : "" }}</div>
+                <div>tuesday: {{ time ? time[0].tuesday : "" }}</div>
+                <div>Wednesday: {{ time ? time[0].wednesday : "" }}</div>
+                <div>Thursday: {{ time ? time[0].thursday : "" }}</div>
+                <div>Friday: {{ time ? time[0].friday : "" }}</div>
+                <div>Saturday: {{ time ? time[0].saturday : "" }}</div>
+                <div>Sunday: {{ time ? time[0].sunday : "" }}</div>
               </div>
             </div>
 
@@ -258,7 +258,7 @@ This is my DIV element.
           v-for="(img, index) in cafe_images_dish"
           :key="index"
         >
-          <div class="card shadow">
+          <div class="card shadow h-100">
             <div class="card-body">
               <img
                 alt="image"
@@ -267,11 +267,13 @@ This is my DIV element.
                 class="bd-placeholder-img card-img-top"
                 :src="`http://localhost:5000/api/images/cafe/${img.i_name}`"
               />
-              <hr>
+              <hr />
               <div class="row mt-2">
                 <div class="col">
                   <h5 style="direction: ltl">{{ img.i_menu_name }}</h5>
-                  <h4 style="direction: ltl">฿ {{ img.i_price }}</h4>
+                  <h4 style="direction: ltl" class="price">
+                    ฿ {{ img.i_price }}
+                  </h4>
                 </div>
               </div>
             </div>
@@ -447,10 +449,28 @@ This is my DIV element.
                       _______________________________________________________________________________________________________
                     </div>
                   </div>
-                  <div class="mb-2 mt-3" v-if="numAllReview>6" style="text-align:center">
-                    <button type="button" class="btn btn-dark" @click="previousPage"><i class="bi bi-caret-left-fill"></i></button>
-                    <span class="mx-2">Page {{ currentPage }} of {{ totalPages }}</span>
-                    <button type="button" class="btn btn-dark" @click="nextPage"><i class="bi bi-caret-right-fill"></i></button>
+                  <div
+                    class="mb-2 mt-3"
+                    v-if="numAllReview > 6"
+                    style="text-align: center"
+                  >
+                    <button
+                      type="button"
+                      class="btn btn-dark"
+                      @click="previousPage"
+                    >
+                      <i class="bi bi-caret-left-fill"></i>
+                    </button>
+                    <span class="mx-2"
+                      >Page {{ currentPage }} of {{ totalPages }}</span
+                    >
+                    <button
+                      type="button"
+                      class="btn btn-dark"
+                      @click="nextPage"
+                    >
+                      <i class="bi bi-caret-right-fill"></i>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -460,57 +480,33 @@ This is my DIV element.
         </div>
         <div class="col">
           <section class="pt-5 pb-5">
-            <h2 class="pb-2" style="text-align: center">Near by</h2>
-            <div class="container w-75">
+            <h2 class="pb-2" style="text-align: center">Recommend</h2>
+            <div
+              class="container w-75"
+              v-for="(cafe, index) in cafe_all2"
+              :key="index"
+            >
               <div class="col mb-3">
-                <div class="card shadow-sm">
+                <div class="card shadow-sm h-100">
                   <div class="moreCafe card-body">
                     <img
-                      class="img-fluid pb-2"
-                      src="https://image.bestreview.asia/wp-content/uploads/2022/05/best-cafe-amazon-menu.jpg"
+                      width="100%"
+                      height="150"
+                      class="bd-placeholder-img card-img-top"
+                      :src="`http://localhost:5000/api/images/cafe/${cafe.c_image}`"
                       alt=""
                     />
-                    <h4 class="card-title">ERD Cafe</h4>
-                    <p class="card-text">Cafe in forest.</p>
-                    <a href="#" class="btn btn-primary" style="direction: rtl"
-                      >View</a
+                    <hr />
+                    <h5 class="card-title">{{ cafe ? cafe.c_name : "" }}</h5>
+                    <!-- <p class="card-text">Cafe in forest.</p> -->
+                    <button
+                      @click="detailBTN(cafe.c_id)"
+                      href="#"
+                      class="btn btn-primary mt-2"
+                      style="direction: rtl"
                     >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="container w-75">
-              <div class="col mb-3">
-                <div class="card shadow-sm">
-                  <div class="moreCafe card-body">
-                    <img
-                      class="img-fluid pb-2"
-                      src="https://image.bestreview.asia/wp-content/uploads/2022/05/best-cafe-amazon-menu.jpg"
-                      alt=""
-                    />
-                    <h4 class="card-title">ERD Cafe</h4>
-                    <p class="card-text">Cafe in forest.</p>
-                    <a href="#" class="btn btn-primary" style="direction: rtl"
-                      >View</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="container w-75">
-              <div class="col mb-3">
-                <div class="card shadow-sm">
-                  <div class="moreCafe card-body">
-                    <img
-                      class="img-fluid pb-2"
-                      src="https://image.bestreview.asia/wp-content/uploads/2022/05/best-cafe-amazon-menu.jpg"
-                      alt=""
-                    />
-                    <h4 class="card-title">ERD Cafe</h4>
-                    <p class="card-text">Cafe in forest.</p>
-                    <a href="#" class="btn btn-primary" style="direction: rtl"
-                      >View</a
-                    >
+                      View
+                    </button>
                   </div>
                 </div>
               </div>
@@ -527,7 +523,7 @@ import ReviewStore from "@/store/review";
 import UserCafeStore from "@/store/user_cafe";
 import AuthUser from "@/store/AuthUser";
 import Swal from "sweetalert2";
-import GoogleMap from '../components/GoogleMap.vue';
+import GoogleMap from "../components/GoogleMap.vue";
 
 export default {
   //components: { GoogleMap },
@@ -554,7 +550,9 @@ export default {
       pageSize: 6,
       iframe: null,
       isFavorite: null,
-      time:null,
+      time: null,
+      cafe_all: [],
+      cafe_all2: null,
     };
   },
   created() {
@@ -563,28 +561,25 @@ export default {
     this.fetchCafeImage();
     this.fetchReview();
     this.fetchCafeTime();
-    if(this.isAuthen()){
+    this.fetchAllCafe();
+    if (this.isAuthen()) {
       this.fetchFavorite();
     }
   },
   methods: {
-    // async findMtstate(){
-    //   const success = (position)=>{
-    //     console.log(position)
-    //     const latitude = position.coords.latitude
-    //     const longtitude = position.coords.longtitude
-        
-    //   }
-    //   const error = () =>{
-    //     this.location = 'Unable to retrieve your location'
-    //   }
-    //   navigator.geolocation.getCurrentPosition(success,error)
-    // },
+    async fetchAllCafe() {
+      await CafeStore.dispatch("fetchCafe");
+      this.cafe_all = await CafeStore.getters.cafe;
+      this.cafe_all2 = this.cafe_all.filter((cafe) => cafe.c_id != this.c_id);
+      this.cafe_all2 = this.cafe_all2
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3);
+    },
     async fetchCafeData() {
       await CafeStore.dispatch("fetchCafeById", this.c_id);
       this.cafe = await CafeStore.getters.cafe;
       this.cafe_star = this.cafe[0].c_star.toFixed(1);
-      this.iframe = this.cafe[0].c_map   
+      this.iframe = this.cafe[0].c_map;
       //await this.splitIframe(this.cafe[0].c_map);
     },
     async fetchCafeImage() {
@@ -598,20 +593,20 @@ export default {
       this.numAllReview = this.reviews.length;
       this.countStar();
     },
-    async fetchFavorite(){
+    async fetchFavorite() {
       let payload = {
-          u_id: this.u_id,
-          c_id: this.c_id,
-        };
+        u_id: this.u_id,
+        c_id: this.c_id,
+      };
       await UserCafeStore.dispatch("fetchUserCafe", payload);
-      if(UserCafeStore.getters.user_cafe.length==1){
-        this.isFavorite = true
-      }else{
-        this.isFavorite = false
+      if (UserCafeStore.getters.user_cafe.length == 1) {
+        this.isFavorite = true;
+      } else {
+        this.isFavorite = false;
       }
     },
-    async fetchCafeTime(){
-      let id = this.c_id
+    async fetchCafeTime() {
+      let id = this.c_id;
       await CafeStore.dispatch("fetchCafeTime", id);
       this.time = await CafeStore.getters.times;
     },
@@ -690,23 +685,31 @@ export default {
     // },
     async toggleFavorite() {
       let payload = {
-          u_id: this.u_id,
-          c_id: this.c_id,
-        };
-        //console.log(UserCafeStore.getters.user_cafe)
-      if(UserCafeStore.getters.user_cafe.length==0){
+        u_id: this.u_id,
+        c_id: this.c_id,
+      };
+      //console.log(UserCafeStore.getters.user_cafe)
+      if (UserCafeStore.getters.user_cafe.length == 0) {
         let res = await UserCafeStore.dispatch("addUserCafe", payload);
         //console.log(res)
         this.isFavorite = !this.isFavorite;
-        this.fetchFavorite()       
-      }else if(UserCafeStore.getters.user_cafe.length==1){
-        let id = UserCafeStore.getters.user_cafe[0].uc_id
+        this.fetchFavorite();
+      } else if (UserCafeStore.getters.user_cafe.length == 1) {
+        let id = UserCafeStore.getters.user_cafe[0].uc_id;
         let res = await UserCafeStore.dispatch("removeUserCafe", id);
         //console.log(res)
         this.isFavorite = !this.isFavorite;
-        this.fetchFavorite()
+        this.fetchFavorite();
       }
-
+    },
+    detailBTN(id) {
+       this.$router.push({ path: "/" }).then(() => {
+        this.$router
+          .push({ name: "Detail", params: { id: id } })
+          .then(() => {
+            window.scrollTo(0, 0);
+          });
+       });
     },
   },
   computed: {
@@ -727,7 +730,9 @@ export default {
       return this.reviews ? Math.ceil(this.reviews.length / this.pageSize) : 0;
     },
     favoriteClass() {
-      return this.isFavorite ? 'bi bi-star-fill text-warning ml-1' : 'bi bi-star ml-1';
+      return this.isFavorite
+        ? "bi bi-star-fill text-warning ml-1"
+        : "bi bi-star ml-1";
     },
   },
 };
