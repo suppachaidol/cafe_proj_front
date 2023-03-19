@@ -1,26 +1,28 @@
 <template>
   <div>
-    <section class="pt-5 pb-5 height: 100vh">
-      <div class="container mb-5">
-        <nav
-          class="navbar navbar-light bg-light rounded-4 border border-dark"
-          style="background-color: #e3f2fd"
-        >
-          <div class="container-fluid mx-5">
-            <form class="form-inline d-block w-25" style="text-align:center;">
-              <input
-                class="input-search form-control form-control-lg"
-                type="text"
-                v-model="input"
-                placeholder="Search"
-                @click="currentPage1"
-              />
-              <input v-model="nearBy" type="checkbox" @change="getCurrentLocation">
-              <span class="ms-2" id="checkmark">Near by</span>
-              
-            </form>
-            <section>
-              <div class="row">
+    <section class="mx-2pt-5 pb-5 height: 100vh">
+      <div class = 'row' >
+        <div class = 'col-2'>
+          <div class="container mb-5">
+            <nav
+              class="navbar navbar-light bg-light rounded-4 border border-dark"
+              style="background-color: #e3f2fd"
+            >
+              <div class="container">
+                <form class="form-inline d-block" >
+                  <input
+                    class="input-search form-control form-control"
+                    type="text"
+                    v-model="input"
+                    placeholder="Search"
+                    @click="currentPage1"
+                  />
+                  <input class="form-check-input" v-model="nearBy" type="checkbox" @change="getCurrentLocation">
+                  <span   class="mx-2" id="checkmark">Near by</span>
+                </form>
+
+                 
+                 
                 <div class="col">
                   <div class="form-check" v-for="item in items"
                   :key="item.value">
@@ -36,102 +38,108 @@
                     <label class="form-check-label">{{ item.text }}</label>
                   </div>
                 </div>
+              </div> 
+                
+
+                <div class="container ">
+                  <div class="container dropdown mt-3 mb-2">
+                    <button
+                      class="btn btn-secondary dropdown-toggle w-100 text-white"
+                      href="#"
+                      role="button"
+                      id="dropdownMenuLink"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      {{ selectedFilterOption ? selectedFilterOption : 'Filter' }} 
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li v-for="(option, index) in filterOptions" :key="index">
+                        <a class="dropdown-item"  @click="selectFilterOption(option)">{{ option }}</a>
+                      </li>
+                    </ul>
+                  </div>
+            
+
+                <div class="container dropdown mb-2" >
+                      <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ selectedStarOption ? selectedStarOption : 'Star' }} <i class="bi bi-star-fill"></i>
+                      </button>
+                      <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+                        <li v-for="(option, index) in starOptions" :key="index">
+                        <a class="dropdown-item"  @click="selectStarOption(option)">{{ option }} <i class="bi bi-star-fill"></i></a>
+                        </li>
+                      </ul>
+                </div> 
+
               </div>
-            </section>
-            <div class="col-2">
-              <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle w-100 text-white"
-                  href="#"
-                  role="button"
-                  id="dropdownMenuLink"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  {{ selectedFilterOption ? selectedFilterOption : 'Filter' }} 
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <li v-for="(option, index) in filterOptions" :key="index">
-                    <a class="dropdown-item"  @click="selectFilterOption(option)">{{ option }}</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="dropdown mb-2" >
-                  <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{ selectedStarOption ? selectedStarOption : 'Star' }} <i class="bi bi-star-fill"></i>
-                  </button>
-                  <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-                    <li v-for="(option, index) in starOptions" :key="index">
-                    <a class="dropdown-item"  @click="selectStarOption(option)">{{ option }} <i class="bi bi-star-fill"></i></a>
-                    </li>
-                  </ul>
-                </div>
+            </nav>
           </div>
-        </nav>
-      </div>
-
-      <div class="container">
-        <div id="map"></div>
-        <button @click="clear">Clear</button>
-        <div v-for="dis in distance" :key="dis">
-          {{ dis }}
         </div>
+        <div class='col'>
+          <div class="container">
+            <div id="map"></div>
+            <button @click="clear">Clear</button>
+            <div v-for="dis in distance" :key="dis">
+              {{ dis }}
+            </div>
 
-        <div
-          class="col justify-content-center align-items-center"
-          style="text-align: center"
-        >
-          <h3 class="mt-4 mb-5"><strong>Result Cafe</strong></h3>
+            <div
+              class="col justify-content-center align-items-center"
+              style="text-align: center"
+            >
+              <h3 class="mt-4 mb-5"><strong>Result Cafe</strong></h3>
 
-          <div class="row">
-            <div class="col-3" v-for="(place, index) in displayedCafes" :key="index">
-              <div class="container">
-                <div class="col mb-3">
-                  <div class="card shadow-sm" style="height: 350px">
-                    <div class="moreCafe card-body">
-                      <a href="#" @click="showMarkers(place)">
-                        <img
-                          width="100%"
-                          height="150"
-                          class="bd-placeholder-img card-img-top"
-                          :src="`http://localhost:5000/api/images/cafe/${place.c_image}`"
-                          alt=""
-                        />
-                        <h5 class="card-title mt-2">{{ place.c_name }}</h5>
-                        <p class="card-text">
-                          <i class="bi bi-star-fill" style="color: #ff9529"></i>
-                          {{ place.c_star.toFixed(1) }} ({{ place.c_review }}
-                          reviews)
-                        </p>
-                        <div class="bottomButton">
-                          <button
-                            @click="detailBTN(place.c_id)"
-                            href="#"
-                            class="btn btn-primary"
-                            style="direction: rtl"
-                          >
-                            View
-                          </button>
+              <div class="row">
+                <div class="col-3" v-for="(place, index) in displayedCafes" :key="index">
+                  <div class="container">
+                    <div class="col mb-3">
+                      <div class="card shadow-sm" style="height: 350px">
+                        <div class="moreCafe card-body">
+                          <a href="#" @click="showMarkers(place)">
+                            <img
+                              width="100%"
+                              height="150"
+                              class="bd-placeholder-img card-img-top"
+                              :src="`http://localhost:5000/api/images/cafe/${place.c_image}`"
+                              alt=""
+                            />
+                            <h5 class="card-title mt-2">{{ place.c_name }}</h5>
+                            <p class="card-text">
+                              <i class="bi bi-star-fill" style="color: #ff9529"></i>
+                              {{ place.c_star.toFixed(1) }} ({{ place.c_review }}
+                              reviews)
+                            </p>
+                            <div class="bottomButton">
+                              <button
+                                @click="detailBTN(place.c_id)"
+                                href="#"
+                                class="btn btn-primary"
+                                style="direction: rtl"
+                              >
+                                View
+                              </button>
+                            </div>
+                          </a>
                         </div>
-                      </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <div class="item error" v-if="!filteredList().length">
+                <p>No results found!</p>
+              </div>
+              <div class="mb-2 mt-3" style="text-align: center" v-if="filteredList().length">
+                <button type="button" class="btn btn-dark" @click="previousPage">
+                  <i class="bi bi-caret-left-fill"></i>
+                </button>
+                <span class="mx-2">Page {{ currentPage }} of {{ totalPages }}</span>
+                <button type="button" class="btn btn-dark" @click="nextPage">
+                  <i class="bi bi-caret-right-fill"></i>
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="item error" v-if="!filteredList().length">
-            <p>No results found!</p>
-          </div>
-          <div class="mb-2 mt-3" style="text-align: center" v-if="filteredList().length">
-            <button type="button" class="btn btn-dark" @click="previousPage">
-              <i class="bi bi-caret-left-fill"></i>
-            </button>
-            <span class="mx-2">Page {{ currentPage }} of {{ totalPages }}</span>
-            <button type="button" class="btn btn-dark" @click="nextPage">
-              <i class="bi bi-caret-right-fill"></i>
-            </button>
           </div>
         </div>
       </div>
