@@ -91,7 +91,7 @@
                 focusable="false"
               />
 
-              <div class="card-body">
+              <div class="card-body d-flex flex-column">
                 <div>
                   <h5>{{ cafe.c_name }}</h5>
                   <div>
@@ -100,6 +100,7 @@
                   </div>
                 </div>
                 <p class="card-text"></p>
+                <div class="mt-auto">
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <button
@@ -111,6 +112,7 @@
                     </button>
                   </div>
                 </div>
+              </div>
               </div>
             </div>
           </div>
@@ -140,7 +142,7 @@
       </h3>
     </div>
 
-    <div class="album py-5">
+    <div class="album py-5 ">
       <div class="container">
         <div class="row g-3">
           <div class="col-md-3 col-sm-6 col-12"
@@ -159,7 +161,7 @@
                 focusable="false"
               />
 
-              <div class="card-body">
+              <div class="card-body d-flex flex-column">
                 <div>
                   <h5>{{ cafe.c_name }}</h5>
                   <div>
@@ -168,6 +170,7 @@
                   </div>
                 </div>
                 <p class="card-text"></p>
+                 <div class="mt-auto">
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <button
@@ -178,6 +181,7 @@
                       View
                     </button>
                   </div>
+                </div>
                 </div>
               </div>
             </div>

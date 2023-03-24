@@ -100,7 +100,7 @@
           </div>
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="nav-link active" style="color: white " aria-current="page" href="/search"><i class="bi bi-search"></i></a>
+                <a class="nav-link active" style="color: white " aria-current="page" href="/map"><i class="bi bi-search"></i></a>
             </li>
           </ul>
         </div>
