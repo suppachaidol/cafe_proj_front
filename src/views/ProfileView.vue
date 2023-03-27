@@ -1,5 +1,5 @@
 <template>
-<section class="pt-5 pb-5 height: 100vh">         
+<section class="pt-5 pb-5 height: 100vh" style="background-color:#f2eddd">  
     <div class="p-3 mb-2 ">
         <section class="  align-items-center d-flex  ">
             <div class="container ">
@@ -9,7 +9,7 @@
                         <div class=" justify-content-center align-items-center" style="text-align: center">
                             <img
                                 :src="`http://localhost:5000/api/images/profile/${user.u_image}`"
-                                class="img-fluid mx-2"
+                                class="img-fluid mx-2 shadow-lg"
                                 alt="..."
                                 style="height : 20rem; border-radius:50%"
                                 />
@@ -41,12 +41,12 @@
                     <div class="col justify-content-center align-items-center" style="text-align: center">
                         <h3 class="mb-5"><strong>Your list</strong></h3>
 
-                        <div class="scroll-container">
-                            <div class="row">
+                        <div class="scrollable" v-scroll="onScroll">
+                            <div class="row"  style=" width: 100% ">
                                 <div class="col-6" v-for="(fav, index) in fav_cafe" :key="index">
                                     <div class="container">
                                         <div class="col mb-3">
-                                            <div class="card shadow-sm">
+                                            <div class="card shadow-sm" style="height: 20em;">
                                                 <div class="moreCafe card-body">
                                                     <img
                                                     width="100%"
@@ -60,8 +60,7 @@
                                                     <button @click="detailBTN(fav.c_id)" href="#" class="btn btn-primary" style="direction: rtl"
                                                     >View</button
                                                     >
-                                                </div>
-                                                
+                                                </div> 
                                             </div>
                                         </div>
                                     </div>
@@ -101,14 +100,25 @@ export default {
         this.$router.push({ path: "/detail/" + id, params: { id: id } }).then(() => {
         window.scrollTo(0, 0)}); 
         },
+        onScroll() {
+            const content = this.$el.querySelector('.content')
+            if (content.scrollTop + content.clientHeight >= content.scrollHeight) {
+                // User has reached the bottom of the scrollable area
+                this.page++
+                // Fetch more data from the API
+                this.fetchItems()
+            }
+        },
+        fetchItems() {
+        // Fetch more items from the API and add them to the items array
+        }
     },
 } 
 </script>
 
 <style>
-.scroll-container {
-  overflow-y: scroll;
-  overflow-x: none;
+.scrollable {
   height: 800px;
+  overflow-y: scroll;
 }
 </style>

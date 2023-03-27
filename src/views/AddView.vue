@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: #eee">
+  <div style="background-color:#f2eddd">
     <section class="pt-5">
       <div class="container">
         <div class="row">
@@ -144,7 +144,7 @@
                   />
                   <button
                     type="button"
-                    class="ms-2"
+                    class="information ms-2"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
                     style="border: none"
@@ -170,7 +170,7 @@
                           </h5>
                           <button
                             type="button"
-                            class="btn-close"
+                            class=" btn-close"
                             data-bs-dismiss="modal"
                             aria-label="Close"
                           ></button>
@@ -226,7 +226,7 @@
                   />
                   <button
                     type="button"
-                    class="ms-2"
+                    class="information ms-2"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal2"
                     style="border: none"
@@ -1158,6 +1158,9 @@ export default {
 };
 </script>
 <style scoped>
+.information {
+  background-color: #f2eddd ;
+}
 .selected {
   border: 2px solid red;
 }

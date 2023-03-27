@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img
+        <a class="navbar-brand"  href="/"><img
         src="https://cdn-icons-png.flaticon.com/512/2069/2069532.png"
         class="img-fluid mx-2"
         alt="..."
@@ -28,9 +28,18 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/contact">Contact</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link active" v-if="isAuthen()" aria-current="page" href="/add">Add Cafe</a>
+            </li>
             <li v-if="role=='admin' && isAuthen()" class="nav-item">
               <a class="nav-link active" aria-current="page" href="/approve">Cafe Management</a>
             </li>
+            
+            <ul class="navbar-nav pb-2 mb-lg-0">
+              <li class="nav-item">
+                  <a class="nav-link active" style="color: white " aria-current="page" href="/map"><i class="bi bi-search"></i></a>
+              </li>
+            </ul>
             <!-- <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle"
@@ -68,12 +77,16 @@
             </li> -->
           </ul>
           <button class="profile-button" v-if="role=='user' && isAuthen()" @click="goToProfile(userId)">
-          <img
-              src="https://icon-library.com/images/profile-icon-white/profile-icon-white-22.jpg"
-              class="img-fluid mx-2"
+          <!-- <img
+              :src="`http://localhost:5000/api/images/profile/${user.u_image}`"
+              class="rounded-circle mx-2"
+              width="50" 
               alt="..."
-              style="height: 2.5rem "
-            />
+              style="height: 2.5rem"
+            /> -->
+            <div class="circle-frame mx-2 text-white" style="textTransform: uppercase">
+              {{user.u_name.charAt(0)}}
+            </div>       
           </button>
           <button class="profile-button me-2 pt-2" v-if="role=='admin' && isAuthen()" @click="goToProfile(userId)">
             <h3  style="color:white" >Admin</h3>
@@ -85,7 +98,7 @@
               type="button"
               class="btn btn-secondary me-2"
             >
-              Sign out
+              Sign out <i class="bi bi-box-arrow-right"></i>
             </button>
           </div>
           <div>
@@ -98,11 +111,6 @@
               Sign In
             </button>
           </div>
-          <ul class="navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link active" style="color: white " aria-current="page" href="/map"><i class="bi bi-search"></i></a>
-            </li>
-          </ul>
         </div>
       </div>
     </nav>
@@ -118,7 +126,8 @@ export default {
   data() {
     return {
       userId: AuthUser.getters.user.u_id,
-      role: AuthUser.getters.user.u_role
+      role: AuthUser.getters.user.u_role,
+      user: AuthUser.getters.user,
     };
   },
   methods: {
@@ -145,5 +154,12 @@ export default {
   background-color: #212529;
   cursor: pointer;
   }
+.circle-frame {
+  width: 30px;
+  border-radius: 50%;
+  border: 3px solid rgb(255, 255, 255);
+  overflow: hidden;
+  box-sizing: border-box;
+}
 </style>
 

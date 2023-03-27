@@ -1,517 +1,522 @@
-<template>
-  <div class="container mt-5">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-6">
+<template >
+  <div style="background-color:#f2eddd">
+    <div class="container pt-5"  >
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-6">
+            <div
+              id="carouselExampleIndicators"
+              class="carousel slide"
+              data-bs-ride="carouselDetail"
+              style="margin-top: 1em"
+            >
+              <div class="carousel-inner">
+                <div
+                  class="carousel-item active"
+                  v-for="(img, index) in cafe_images_place"
+                  :key="index"
+                >
+                  <img
+                    :src="`http://localhost:5000/api/images/cafe/${img.i_name}`"
+                    class="img-fluid w-100"
+                    alt="..."
+                    style="height: 25rem"
+                  />
+                </div>
+                <!-- <div class="carousel-item  ">
+                  <div class="ratio ratio-16x9 shadow-lg">
+                    <iframe class="ratio ratio-16x9"
+                      src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
+                      allowfullscreen=""></iframe>
+                  </div>
+                </div> -->
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+            <div class=" mt-2">
+              <!-- <p v-if="cafe[0] ? cafe[0] : null"> -->
+              <p v-html="iframe"></p>
+              <!-- <iframe
+                  :src="iframe"
+                  width="600"
+                  height="450"
+                  style="border: 0"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe> -->
+              <!-- <GoogleMap :destLat="cafe[0].c_lat" :destLng="cafe[0].c_lon"/> -->
+              <!-- </p> -->
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-6 mb-3 mb-md-0">
+                  <h2>
+                    {{ cafe[0] ? cafe[0].c_name : "" }}
+                  </h2>
+                  <div v-if="cafe[0] ? cafe[0] : null">
+                    <span
+                      class="star-comment"
+                      v-if="cafe[0].c_star >= 0 && cafe[0].c_star < 0.5"
+                    >
+                      <i class="bi bi-star"></i>
+                      <i class="bi bi-star"></i>
+                      <i class="bi bi-star"></i>
+                      <i class="bi bi-star"></i>
+                      <i class="bi bi-star"></i>
+                    </span>
+                    <span
+                      class="star-comment"
+                      v-if="cafe[0].c_star >= 0.5 && cafe[0].c_star < 1"
+                    >
+                      <i class="bi bi-star-half"></i>
+                      <i class="bi bi-star"></i>
+                      <i class="bi bi-star"></i>
+                      <i class="bi bi-star"></i>
+                      <i class="bi bi-star"></i>
+                    </span>
+                    <span
+                      class="star-comment"
+                      v-if="cafe[0].c_star >= 1 && cafe[0].c_star < 1.5"
+                    >
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star"></i>
+                      <i class="bi bi-star"></i>
+                      <i class="bi bi-star"></i>
+                      <i class="bi bi-star"></i>
+                    </span>
+                    <span
+                      class="star-comment"
+                      v-if="cafe[0].c_star >= 1.5 && cafe[0].c_star < 2"
+                    >
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-half"></i>
+                      <i class="bi bi-star"></i>
+                      <i class="bi bi-star"></i>
+                      <i class="bi bi-star"></i>
+                    </span>
+                    <span
+                      class="star-comment"
+                      v-if="cafe[0].c_star >= 2 && cafe[0].c_star < 2.5"
+                    >
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star"></i>
+                      <i class="bi bi-star"></i>
+                      <i class="bi bi-star"></i>
+                    </span>
+                    <span
+                      class="star-comment"
+                      v-if="cafe[0].c_star >= 2.5 && cafe[0].c_star < 3"
+                    >
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-half"></i>
+                      <i class="bi bi-star"></i>
+                      <i class="bi bi-star"></i>
+                    </span>
+                    <span
+                      class="star-comment"
+                      v-if="cafe[0].c_star >= 3 && cafe[0].c_star < 3.5"
+                    >
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star"></i>
+                      <i class="bi bi-star"></i>
+                    </span>
+                    <span
+                      class="star-comment"
+                      v-if="cafe[0].c_star >= 3.5 && cafe[0].c_star < 4"
+                    >
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-half"></i>
+                      <i class="bi bi-star"></i>
+                    </span>
+                    <span
+                      class="star-comment"
+                      v-if="cafe[0].c_star >= 4 && cafe[0].c_star < 4.5"
+                    >
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star"></i>
+                    </span>
+                    <span
+                      class="star-comment"
+                      v-if="cafe[0].c_star >= 4.5 && cafe[0].c_star < 5"
+                    >
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-half"></i>
+                    </span>
+                    <span class="star-comment" v-if="cafe[0].c_star >= 5">
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                    </span>
+                    {{ cafe[0] ? cafe[0].c_star.toFixed(1) : "" }}
+                    ({{ numAllReview }} reviews)
+                  </div>
+                </div>
+
+                <div class="col-6 mt-2 word-spacing: 5px;">
+                  <h5>
+                    <div class="star-rating" v-if="isAuthen()">
+                      <span class="star" @click="toggleFavorite">
+                        <i :class="favoriteClass"></i> </span
+                      ><strong> Favorite</strong>
+                    </div>
+                  </h5>
+                </div>
+              </div>
+
+              <strong>Address</strong>
+              <div class="container">
+                <div class="col">
+                  {{ cafe[0] ? cafe[0].c_location : "" }}
+                </div>
+              </div>
+
+              <strong>Service</strong>
+              <div class="container">
+                <div class="col">
+                  {{ cafe[0] ? cafe[0].c_service : "" }}
+                </div>
+              </div>
+
+              <!-- <button  @change="myFunction">Try it</button>
+
+  <div id="myDIV">
+  This is my DIV element.
+  </div> -->
+
+              <strong>Hours:</strong>
+              <div class="container">
+                <div class="col">
+                  <div>Monday: {{ time ? time[0].monday : "" }}</div>
+                  <div>tuesday: {{ time ? time[0].tuesday : "" }}</div>
+                  <div>Wednesday: {{ time ? time[0].wednesday : "" }}</div>
+                  <div>Thursday: {{ time ? time[0].thursday : "" }}</div>
+                  <div>Friday: {{ time ? time[0].friday : "" }}</div>
+                  <div>Saturday: {{ time ? time[0].saturday : "" }}</div>
+                  <div>Sunday: {{ time ? time[0].sunday : "" }}</div>
+                </div>
+              </div>
+
+              <strong>Detail</strong>
+              <div class="container">
+                <div class="col">
+                  {{ cafe[0] ? cafe[0].c_detail : "" }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 mb-3">
+          <h2><strong> Popular Dishes</strong></h2>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
           <div
-            id="carouselExampleIndicators"
-            class="carousel slide"
-            data-bs-ride="carouselDetail"
-            style="margin-top: 1em"
+            class="col mb-4"
+            v-for="(img, index) in cafe_images_dish"
+            :key="index"
           >
-            <div class="carousel-inner">
+            <div class="card shadow h-100">
+              <div class="card-body">
+                <img
+                  alt="image"
+                  width="100%"
+                  height="225"
+                  class="bd-placeholder-img card-img-top"
+                  :src="`http://localhost:5000/api/images/cafe/${img.i_name}`"
+                />
+                <hr />
+                <div class="row mt-2">
+                  <div class="col">
+                    <h5 style="direction: ltl">{{ img.i_menu_name }}</h5>
+                    <h4 style="direction: ltl" class="price">
+                      ฿ {{ img.i_price }}
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-8">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-6 w-500px mt-5 mb-3">
+                  <h4>Overall ratings and reviews</h4>
+                  <div>
+                    Reviews can only be made by who have eaten at this cafe
+                  </div>
+                </div>
+
+                <div class="col-6 mt-5 mb-3">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-4 star-comment">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                      </div>
+                      <div class="col-3">({{ review_5star }} reviews)</div>
+                    </div>
+                  </div>
+
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-4 star-comment">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                      </div>
+                      <div class="col-3">({{ review_4star }} reviews)</div>
+                    </div>
+                  </div>
+
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-4 star-comment">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                      </div>
+                      <div class="col-3">({{ review_3star }} reviews)</div>
+                    </div>
+                  </div>
+
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-4 star-comment">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                      </div>
+                      <div class="col-3">({{ review_2star }} reviews)</div>
+                    </div>
+                  </div>
+
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-4 star-comment">
+                        <i class="bi bi-star-fill"></i>
+                      </div>
+                      <div class="col-3">({{ review_1star }} reviews)</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-5-1 mb-2">
+                  <div class="container mt-2">
+                    <div class="pt-2">
+                      <h5 v-if="!isAuthen()">Reviews from other</h5>
+                      <h5 v-if="isAuthen()">
+                        Your first-hand experiences really help other. Thanks!
+                      </h5>
+
+                      <i class="mx-2" v-if="isAuthen()"
+                        >Your overall rating of this Cafe :
+                      </i>
+
+                      <div class="star-rating" v-if="isAuthen()">
+                        <span
+                          v-for="n in maxRating"
+                          :key="n"
+                          class="star"
+                          :class="{ filled: n <= currentRating }"
+                          @click="rate(n)"
+                        >
+                          <i class="bi bi-star-fill"></i
+                        ></span>
+                        {{ currentRating }}
+                      </div>
+                    </div>
+                    <div class="container-fluid mt-2" v-if="isAuthen()">
+                      <div class="row">
+                        <div class="col-2 mt-1">
+                          <h5>comment</h5>
+                        </div>
+
+                        <div class="col mb-3">
+                          <input
+                            type="text"
+                            class="form-control w-100"
+                            placeholder="What do you think ?"
+                            required
+                            v-model="r_comment"
+                          />
+                        </div>
+
+                        <div class="col-2">
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            @click="createReview"
+                          >
+                            Confirm
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="line pb-3">
+                      _______________________________________________________________________________________________________
+                    </p>
+                    <div>
+                      <div
+                        class="container-fluid"
+                        v-for="(review, index) in displayedReviews"
+                        :key="index"
+                      >
+                        <div class ="body-comment pt-3 mb-2" >
+                          <div class="row">
+                            <div class="col-2">
+                              <div style="text-align: center">
+                                <img
+                                  class="img-fluid w-75"
+                                  :src="`http://localhost:5000/api/images/profile/${review.u_image}`"
+                                  alt=""
+                                  style="
+                                    width: 50px;
+                                    height: 50px;
+                                    border-radius: 50%;
+                                  "
+                                />
+                              </div>
+                              <p style="text-align: center">{{ review.u_name }}</p>
+                            </div>
+
+                            <div class="col-5">
+                              <div class="mb-2">
+                                <span
+                                  class="star-comment"
+                                  v-for="n in review.r_star"
+                                  :key="n"
+                                >
+                                  <i class="bi bi-star-fill"></i
+                                ></span>
+                                {{ formattedDatetime(review.r_date) }}
+                              </div>
+                              <p>{{ review.r_comment }}</p>
+                            </div>
+                          </div>
+                          <div class="line pb-3">
+                            _______________________________________________________________________________________________________
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="mb-2 mt-3"
+                        v-if="numAllReview > 6"
+                        style="text-align: center"
+                      >
+                        <button
+                          type="button"
+                          class="btn btn-dark"
+                          @click="previousPage"
+                        >
+                          <i class="bi bi-caret-left-fill"></i>
+                        </button>
+                        <span class="mx-2"
+                          >Page {{ currentPage }} of {{ totalPages }}</span
+                        >
+                        <button
+                          type="button"
+                          class="btn btn-dark"
+                          @click="nextPage"
+                        >
+                          <i class="bi bi-caret-right-fill"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <section class="pt-5 pb-5">
+              <h2 class="pb-2" style="text-align: center">Recommend</h2>
               <div
-                class="carousel-item active"
-                v-for="(img, index) in cafe_images_place"
+                class="container w-75"
+                v-for="(cafe, index) in cafe_all2"
                 :key="index"
               >
-                <img
-                  :src="`http://localhost:5000/api/images/cafe/${img.i_name}`"
-                  class="img-fluid w-100"
-                  alt="..."
-                  style="height: 25rem"
-                />
-              </div>
-              <!-- <div class="carousel-item  ">
-                <div class="ratio ratio-16x9 shadow-lg">
-                  <iframe class="ratio ratio-16x9"
-                    src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
-                    allowfullscreen=""></iframe>
-                </div>
-              </div> -->
-            </div>
-            <button
-              class="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-          <div class="mt-2">
-            <!-- <p v-if="cafe[0] ? cafe[0] : null"> -->
-            <p v-html="iframe"></p>
-            <!-- <iframe
-                :src="iframe"
-                width="600"
-                height="450"
-                style="border: 0"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe> -->
-            <!-- <GoogleMap :destLat="cafe[0].c_lat" :destLng="cafe[0].c_lon"/> -->
-            <!-- </p> -->
-          </div>
-        </div>
-
-        <div class="col-lg-6">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-6 col-lg-5 mb-3 mb-md-0">
-                <h2>
-                  {{ cafe[0] ? cafe[0].c_name : "" }}
-                </h2>
-                <div v-if="cafe[0] ? cafe[0] : null">
-                  <span
-                    class="star-comment"
-                    v-if="cafe[0].c_star >= 0 && cafe[0].c_star < 0.5"
-                  >
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-star"></i>
-                  </span>
-                  <span
-                    class="star-comment"
-                    v-if="cafe[0].c_star >= 0.5 && cafe[0].c_star < 1"
-                  >
-                    <i class="bi bi-star-half"></i>
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-star"></i>
-                  </span>
-                  <span
-                    class="star-comment"
-                    v-if="cafe[0].c_star >= 1 && cafe[0].c_star < 1.5"
-                  >
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-star"></i>
-                  </span>
-                  <span
-                    class="star-comment"
-                    v-if="cafe[0].c_star >= 1.5 && cafe[0].c_star < 2"
-                  >
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-half"></i>
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-star"></i>
-                  </span>
-                  <span
-                    class="star-comment"
-                    v-if="cafe[0].c_star >= 2 && cafe[0].c_star < 2.5"
-                  >
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-star"></i>
-                  </span>
-                  <span
-                    class="star-comment"
-                    v-if="cafe[0].c_star >= 2.5 && cafe[0].c_star < 3"
-                  >
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-half"></i>
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-star"></i>
-                  </span>
-                  <span
-                    class="star-comment"
-                    v-if="cafe[0].c_star >= 3 && cafe[0].c_star < 3.5"
-                  >
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star"></i>
-                    <i class="bi bi-star"></i>
-                  </span>
-                  <span
-                    class="star-comment"
-                    v-if="cafe[0].c_star >= 3.5 && cafe[0].c_star < 4"
-                  >
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-half"></i>
-                    <i class="bi bi-star"></i>
-                  </span>
-                  <span
-                    class="star-comment"
-                    v-if="cafe[0].c_star >= 4 && cafe[0].c_star < 4.5"
-                  >
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star"></i>
-                  </span>
-                  <span
-                    class="star-comment"
-                    v-if="cafe[0].c_star >= 4.5 && cafe[0].c_star < 5"
-                  >
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-half"></i>
-                  </span>
-                  <span class="star-comment" v-if="cafe[0].c_star >= 5">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                  </span>
-                  {{ cafe[0] ? cafe[0].c_star.toFixed(1) : "" }}
-                  ({{ numAllReview }} reviews)
-                </div>
-              </div>
-
-              <div class="col-6 mt-2 word-spacing: 5px;">
-                <h5>
-                  <div class="star-rating" v-if="isAuthen()">
-                    <span class="star" @click="toggleFavorite">
-                      <i :class="favoriteClass"></i> </span
-                    ><strong> Favorite</strong>
-                  </div>
-                </h5>
-              </div>
-            </div>
-
-            <strong>Address</strong>
-            <div class="container">
-              <div class="col">
-                {{ cafe[0] ? cafe[0].c_location : "" }}
-              </div>
-            </div>
-
-            <strong>Service</strong>
-            <div class="container">
-              <div class="col">
-                {{ cafe[0] ? cafe[0].c_service : "" }}
-              </div>
-            </div>
-
-            <!-- <button  @change="myFunction">Try it</button>
-
-<div id="myDIV">
-This is my DIV element.
-</div> -->
-
-            <strong>Hours:</strong>
-            <div class="container">
-              <div class="col">
-                <div>Monday: {{ time ? time[0].monday : "" }}</div>
-                <div>tuesday: {{ time ? time[0].tuesday : "" }}</div>
-                <div>Wednesday: {{ time ? time[0].wednesday : "" }}</div>
-                <div>Thursday: {{ time ? time[0].thursday : "" }}</div>
-                <div>Friday: {{ time ? time[0].friday : "" }}</div>
-                <div>Saturday: {{ time ? time[0].saturday : "" }}</div>
-                <div>Sunday: {{ time ? time[0].sunday : "" }}</div>
-              </div>
-            </div>
-
-            <strong>Detail</strong>
-            <div class="container">
-              <div class="col">
-                {{ cafe[0] ? cafe[0].c_detail : "" }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="mt-3 mb-3">
-        <h2><strong> Popular Dishes</strong></h2>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-        <div
-          class="col mb-4"
-          v-for="(img, index) in cafe_images_dish"
-          :key="index"
-        >
-          <div class="card shadow h-100">
-            <div class="card-body">
-              <img
-                alt="image"
-                width="100%"
-                height="225"
-                class="bd-placeholder-img card-img-top"
-                :src="`http://localhost:5000/api/images/cafe/${img.i_name}`"
-              />
-              <hr />
-              <div class="row mt-2">
-                <div class="col">
-                  <h5 style="direction: ltl">{{ img.i_menu_name }}</h5>
-                  <h4 style="direction: ltl" class="price">
-                    ฿ {{ img.i_price }}
-                  </h4>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-8">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-6 w-500px mt-5 mb-3">
-                <h4>Overall ratings and reviews</h4>
-                <div>
-                  Reviews can only be made by who have eaten at this cafe
-                </div>
-              </div>
-
-              <div class="col-6 mt-5 mb-3">
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-4 star-comment">
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                    </div>
-                    <div class="col-3">({{ review_5star }} reviews)</div>
-                  </div>
-                </div>
-
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-4 star-comment">
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                    </div>
-                    <div class="col-3">({{ review_4star }} reviews)</div>
-                  </div>
-                </div>
-
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-4 star-comment">
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                    </div>
-                    <div class="col-3">({{ review_3star }} reviews)</div>
-                  </div>
-                </div>
-
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-4 star-comment">
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                    </div>
-                    <div class="col-3">({{ review_2star }} reviews)</div>
-                  </div>
-                </div>
-
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-4 star-comment">
-                      <i class="bi bi-star-fill"></i>
-                    </div>
-                    <div class="col-3">({{ review_1star }} reviews)</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-5-1 mb-2">
-                <div class="pt-2">
-                  <h5 v-if="!isAuthen()">Reviews from other</h5>
-                  <h5 v-if="isAuthen()">
-                    Your first-hand experiences really help other. Thanks!
-                  </h5>
-
-                  <i class="mx-2" v-if="isAuthen()"
-                    >Your overall rating of this Cafe :
-                  </i>
-
-                  <div class="star-rating" v-if="isAuthen()">
-                    <span
-                      v-for="n in maxRating"
-                      :key="n"
-                      class="star"
-                      :class="{ filled: n <= currentRating }"
-                      @click="rate(n)"
-                    >
-                      <i class="bi bi-star-fill"></i
-                    ></span>
-                    {{ currentRating }}
-                  </div>
-                </div>
-                <div class="container-fluid mt-2" v-if="isAuthen()">
-                  <div class="row">
-                    <div class="col-2 mt-1">
-                      <h5>comment</h5>
-                    </div>
-
-                    <div class="col mb-3">
-                      <input
-                        type="text"
-                        class="form-control w-100"
-                        placeholder="What do you think ?"
-                        required
-                        v-model="r_comment"
+                <div class="col mb-3">
+                  <div class="card shadow-sm h-100">
+                    <div class="moreCafe card-body">
+                      <img
+                        width="100%"
+                        height="150"
+                        class="bd-placeholder-img card-img-top"
+                        :src="`http://localhost:5000/api/images/cafe/${cafe.c_image}`"
+                        alt=""
                       />
-                    </div>
-
-                    <div class="col-2">
+                      <hr />
+                      <h5 class="card-title">{{ cafe ? cafe.c_name : "" }}</h5>
+                      <!-- <p class="card-text">Cafe in forest.</p> -->
                       <button
-                        type="button"
-                        class="btn btn-secondary"
-                        @click="createReview"
+                        @click="detailBTN(cafe.c_id)"
+                        href="#"
+                        class="btn btn-dark mt-2"
+                        style="direction: rtl"
                       >
-                        Confirm
+                        View
                       </button>
                     </div>
                   </div>
                 </div>
-                <p class="line pb-3">
-                  _______________________________________________________________________________________________________
-                </p>
-                <div>
-                  <div
-                    class="container-fluid"
-                    v-for="(review, index) in displayedReviews"
-                    :key="index"
-                  >
-                    <div class="row">
-                      <div class="col-2">
-                        <div style="text-align: center">
-                          <img
-                            class="img-fluid w-75"
-                            :src="`http://localhost:5000/api/images/profile/${review.u_image}`"
-                            alt=""
-                            style="
-                              width: 50px;
-                              height: 50px;
-                              border-radius: 50%;
-                            "
-                          />
-                        </div>
-                        <p style="text-align: center">{{ review.u_name }}</p>
-                      </div>
-
-                      <div class="col-5">
-                        <div class="mb-2">
-                          <span
-                            class="star-comment"
-                            v-for="n in review.r_star"
-                            :key="n"
-                          >
-                            <i class="bi bi-star-fill"></i
-                          ></span>
-                          {{ formattedDatetime(review.r_date) }}
-                        </div>
-                        <p>{{ review.r_comment }}</p>
-                      </div>
-                    </div>
-                    <div class="line pb-3">
-                      _______________________________________________________________________________________________________
-                    </div>
-                  </div>
-                  <div
-                    class="mb-2 mt-3"
-                    v-if="numAllReview > 6"
-                    style="text-align: center"
-                  >
-                    <button
-                      type="button"
-                      class="btn btn-dark"
-                      @click="previousPage"
-                    >
-                      <i class="bi bi-caret-left-fill"></i>
-                    </button>
-                    <span class="mx-2"
-                      >Page {{ currentPage }} of {{ totalPages }}</span
-                    >
-                    <button
-                      type="button"
-                      class="btn btn-dark"
-                      @click="nextPage"
-                    >
-                      <i class="bi bi-caret-right-fill"></i>
-                    </button>
-                  </div>
-                </div>
               </div>
-              <div></div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div class="col">
-          <section class="pt-5 pb-5">
-            <h2 class="pb-2" style="text-align: center">Recommend</h2>
-            <div
-              class="container w-75"
-              v-for="(cafe, index) in cafe_all2"
-              :key="index"
-            >
-              <div class="col mb-3">
-                <div class="card shadow-sm h-100">
-                  <div class="moreCafe card-body">
-                    <img
-                      width="100%"
-                      height="150"
-                      class="bd-placeholder-img card-img-top"
-                      :src="`http://localhost:5000/api/images/cafe/${cafe.c_image}`"
-                      alt=""
-                    />
-                    <hr />
-                    <h5 class="card-title">{{ cafe ? cafe.c_name : "" }}</h5>
-                    <!-- <p class="card-text">Cafe in forest.</p> -->
-                    <button
-                      @click="detailBTN(cafe.c_id)"
-                      href="#"
-                      class="btn btn-primary mt-2"
-                      style="direction: rtl"
-                    >
-                      View
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
         </div>
       </div>
     </div>
@@ -746,6 +751,10 @@ export default {
 // }
 </script>
 <style scoped>
+.body-comment{
+  background-color:white;
+  border-radius: 15px;
+}
 .myDIV {
   width: 100%;
   padding: 50px 0;
@@ -766,8 +775,9 @@ export default {
   background: #5f4545;
 }
 .col-5-1 {
-  background-color: #bab0b0;
+  background-color: #e1aa70;
   width: 100%;
+  border-radius: 15px;
 }
 .star-rating {
   display: inline-block;

@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <div class="title mt-5">
+  <div style="background-color:#f2eddd">
+    <div class="title pt-5">
       <h1>
         CAFE HOPPER
         <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqBFAvlcnBTyqZdg8ClpCTnU3G_fTAOlm5aA&usqp=CAU"
+          src="https://cdn-icons-png.flaticon.com/512/1992/1992706.png"
           class="img-fluid"
           alt="..."
           style="height: 4rem"
@@ -20,7 +20,7 @@
         <div class="carousel-inner">
           <div class="carousel-item active">
             <img
-              src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGFyaXMlMjBjYWZlfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
+              src="https://img.wongnai.com/p/1920x0/2021/02/17/de2c76b88b6b4d4e86542c780107e93d.jpg"
               class="img-fluid w-100"
               alt="..."
               style="height: 32rem"
@@ -28,7 +28,7 @@
           </div>
           <div class="carousel-item">
             <img
-              src="https://s.isanook.com/tr/0/ui/285/1427369/Molyn-Cafe-02.jpg"
+              src="https://static1.squarespace.com/static/531a0cf3e4b04f773bfe0513/5aac1a77352f53c0c8a069db/5aac215a03ce64a52c2d528f/1528805272988/menu+boards.jpg?format=2500w"
               class="img-fluid w-100"
               alt="..."
               style="height: 32rem"
@@ -36,7 +36,7 @@
           </div>
           <div class="carousel-item">
             <img
-              src="https://media-cdn.tripadvisor.com/media/photo-s/10/e5/73/92/photo1jpg.jpg"
+              src="https://cms.dmpcdn.com/trueyouarticle/2020/05/01/7c1d95c0-8b11-11ea-ba62-5fddfdec27cd_1024.jpg"
               class="img-fluid w-100"
               alt="..."
               style="height: 32rem"
@@ -117,12 +117,12 @@
             </div>
           </div>
           <div class="mb-2 mt-5" style="text-align:center" v-if="cafe_star.length>8">
-            <button type="button" class="btn btn-dark" @click="previousPageStar">
-              <i class="bi bi-caret-left-fill"></i>
+            <button type="button" class="btn" @click="previousPageStar">
+              <img class ="rotate-img" src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/next-icon.png" alt="" style="width:3rem">
             </button>
             <span class="mx-2">Page {{ currentPageStar }} of {{ totalPagesStar }}</span>
-            <button type="button" class="btn btn-dark" @click="nextPageStar">
-              <i class="bi bi-caret-right-fill"></i>
+            <button type="button" class="btn" @click="nextPageStar">
+              <img src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/next-icon.png" alt="" style="width:3rem">
             </button>
           </div>
         </div>
@@ -191,16 +191,16 @@
       </div>
 
       <div class="mb-2 mt-5" style="text-align:center" v-if="cafe_date.length>8">
-        <button type="button" class="btn btn-dark" @click="previousPageDate">
-          <i class="bi bi-caret-left-fill"></i>
+        <button type="button" class="btn " @click="previousPageDate">
+          <img class ="rotate-img" src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/next-icon.png" alt="" style="width:3rem">
         </button>
         <span class="mx-2">Page {{ currentPageDate }} of {{ totalPagesDate }}</span>
-        <button type="button" class="btn btn-dark" @click="nextPageDate">
-          <i class="bi bi-caret-right-fill"></i>
+        <button type="button" class="btn " @click="nextPageDate">
+           <img src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/next-icon.png" alt="" style="width:3rem ">
         </button>
       </div>
 
-      <div class="container-xxl mt-5" v-if="isAuthen()">
+      <!-- <div class="container-xxl mt-5" v-if="isAuthen()">
         <button
           @click="addBTN"
           type="button"
@@ -208,7 +208,7 @@
         >
           Add Cafe
         </button>
-      </div>
+      </div> -->
     </div>
 
     <a
@@ -311,12 +311,15 @@ export default {
 </script>
 
 <style>
+.rotate-img {
+  transform: rotate(180deg);
+}
 .scroll-top {
   position: fixed;
   right: 15px;
   bottom: 15px;
   z-index: 99999;
-  background: red;
+  background: #9c7d5c;
   width: 44px;
   height: 44px;
   border-radius: 50px;
@@ -340,6 +343,5 @@ export default {
 }
 .title {
   text-align: center;
-  margin-top: 30px;
 }
 </style>

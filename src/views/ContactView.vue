@@ -11,7 +11,7 @@
                 </section>
             </div>
         </div>
-        <div class="p-3 bg-secondary text-white" style = " height: 100hv">
+        <div class="p-3 text-dark" style = "background-color:#b49c74">
             <section class="pt-5  align-items-center d-flex  ">
             <div class="container ">
                 <div class="row ">
