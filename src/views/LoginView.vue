@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="vh-100" style="background-color: #eee">
+    <section class="vh-100" style="background-color: #f2eddd">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col col-xl-10">
