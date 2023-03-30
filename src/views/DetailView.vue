@@ -188,7 +188,8 @@
                       <i class="bi bi-star-fill"></i>
                       <i class="bi bi-star-fill"></i>
                     </span>
-                    {{ cafe[0] ? cafe[0].c_star.toFixed(1) : "" }}
+                    <span class="ms-2" v-if="cafe[0].c_star>0">{{ cafe[0] ? cafe[0].c_star.toFixed(1) : "" }}</span>
+                    <span class="ms-2" v-else>-</span>
                     ({{ numAllReview }} reviews)
                   </div>
                 </div>
@@ -585,6 +586,8 @@ export default {
       this.cafe = await CafeStore.getters.cafe;
       this.cafe_star = this.cafe[0].c_star.toFixed(1);
       this.iframe = this.cafe[0].c_map;
+      let service = this.cafe[0].c_service.split(",")
+      this.cafe[0].c_service = service.join(", ")
       //await this.splitIframe(this.cafe[0].c_map);
     },
     async fetchCafeImage() {
@@ -614,6 +617,14 @@ export default {
       let id = this.c_id;
       await CafeStore.dispatch("fetchCafeTime", id);
       this.time = await CafeStore.getters.times;
+      this.time[0].monday.includes("-") ? this.time[0].monday = "Closed" : true
+      this.time[0].tuesday.includes("-") ? this.time[0].tuesday = "Closed" : true
+      this.time[0].wednesday.includes("-") ? this.time[0].wednesday = "Closed" : true
+      this.time[0].thursday.includes("-") ? this.time[0].thursday = "Closed" : true
+      this.time[0].friday.includes("-") ? this.time[0].friday = "Closed" : true
+      this.time[0].saturday.includes("-") ? this.time[0].saturday = "Closed" : true
+      this.time[0].sunday.includes("-") ? this.time[0].sunday = "Closed" : true
+      
     },
     filterImg(images) {
       for (let i = 0; i < images.length; i++) {
@@ -660,15 +671,26 @@ export default {
           confirmButtonColor: "#dd6b55",
         });
       } else {
-        let playload = {
-          u_id: this.u_id,
-          c_id: this.c_id,
-          r_comment: this.r_comment,
-          r_star: this.currentRating,
-        };
-        let res = await ReviewStore.dispatch("addReview", playload);
-        this.updateStar();
-        this.$router.go(0);
+        Swal.fire({
+        icon: "question",
+        text: "Are you sure to rate this cafe",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#dd6b55",
+        confirmButtonText: "Yes",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          let playload = {
+            u_id: this.u_id,
+            c_id: this.c_id,
+            r_comment: this.r_comment,
+            r_star: this.currentRating,
+          };
+          let res = await ReviewStore.dispatch("addReview", playload);
+          this.updateStar();
+          this.$router.go(0);
+        }
+      });
       }
     },
     async updateStar() {

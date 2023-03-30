@@ -4,189 +4,7 @@
       <div class="mx-5">
         <div class="row">
           <div class="col-2" >
-
-            <!-- <div class=" mb-5 mt-5 " id="filter-bar">
-            <nav
-              class="navbar navbar-light bg-light rounded-4 border border-dark"
-              style="background-image: url('https://i.pinimg.com/originals/64/26/35/6426354e65e2465b0160513b50f577a6.jpg');"
-            >
-              <div class="container">
-                <form class="form-inline d-block">
-                  <input
-                    class="input-search form-control form-control"
-                    type="text"
-                    v-model="input"
-                    placeholder="Search"
-                    @click="currentPage1"
-                  />
-                  <input
-                    class="form-check-input"
-                    v-model="nearBy"
-                    type="checkbox"
-                    @change="getCurrentLocation"
-                  />
-                  <span class="mx-2" id="checkmark">Near by</span>
-                </form>
-
-                <div class="col mt-3">
-                  <h4><strong>Services</strong></h4>
-                  <div
-                    class="form-check"
-                    v-for="item in items"
-                    :key="item.value"
-                  >
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="check1"
-                      name="option1"
-                      :value="item.value"
-                      v-model="service_selected"
-                      @change="currentPage1"
-                    />
-                    <label class="form-check-label">{{ item.text }}</label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="container text-light">
-                <div class="container dropdown mt-3 mb-2">
-                  <button
-                    class="btn btn-secondary dropdown-toggle w-100 text-white"
-                    href="#"
-                    role="button"
-                    id="dropdownMenuLink"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    {{ selectedFilterOption ? selectedFilterOption : "Filter" }}
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li v-for="(option, index) in filterOptions" :key="index">
-                      <a
-                        class="dropdown-item"
-                        @click="selectFilterOption(option)"
-                        >{{ option }}</a
-                      >
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="container dropdown mb-2">
-                  <button
-                    class="btn btn-secondary dropdown-toggle w-100"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    {{ selectedStarOption ? selectedStarOption : "Star" }}
-                    <i class="bi bi-star-fill"></i>
-                  </button>
-                  <ul
-                    class="dropdown-menu w-100"
-                    aria-labelledby="dropdownMenuButton"
-                  >
-                    <li v-for="(option, index) in starOptions" :key="index">
-                      <a class="dropdown-item" @click="selectStarOption(option)"
-                        >{{ option }} <i class="bi bi-star-fill"></i
-                      ></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </nav>
-            </div> -->
-          </div>
-          <div class="col mt-5">
-             <!-- <h3 class="col mt-4 mb-5 justify-content-center align-items-center" style="text-align: center" ><strong>Result Cafe</strong></h3> -->
-            <div class="container">
-              <div id="map"></div>
-              <div v-for="dis in distance" :key="dis">
-                {{ dis }}
-              </div>
-
-              <div
-                class="col justify-content-center align-items-center"
-                style="text-align: center"
-              >
-                <h3 class="mt-4 mb-5"><strong>Result Cafe
-                  <img src="https://cdn-icons-png.flaticon.com/512/2875/2875387.png" alt="" style="height: 3rem" ></strong></h3>
-
-                <div class="row">
-                  <div
-                    class="col-3"
-                    v-for="(place, index) in displayedCafes"
-                    :key="index"
-                  >
-                    <div class="container">
-                      <div class="col mb-3">
-                        <div class="card shadow-sm" style="height: 350px">
-                          <div class="moreCafe card-body">
-                            <a href="#" @click="showMarkers(place)">
-                              <img
-                                width="100%"
-                                height="150"
-                                class="bd-placeholder-img card-img-top"
-                                :src="`http://localhost:5000/api/images/cafe/${place.c_image}`"
-                                alt=""
-                              />
-                              <h5 class="card-title mt-2">{{ place.c_name }}</h5>
-                              <p class="card-text">
-                                <i
-                                  class="bi bi-star-fill"
-                                  style="color: #ff9529"
-                                ></i>
-                                {{ place.c_star.toFixed(1) }} ({{
-                                  place.c_review
-                                }}
-                                reviews)
-                              </p>
-                              <div class="bottomButton">
-                                <button
-                                  @click="detailBTN(place.c_id)"
-                                  href="#"
-                                  class="btn btn-primary"
-                                  style="direction: rtl"
-                                >
-                                  View
-                                </button>
-                              </div>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="item error" v-if="!filteredList().length">
-                  <p>No results found!</p>
-                </div>
-                <div
-                  class="mb-2 mt-3"
-                  style="text-align: center"
-                  v-if="filteredList().length"
-                >
-                  <button
-                    type="button"
-                    class="btn "
-                    @click="previousPage"
-                  >
-                    <img class ="rotate-img" src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/next-icon.png" alt="" style="width:3rem">
-                  </button>
-                  <span class="mx-2"
-                    >Page {{ currentPage }} of {{ totalPages }}</span
-                  >
-                  <button type="button" class="btn" @click="nextPage">
-                    <img  src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/next-icon.png" alt="" style="width:3rem">
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="scroll-top1">
+                  <div class="scroll-top1">
         <div class=" mb-5 mt-5 " id="filter-bar">
           <nav
             class="navbar navbar-light bg-light rounded-4 border border-dark"
@@ -276,10 +94,265 @@
                   </li>
                 </ul>
               </div>
+              <div class="container dropdown mb-2">
+                  <button
+                    class="btn btn-secondary dropdown-toggle w-100"
+                    type="button"
+                    id="dropdownTravel"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    {{ selectedTravelOption}}
+                    
+                  </button>
+                  <ul
+                    class="dropdown-menu w-100"
+                    aria-labelledby="dropdownTravel"
+                  >
+                    <li v-for="(option, index) in travelMode" :key="index">
+                      <a class="dropdown-item" @click="selectTravelOption(option)"
+                        >{{ option }} </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="container mb-2">
+                  <button
+                    class="btn btn-secondary w-100"
+                    type="button"
+                    @click="clear"
+                  >
+                    Clear Filter
+                  </button>
+                  
+                </div>
             </div>
           </nav>
         </div>
       </div>
+
+            <!-- <div class=" mb-5 mt-5 " id="filter-bar">
+            <nav
+              class="navbar navbar-light bg-light rounded-4 border border-dark"
+              style="background-image: url('https://i.pinimg.com/originals/64/26/35/6426354e65e2465b0160513b50f577a6.jpg');"
+            >
+              <div class="container">
+                <form class="form-inline d-block">
+                  <input
+                    class="input-search form-control form-control"
+                    type="text"
+                    v-model="input"
+                    placeholder="Search"
+                    @click="currentPage1"
+                  />
+                  <input
+                    class="form-check-input"
+                    v-model="nearBy"
+                    type="checkbox"
+                    @change="getCurrentLocation"
+                  />
+                  <span class="mx-2" id="checkmark">Near by</span>      
+                </form>
+
+                <div class="col mt-3">
+                  <h4><strong>Services</strong></h4>
+                  <div
+                    class="form-check"
+                    v-for="item in items"
+                    :key="item.value"
+                  >
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="check1"
+                      name="option1"
+                      :value="item.value"
+                      v-model="service_selected"
+                      @change="currentPage1"
+                    />
+                    <label class="form-check-label">{{ item.text }}</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="container text-light">
+                <div class="container dropdown mt-3 mb-2">
+                  <button
+                    class="btn btn-secondary dropdown-toggle w-100 text-white"
+                    href="#"
+                    role="button"
+                    id="dropdownMenuLink"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    {{ selectedFilterOption ? selectedFilterOption : "Filter" }}
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li v-for="(option, index) in filterOptions" :key="index">
+                      <a
+                        class="dropdown-item"
+                        @click="selectFilterOption(option)"
+                        >{{ option }}</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="container dropdown mb-2">
+                  <button
+                    class="btn btn-secondary dropdown-toggle w-100"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    {{ selectedStarOption ? selectedStarOption : "Star" }}
+                    <i class="bi bi-star-fill"></i>
+                  </button>
+                  <ul
+                    class="dropdown-menu w-100"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <li v-for="(option, index) in starOptions" :key="index">
+                      <a class="dropdown-item" @click="selectStarOption(option)"
+                        >{{ option }} <i class="bi bi-star-fill"></i
+                      ></a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="container dropdown mb-2">
+                  <button
+                    class="btn btn-secondary dropdown-toggle w-100"
+                    type="button"
+                    id="dropdownTravel"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    {{ selectedTravelOption}}
+                    
+                  </button>
+                  <ul
+                    class="dropdown-menu w-100"
+                    aria-labelledby="dropdownTravel"
+                  >
+                    <li v-for="(option, index) in travelMode" :key="index">
+                      <a class="dropdown-item" @click="selectTravelOption(option)"
+                        >{{ option }} </a>
+                    </li>
+                  </ul>
+                </div>
+                  <div class="container mb-2">
+                  <button
+                    class="btn btn-secondary w-100"
+                    type="button"
+                    @click="clear"
+                  >
+                    Clear Filter
+                  </button>
+                  
+                </div>
+              </div>
+            </nav>
+            </div> -->
+          </div>
+          <div class="col mt-5">
+             <!-- <h3 class="col mt-4 mb-5 justify-content-center align-items-center" style="text-align: center" ><strong>Result Cafe</strong></h3> -->
+            <div class="container" id="con">
+              <div id="map"></div>
+              <div v-for="dis in distance" :key="dis" class="distance">
+                {{ dis }}
+              </div>
+
+              <div
+                class="col justify-content-center align-items-center"
+                style="text-align: center"
+              >
+                <h3 class="mt-4 mb-5"><strong>Result Cafe
+                  <img src="https://cdn-icons-png.flaticon.com/512/2875/2875387.png" alt="" style="height: 3rem" ></strong></h3>
+
+                <div class="row">
+                  <div
+                    class="col-3"
+                    v-for="(place, index) in displayedCafes"
+                    :key="index"
+                  >
+                    <div class="container">
+                      <div class="col mb-3">
+                        <div class="card shadow-sm" style="height: 350px">
+                          <div class="moreCafe card-body">
+                            <a href="#" @click="showMarkers(place)">
+                              <img
+                                width="100%"
+                                height="150"
+                                class="bd-placeholder-img card-img-top"
+                                :src="`http://localhost:5000/api/images/cafe/${place.c_image}`"
+                                alt=""
+                              />
+                              <h5 class="card-title mt-2">{{ place.c_name }}</h5>
+                              <p class="card-text" v-if="place.c_star>0">
+                                <i
+                                  class="bi bi-star-fill"
+                                  style="color: #ff9529"
+                                ></i>
+                                {{ place.c_star.toFixed(1) }} ({{
+                                  place.c_review
+                                }}
+                                reviews)
+                              </p>
+                              <p class="card-text" v-else>
+                                <i
+                                  class="bi bi-star-fill"
+                                  style="color: #ff9529"
+                                ></i>
+                                - ({{
+                                  place.c_review
+                                }}
+                                reviews)
+                              </p>
+                              <div class="bottomButton">
+                                <button
+                                  @click="detailBTN(place.c_id)"
+                                  href="#"
+                                  class="btn btn-primary"
+                                  style="direction: rtl"
+                                >
+                                  View
+                                </button>
+                              </div>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item error" v-if="!filteredList().length">
+                  <p>No results found!</p>
+                </div>
+                <div
+                  class="mb-2 mt-3"
+                  style="text-align: center"
+                  v-if="filteredList().length"
+                >
+                  <button
+                    type="button"
+                    class="btn "
+                    @click="previousPage"
+                  >
+                    <img class ="rotate-img" src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/next-icon.png" alt="" style="width:3rem">
+                  </button>
+                  <span class="mx-2"
+                    >Page {{ currentPage }} of {{ totalPages }}</span
+                  >
+                  <button type="button" class="btn" @click="nextPage">
+                    <img  src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/next-icon.png" alt="" style="width:3rem">
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     
     </section>
   </div>
@@ -310,7 +383,7 @@ export default {
         { value: "Takeaway", text: "Takeaway" },
         { value: "Co-Working Space", text: "Co-Working Space" },
         { value: "Meeting", text: "Meeting" },
-        { value: "Toilets", text: "Toilets" },
+        //{ value: "Toilets", text: "Toilets" },
         { value: "Creative Space", text: "Creative Space" },
         { value: "Screening Room", text: "Screening Room" },
         { value: "Karaoke", text: "Karaoke" },
@@ -326,6 +399,9 @@ export default {
       longitude: 0,
       mak: [],
       di: [],
+      travelMode:["Walking","Driving"],
+      selectedTravelOption: "Walking",
+      selectedTravelMode:"",
     };
   },
   created() {
@@ -339,6 +415,9 @@ export default {
       for (let i = 0; i < this.cafe.length; i++) {
         this.cafe[i].c_service = await this.cafe[i].c_service.split(",");
       }
+    },
+    selectTravelOption(option){
+      this.selectedTravelOption = option
     },
     selectStarOption(option) {
       this.currentPage = 1;
@@ -441,6 +520,11 @@ export default {
               suppressMarkers: true,
             });
 
+            if(this.selectedTravelOption === "Walking"){
+              this.selectedTravelMode = google.maps.TravelMode.WALKING
+            }else if(this.selectedTravelOption === "Driving"){
+              this.selectedTravelMode = google.maps.TravelMode.DRIVING
+            }
             // Set direction request options
             const request = {
               origin: userLatLng,
@@ -448,7 +532,7 @@ export default {
                 lat: parseFloat(place.c_lat),
                 lng: parseFloat(place.c_lon),
               },
-              travelMode: google.maps.TravelMode.WALKING,
+              travelMode: this.selectedTravelMode
             };
 
             // Calculate direction and display on map
@@ -458,8 +542,8 @@ export default {
                 this.di.push(directionsRenderer);
                 // Calculate and display distance
                 const distance = result.routes[0].legs[0].distance.value / 1000;
-                const distanceText =
-                  place.c_name + " " + distance.toFixed(2) + " km";
+                const distanceText = 
+                  this.selectedTravelOption + " to " + place.c_name + " " + distance.toFixed(2) + " km";
 
                 if (!this.distance.includes(distanceText)) {
                   this.distance.push(distanceText);
@@ -645,14 +729,16 @@ export default {
 
 <style scoped>
 .scroll-top1 {
-  position: fixed;
+  position: sticky;
   left: 48px;
   width: 217px;
-  top:15px;
+  top:20px;
   bottom: 10px;
   z-index: 99999;
   border-radius: 30px;
   transition: all 0.4s;
+  margin-top: 50px;
+  
 }
 .card:hover {
   transform: scale(0.95);
@@ -664,6 +750,7 @@ a {
 #map {
   height: 500px;
   width: 100%;
+  border: solid black 1px;
 }
 .bottomButton {
   position: absolute;
@@ -672,4 +759,15 @@ a {
   justify-content: center;
   align-items: center;
 }
+.distance{
+  margin: 10px;
+  font-size: 18px;
+  border: solid black 1px;
+  padding: 4px;
+  border-radius: 8px;
+  display: inline-block;
+  background-color: #e6c7ad;
+}
+
+
 </style>

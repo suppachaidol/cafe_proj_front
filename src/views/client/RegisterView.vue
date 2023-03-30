@@ -220,7 +220,7 @@ export default {
       if (this.v$.$error) {
         Swal.fire({
           icon: "error",
-          text: "Please fill in the correct information.",
+          text: "Please fill out correct information.",
           confirmButtonColor: "#dd6b55",
         });
       } else {
@@ -250,7 +250,7 @@ export default {
         } else {
           Swal.fire({
             icon: "error",
-            text: res.message,
+            text: "Register failed",
             confirmButtonColor: "#dd6b55",
           });
         }

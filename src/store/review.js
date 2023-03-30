@@ -9,19 +9,28 @@ Axios.defaults.headers.common = { 'Authorization': `bearer ${AuthUser.getters.jw
 export default new Vuex.Store({
     state: {
         review: [],
+        allReview:[],
     },
     getters: {
         review: (state) => state.review,
+        allReview: (state) => state.allReview,
     },
     mutations: {
         fetch(state, { res }) {
             state.review = res.data
+        },
+        fetchAll(state, { res }) {
+            state.allReview = res.data
         },
         add(state, { payload }) {
             state.review.push(payload)
         },
     },
     actions: {  
+        async fetchAllReview({ commit }){
+            let res = await Axios.get(api_endpoint + '/api/review/cafeAll')
+            commit('fetchAll', { res })
+        },
         async fetchReviewByCafeId({ commit }, id) {
             let res = await Axios.get(api_endpoint + '/api/review/cafe/' + id)
             commit('fetch', { res })

@@ -868,6 +868,7 @@ export default {
       c_status: "",
       c_latlon: "",
       c_map: "",
+      u_id: AuthUser.getters.user.u_id,
 
       mondayAM: "",
       tuesdayAM: "",
@@ -890,7 +891,7 @@ export default {
         { value: "Takeaway", text: "Takeaway" },
         { value: "Co-Working Space", text: "Co-Working Space" },
         { value: "Meeting", text: "Meeting" },
-        { value: "Toilets", text: "Toilets" },
+        //{ value: "Toilets", text: "Toilets" },
         { value: "Creative Space", text: "Creative Space" },
         { value: "Screening Room", text: "Screening Room" },
         { value: "Karaoke", text: "Karaoke" },
@@ -960,6 +961,7 @@ export default {
         sundayPM: { required },
         selectedImageId: { required },
         profile_upload: { required },
+        selectedValues: { required },
       };
     });
     const v$ = useValidate(rules, state);
@@ -1031,7 +1033,7 @@ export default {
       if (this.v$.$error) {
         Swal.fire({
           icon: "error",
-          text: "Please fill in all information.",
+          text: "Please fill out all information.",
           confirmButtonColor: "#dd6b55",
         });
       } else {
@@ -1072,8 +1074,9 @@ export default {
           Swal.fire({
             icon: "success",
             title: "Add cafe successful",
+            text: "Waiting for admin approval",
             showConfirmButton: false,
-            timer: 1500,
+            timer: 2000,
           });
           this.$router.push("/");
         } else {
@@ -1100,6 +1103,7 @@ export default {
           this.state.saturdayAM + " AM to " + this.state.saturdayPM + " PM",
         sunday: this.state.sundayAM + " AM to " + this.state.sundayPM + " PM",
       };
+      
       let res = await CafeStore.dispatch("addTime", payload);
       //console.log(res);
     },

@@ -202,7 +202,8 @@ export default {
     },
     async approve() {
         Swal.fire({
-        title: "Are you sure to approve cafe?",
+        icon: "question",
+        text: "Are you sure to approve cafe?",
         showCancelButton: true,
         confirmButtonColor: "green",
         cancelButtonColor: "#3085d6",
@@ -221,6 +222,7 @@ export default {
     },
     async reject() {
         Swal.fire({
+        icon: "warning",
         title: "Are you sure to reject?",
         text: "You won't be able to revert this!",
         showCancelButton: true,

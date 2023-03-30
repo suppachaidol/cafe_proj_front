@@ -94,9 +94,13 @@
               <div class="card-body d-flex flex-column">
                 <div>
                   <h5>{{ cafe.c_name }}</h5>
-                  <div>
+                  <div v-if="cafe.c_star>0">
                     <i class="bi bi-star-fill" style="color: #ff9529"></i>
                     {{ cafe.c_star.toFixed(1) }} ({{ cafe.c_review }} reviews)
+                  </div>
+                  <div v-else>
+                    <i class="bi bi-star-fill" style="color: #ff9529"></i>
+                    -  ({{ cafe.c_review }} reviews)
                   </div>
                 </div>
                 <p class="card-text"></p>
@@ -164,9 +168,13 @@
               <div class="card-body d-flex flex-column">
                 <div>
                   <h5>{{ cafe.c_name }}</h5>
-                  <div>
+                  <div v-if="cafe.c_star>0">
                     <i class="bi bi-star-fill" style="color: #ff9529"></i>
                     {{ cafe.c_star.toFixed(1) }} ({{ cafe.c_review }} reviews)
+                  </div>
+                  <div v-else>
+                    <i class="bi bi-star-fill" style="color: #ff9529"></i>
+                    -  ({{ cafe.c_review }} reviews)
                   </div>
                 </div>
                 <p class="card-text"></p>
@@ -222,6 +230,7 @@
 <script>
 import CafeStore from "@/store/cafe";
 import AuthUser from "@/store/AuthUser";
+import ReviewStore from "@/store/review"
 
 export default {
   name: "Body",
@@ -229,6 +238,7 @@ export default {
     return {
       cafe_star: [],
       cafe_date: [],
+      all_review: [],
       currentPageStar: 1,
       currentPageDate: 1,
       pageSize: 8,
@@ -237,8 +247,14 @@ export default {
   created() {
     this.fetchCafeStarData();
     this.fetchCafeDateData();
+    //this.fetchAllReview();
   },
   methods: {
+    async fetchAllReview(){
+      await ReviewStore.dispatch("fetchAllReview");
+      this.all_review = await ReviewStore.getters.allReview;
+      
+    },
     async fetchCafeStarData() {
       await CafeStore.dispatch("fetchCafe");
       this.cafe_star = await CafeStore.getters.cafe;

@@ -11,6 +11,7 @@ import ContactView from '../views/ContactView.vue'
 import ApproveView from '../views/admin/ApproveView.vue'
 import DetailApproveView from '../views/admin/DetailApproveView.vue'
 import MapView from '../components/MapMark.vue'
+import AuthUser from '@/store/AuthUser'
 const routes = [
   {
     path: '/map',
@@ -65,7 +66,7 @@ const routes = [
   {
     path: '/approve',
     name: 'Approve',
-    component: ApproveView
+    component: ApproveView,
   },
   {
     path: '/detailApprove',
@@ -74,9 +75,45 @@ const routes = [
   },
 ]
 
+function isAuthorizedAdmin() {
+  if(AuthUser.getters.user){
+    if(AuthUser.getters.user.u_role === "admin"){
+      return true
+    }
+  }else{
+    return false
+  }
+}
+function isAuthorized() {
+  if(AuthUser.getters.isAuthen){
+    return true
+  }else{
+    return false
+  }
+}
+
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+router.beforeEach((to, from, next) => {
+  if (to.path === '/approve' || to.path === '/detailApprove') {
+    if (!isAuthorizedAdmin()) {
+      alert("You are not authorized to access this page. Please log in with an authorized account.");
+      next('/');
+    } else {
+      next();
+    }
+  }else if(to.path === '/add'){
+    if (!isAuthorized()) {
+      alert("You are not authorized to access this page. Please log in");    
+      next('/login');
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
 
 export default router

@@ -120,7 +120,8 @@ export default new Vuex.Store({
                     c_status: payload.c_status,
                     c_lat: c_lat,
                     c_lon: c_lon,
-                    c_map:payload.c_map
+                    c_map:payload.c_map,
+                    u_id:payload.u_id
                 }
                 
                 let res = await Axios.post(url, body)
@@ -224,6 +225,46 @@ export default new Vuex.Store({
                 let url = api_endpoint + '/api/cafe/reject/'+id
                    
                 let res = await Axios.delete(url)
+                if (res.status === 200 || res.status === 201) {
+                    return {
+                        success: true,                     
+                    }
+                } else {
+                    console.log("NOT 200", res)
+                }
+            }catch(e){
+                if (e.response.status === 400) {
+                    console.log(e)
+                    console.log("ERROR  " + e.response.status + " |   " + e.response.statusText)
+                    return {
+                        success: false,
+                        message: e.response.data.error,
+                    }
+                } else {
+                    console.error(e)
+                    console.log("ERROR  " + e.response.status + " |   " + e.response.statusText)
+                    return {
+                        success: false,
+                        message: e.response.data,
+                    }
+                }
+            }
+        },
+        async contact({ commit },payload) {
+            try{
+                console.log(payload)
+                let url = api_endpoint + '/api/user/contact'
+                let body = {
+                    firstname: payload.firstname,
+                    lastname: payload.lastname,
+                    email: payload.email,
+                    subject: payload.subject,
+                    detail: payload.detail,
+                    u_id: payload.u_id,
+                    u_username: payload.u_username            
+                }
+                console.log(body)
+                let res = await Axios.post(url, body)
                 if (res.status === 200 || res.status === 201) {
                     return {
                         success: true,                     

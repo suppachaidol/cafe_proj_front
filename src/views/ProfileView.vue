@@ -56,7 +56,8 @@
                                                     alt=""
                                                     />
                                                     <h5 class="card-title mt-2">{{fav.c_name}}</h5>
-                                                    <p class="card-text"><i class="bi bi-star-fill" style="color: #ff9529"></i> {{fav.c_star.toFixed(1)}} ({{fav.c_review}} reviews)</p>
+                                                    <p class="card-text" v-if="fav.c_star>0"><i class="bi bi-star-fill" style="color: #ff9529"></i> {{fav.c_star.toFixed(1)}} ({{fav.c_review}} reviews)</p>
+                                                    <p class="card-text" v-else><i class="bi bi-star-fill" style="color: #ff9529"></i> - ({{fav.c_review}} reviews)</p>
                                                     <button @click="detailBTN(fav.c_id)" href="#" class="btn btn-primary" style="direction: rtl"
                                                     >View</button
                                                     >

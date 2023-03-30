@@ -11,23 +11,23 @@
                 </section>
             </div>
         </div>
-        <div class="p-3 text-dark" style = "background-color:#b49c74">
+        <div class="p-3 text-dark vh-100" style = "background-color:#b49c74">
             <section class="pt-5  align-items-center d-flex  ">
             <div class="container ">
                 <div class="row ">
                     <div class="col-12 col-md-6 col-lg-5">
                     <h2 class=" text-center ">Contact Us</h2>
                     <p class=" "></p>
-                    <p class=" ">Should you have any enquiry or suggestion regarding our products, services or promotions please contact us. Please fill out the contact form and we will respond as soon as possible.</p>
+                    <p class=" ">Should you have any enquiry or suggestion regarding our services please contact us. Please fill out the contact form and we will respond as soon as possible.</p>
                     <p class=" mt-5">
                         <strong><i class="bi bi-send"></i> Email : </strong>
-                        <a href="#">CafeHopper@gmail.com</a>
+                        <a href="#" style="color:black">cafehopper.ku@gmail.com</a>
                     </p>
                     <p class=" ">
                         <strong><i class="bi bi-telephone-fill"></i> Phone : </strong>
-                        <a href="#">+66 123456789</a>
+                        <a href="#" style="color:black">+66 123456789</a>
                     </p>
-                    <div align = 'right'><strong>Thankyou</strong></div>
+                    <div align = 'right'><strong>Thank you</strong></div>
                     <div align = 'right'>Puri Pitoonjaroenlap</div>
                     <div align = 'right'>Suppachai Glubpean</div>
                 </div>
@@ -36,36 +36,36 @@
                     <div class="row">
                     <div class="col">
                         <input type="text" class="form-control"
-                        placeholder="First name">
-
+                        placeholder="First name" v-model="state.firstname">
+                        
                     </div>
                     <div class="col">
                         <input type="text" class="form-control"
-                        placeholder="Last name">
+                        placeholder="Last name" v-model="state.lastname">
                     </div>
                     </div>
                     <div class="row mt-4">
                     <div class="col">
                         <input type="email" class="form-control"
-                        placeholder="Enter email">
+                        placeholder="Enter email" v-model="state.email">
                     </div>
                     </div>
                     <div class="row mt-4">
                     <div class="col">
-                        <input type="email" class="form-control"
-                        placeholder="Subject">
+                        <input type="text" class="form-control"
+                        placeholder="Subject" v-model="state.subject">
                     </div>
                     </div>
                     <div class="row mt-4">
                     <div class="col">
                         <textarea class="form-control border border-secondary"
                         name="message" rows="3" placeholder="How can we help?"
-                        style="" spellcheck="false"></textarea>
+                        style="" spellcheck="false" v-model="state.detail"></textarea>
                     </div>
                     </div>
                     <div class="row mt-4">
                         <div class="col">
-                            <button type="submit" class="btn btn-primary">Send</button>
+                            <button type="button" class="btn btn-primary" @click="sendContact">Send</button>
                         </div>
                     </div>
                 </form>
@@ -79,7 +79,79 @@
 </template>
 
 <script>
-    
+import CafeStore from "@/store/cafe";
+import AuthUser from '@/store/AuthUser';
+import Swal from "sweetalert2";
+import useValidate from "@vuelidate/core";
+import { required, email } from "@vuelidate/validators";
+import { reactive, computed } from "vue";
+export default {
+    setup() {
+    const state = reactive({
+        firstname:"",
+        lastname:"",
+        email:"",
+        subject:"",
+        detail:"",
+        u_id: AuthUser.getters.user.u_id,
+        u_username: AuthUser.getters.user.u_username,
+    });   
+    const rules = computed(() => {
+      return {
+        firstname:{required},
+        lastname:{required},
+        email:{required, email},
+        subject:{required},
+        detail:{required},
+      };
+    });
+    const v$ = useValidate(rules, state);
+
+    return {
+      state,
+      v$,
+    };
+  },
+  methods:{
+    async sendContact(){
+        this.v$.$validate();
+        if (this.v$.$error) {
+        Swal.fire({
+          icon: "error",
+          text: "Please fill out correct information.",
+          confirmButtonColor: "#dd6b55",
+        });
+      } else {
+          let payload = {
+              firstname:this.state.firstname,
+              lastname:this.state.lastname,
+              email:this.state.email,
+              subject:this.state.subject,
+              detail:this.state.detail,
+              u_id: this.state.u_id,
+              u_username: this.state.u_username
+          }
+          let res = await CafeStore.dispatch("contact",payload);
+          if(res.success){
+            await Swal.fire({
+            icon: "success",
+            title: "Send success",
+            text: "Thank you for contacting us.",
+            showConfirmButton: false,
+            timer: 1500,
+            });
+            this.$router.go(0)
+          }else{
+            Swal.fire({
+            icon: "error",
+            text: "Send failed",
+            confirmButtonColor: "#dd6b55",
+          });
+          }
+      }
+    },
+  },
+}
 </script>
 
 <style>
