@@ -59,7 +59,7 @@
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  {{ selectedFilterOption ? selectedFilterOption : "Filter" }}
+                  {{ selectedFilterOption ? selectedFilterOption : "Sort By" }}
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <li v-for="(option, index) in filterOptions" :key="index">
@@ -121,7 +121,7 @@
                     type="button"
                     @click="clear"
                   >
-                    Clear Filter
+                    Clear map & filter
                   </button>
                   
                 </div>
@@ -486,6 +486,12 @@ export default {
             },
             map: this.map,
             title: place.c_name,
+            label: {
+            text: place.c_name,
+            color: "black",
+            fontSize: "14px",
+            fontWeight: "bold"
+            },
           });
           newMarkers.push(marker);
           bounds.extend(marker.getPosition());
@@ -507,11 +513,17 @@ export default {
             };
 
             // Create marker for user's location
-            const userMarker = new google.maps.Marker({
-              position: userLatLng,
-              map: this.map,
-              title: "Your Location",
-            });
+            // const userMarker = new google.maps.Marker({
+            //   position: userLatLng,
+            //   map: this.map,
+            //   title: "Your Location",
+            //   label: {
+            //     text: "Your Location",
+            //     color: "black",
+            //     fontSize: "14px",
+            //     fontWeight: "bold"
+            //   },
+            // });
 
             //Create direction service and renderer
             const directionsService = new google.maps.DirectionsService();
@@ -580,7 +592,6 @@ export default {
     async getCurrentLocation() {
       if (this.nearBy == true) {
         const success = (position) => {
-          //console.log(position.coords)
           // this.latitude = position.coords.latitude
           // this.longitude = position.coords.longitude
           this.latitude = parseFloat(13.845931502442474);
@@ -627,6 +638,12 @@ export default {
           position: userLatLng,
           map: this.map,
           title: "Your Location",
+          label: {
+            text: "Your Location",
+            color: "black",
+            fontSize: "14px",
+            fontWeight: "bold"
+          },
         });
       });
     });

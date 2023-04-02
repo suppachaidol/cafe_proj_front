@@ -103,7 +103,7 @@ export default {
       }else{
         Swal.fire({
           icon: 'error',
-          text: "Login failed",
+          text: res.message,
           confirmButtonColor: '#dd6b55'
         })
         this.form.u_password = ""

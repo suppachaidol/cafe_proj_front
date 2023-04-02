@@ -1070,19 +1070,33 @@ export default {
 
           //upload image dish1-4
           await this.uploadDish(res.c_id);
-
-          Swal.fire({
+          if (AuthUser.getters.user.u_role === "admin") {
+            Swal.fire({
             icon: "success",
             title: "Add cafe successful",
-            text: "Waiting for admin approval",
             showConfirmButton: false,
             timer: 2000,
-          });
+            });
+          }else{
+            Swal.fire({
+              icon: "success",
+              title: "Add cafe successful",
+              text: "Waiting for admin approval",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+          }
           this.$router.push("/");
-        } else {
+        } else if(res.message == "This cafe already exists") {
           Swal.fire({
             icon: "error",
-            text: "Please check your data",
+            text: res.message,
+            confirmButtonColor: "#dd6b55",
+          });
+        }else{
+          Swal.fire({
+            icon: "error",
+            text: "Add cafe failed",
             confirmButtonColor: "#dd6b55",
           });
         }
@@ -1105,7 +1119,6 @@ export default {
       };
       
       let res = await CafeStore.dispatch("addTime", payload);
-      //console.log(res);
     },
     async uploadDish(c_id) {
       const api_endpoint = "http://localhost:5000";

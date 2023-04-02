@@ -236,21 +236,22 @@ export default {
           fd.append("u_image", this.state.selectedFile);
           fd.append("u_id",res.u_id)
           const api_endpoint = "http://localhost:5000"
-          Axios.put(api_endpoint+"/api/user/upload-img", fd)
+          await Axios.put(api_endpoint+"/api/user/upload-img", fd)
                 
 
-          Swal.fire({
+          await Swal.fire({
             icon: "success",
             title: "Registration successful",
             showConfirmButton: false,
             timer: 1500,
           });
           await AuthUser.dispatch("login", loginForm);
-          this.$router.push("/");
+          await this.$router.replace("/");
+          await window.location.reload();
         } else {
           Swal.fire({
             icon: "error",
-            text: "Register failed",
+            text: res.message,
             confirmButtonColor: "#dd6b55",
           });
         }

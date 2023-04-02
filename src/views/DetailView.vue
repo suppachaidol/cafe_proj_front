@@ -529,10 +529,8 @@ import ReviewStore from "@/store/review";
 import UserCafeStore from "@/store/user_cafe";
 import AuthUser from "@/store/AuthUser";
 import Swal from "sweetalert2";
-import GoogleMap from "../components/GoogleMap.vue";
 
 export default {
-  //components: { GoogleMap },
   data() {
     return {
       cafe: [],
@@ -572,6 +570,7 @@ export default {
       this.fetchFavorite();
     }
   },
+
   methods: {
     async fetchAllCafe() {
       await CafeStore.dispatch("fetchCafe");
@@ -729,14 +728,14 @@ export default {
         this.fetchFavorite();
       }
     },
-    detailBTN(id) {
-       this.$router.push({ path: "/" }).then(() => {
+    detailBTN(id) { 
+      this.$router.push({path: "/"}).then(()=>{
         this.$router
           .push({ name: "Detail", params: { id: id } })
           .then(() => {
             window.scrollTo(0, 0);
-          });
-       });
+          }); 
+      })
     },
   },
   computed: {

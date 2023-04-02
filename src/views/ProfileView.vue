@@ -11,16 +11,17 @@
                                 :src="`http://localhost:5000/api/images/profile/${user.u_image}`"
                                 class="img-fluid mx-2 shadow-lg"
                                 alt="..."
-                                style="height : 20rem; border-radius:50%"
+                                style="height : 20rem; border-radius:50%; width:50%"
                                 />
-                            <h3 class="mt-3"><strong style="text-align: center">{{user.u_username}}</strong></h3>
+                            <h3 class="mt-4"><strong style="text-align: center">{{user.u_username}}</strong></h3>
                         </div> 
                 
                         <div class="container py-5 ">
-                        <div class="col-10 d-md-block mx-5">
+                        <div class="col-10 d-md-block mx-5" style="font-size:1.3rem">
                             <div class ="row pb-2">
                                 <div class="col" align = 'right'><strong>Name : </strong></div>
                                 <div class="col">{{user.u_name}}</div>
+                                
                             </div>
                             <div class ="row pb-2">
                                 <div class="col" align = 'right' ><strong>Email : </strong></div>
@@ -40,9 +41,12 @@
                     </div> 
                     <div class="col justify-content-center align-items-center" style="text-align: center">
                         <h3 class="mb-5"><strong>Your list</strong></h3>
-
-                        <div class="scrollable" v-scroll="onScroll">
+                        <div v-if="!fav_cafe.length" style="text-align:center;margin-top:200px">
+                            <h3>There is no favorite cafe.</h3>
+                        </div> 
+                        <div class="scrollable" v-scroll="onScroll" v-else>
                             <div class="row"  style=" width: 100% ">
+                                
                                 <div class="col-6" v-for="(fav, index) in fav_cafe" :key="index">
                                     <div class="container">
                                         <div class="col mb-3">
@@ -65,7 +69,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>  
+                                </div> 
                             </div>
                         </div>
 

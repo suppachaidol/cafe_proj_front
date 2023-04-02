@@ -1,5 +1,5 @@
 <template>
-  <div class=" container-fluid min-vh-100" style="background-color:#6c757d" id="bg">
+  <div class=" container-fluid min-vh-100" style="background-color:#f2eddd" id="bg">
     <div class="container-fluid pt-5" >
       <div class="row align-items-center justify-content-center text-center">
         <div class="col-12 col-md-5">
