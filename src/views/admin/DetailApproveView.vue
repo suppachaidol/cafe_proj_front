@@ -9,13 +9,13 @@
                 id="carouselExampleIndicators"
                 class="carousel slide"
                 data-bs-ride="carouselDetail"
-                style="margin-top: 1em"
+                style="margin-top: 1em;border: solid black 2px"
               >
                 <div class="carousel-inner">
                   <div
-                    class="carousel-item active"
                     v-for="(img, index) in cafe_images_place"
                     :key="index"
+                    :class="{ 'carousel-item': true, active: index === 0 }"
                   >
                     <img
                       :src="`http://localhost:5000/api/images/cafe/${img.i_name}`"
@@ -57,37 +57,41 @@
                   <span class="visually-hidden">Next</span>
                 </button>
               </div>
-              <div class="mt-2">
+              <div class="mt-2 ms-2">
                 <p v-html="iframe"></p>
               </div>
             </div>
 
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="font-size:1.25rem">
               <div class="row">
                 <div class="col-lg mb-3 ">
                     <h2>{{ cafe ? cafe[0].c_name : "" }}</h2>             
                 </div>
 
               </div>
-
+              
               <strong>Address</strong>
-              <div class="container">
+              <div class="container mt-2">
                 <div class="col">
                   {{ cafe ? cafe[0].c_location : "" }}
                 </div>
               </div>
+              <p class="mt-3">
 
+              </p>
               <strong>Service</strong>
-              <div class="container">
+              <div class="container mt-2">
                 <div class="col">
                   {{ cafe ? cafe[0].c_service : "" }}
                 </div>
               </div>
 
             
+            <p class="mt-3">
 
+              </p>
               <strong>Hours:</strong>
-              <div class="container">
+              <div class="container mt-2">
                 <div class="col">
                   <div>Monday: {{ time ? time[0].monday : ""}}</div>
                   <div>tuesday: {{ time ? time[0].tuesday : ""}}</div>
@@ -98,9 +102,11 @@
                   <div>Sunday: {{ time ? time[0].sunday : ""}}</div>
                 </div>
               </div>
+              <p class="mt-3">
 
+              </p>
               <strong>Detail</strong>
-              <div class="container">
+              <div class="container mt-2">
                 <div class="col">
                   {{ cafe ? cafe[0].c_detail : "" }}
                 </div>

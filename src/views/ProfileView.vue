@@ -19,21 +19,21 @@
                         <div class="container py-5 ">
                         <div class="col-10 d-md-block mx-5" style="font-size:1.3rem">
                             <div class ="row pb-2">
-                                <div class="col" align = 'right'><strong>Name : </strong></div>
-                                <div class="col">{{user.u_name}}</div>
+                                <div class="col" align = 'left'><strong>Name : </strong>{{user.u_name}}</div>
+                                
                                 
                             </div>
                             <div class ="row pb-2">
-                                <div class="col" align = 'right' ><strong>Email : </strong></div>
-                                <div class="col">{{user.u_email}}</div>
+                                <div class="col" align = 'left' ><strong>Email : </strong>{{user.u_email}}</div>
+                                
                             </div>
                             <div class ="row pb-2">
-                                <div class="col" align = 'right'><strong>Phone : </strong></div>
-                                <div class="col">{{user.u_phone}}</div>
+                                <div class="col" align = 'left'><strong>Phone : </strong>{{user.u_phone}}</div>
+                                
                             </div>
                             <div class ="row pb-2">
-                                <div class="col" align = 'right'><strong>Role : </strong></div>
-                                <div class="col">{{user.u_role}}</div>
+                                <div class="col" align = 'left'><strong>Role : </strong>{{user.u_role}}</div>
+                                
                             </div> 
                                     
                         </div>

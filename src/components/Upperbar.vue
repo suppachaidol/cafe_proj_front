@@ -32,7 +32,7 @@
               <a class="nav-link active" v-if="isAuthen()" aria-current="page" href="/add">Add Cafe</a>
             </li>
             <li v-if="role=='admin' && isAuthen()" class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/approve">Cafe Management</a>
+              <a class="nav-link active" aria-current="page" href="/approve">Approve Cafe</a>
             </li>
             
             <ul class="navbar-nav pb-2 mb-lg-0">

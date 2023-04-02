@@ -31,9 +31,9 @@
               >
                 <div class="carousel-inner">
                   <div
-                    class="carousel-item active"
                     v-for="(img, index) in state.urlImage"
                     :key="index"
+                    :class="{ 'carousel-item': true, active: index === 0 }"
                   >
                     <img
                       :src="`${img.url}`"
