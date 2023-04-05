@@ -480,7 +480,7 @@ export default {
     showMarkers(place) {
       /* eslint-disable */
       const loader = new Loader({
-        apiKey: "AIzaSyDdH-qwXfC5ZffV2-zVPLN38H4hsoLZcwE",
+        apiKey: process.env.API_KEY,
         version: "weekly",
         libraries: ["places"],
       });
@@ -531,10 +531,10 @@ export default {
           // Get user's current location
           navigator.geolocation.getCurrentPosition((position) => {
             const userLatLng = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-              // lat: parseFloat(13.845931502442474),
-              // lng: parseFloat(100.57119222183442),
+              // lat: position.coords.latitude,
+              // lng: position.coords.longitude,
+              lat: parseFloat(13.845931502442474),
+              lng: parseFloat(100.57119222183442),
             };
 
             // Create marker for user's location
@@ -622,10 +622,10 @@ export default {
     async getCurrentLocation() {
       if (this.nearBy == true) {
         const success = (position) => {
-          this.latitude = position.coords.latitude
-          this.longitude = position.coords.longitude
-          // this.latitude = parseFloat(13.845931502442474);
-          // this.longitude = parseFloat(100.57119222183442);
+          // this.latitude = position.coords.latitude
+          // this.longitude = position.coords.longitude
+          this.latitude = parseFloat(13.845931502442474);
+          this.longitude = parseFloat(100.57119222183442);
         };
         const error = () => {
           console.log("Unable to retrieve your location");
@@ -642,7 +642,7 @@ export default {
   mounted() {
     /* eslint-disable */
     const loader = new Loader({
-      apiKey: "AIzaSyDdH-qwXfC5ZffV2-zVPLN38H4hsoLZcwE",
+      apiKey: process.env.API_KEY,
       version: "weekly",
       libraries: ["places"],
     });
@@ -657,10 +657,10 @@ export default {
       });
       navigator.geolocation.getCurrentPosition((position) => {
         const userLatLng = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-          // lat: parseFloat(13.845931502442474),
-          // lng: parseFloat(100.57119222183442),
+          // lat: position.coords.latitude,
+          // lng: position.coords.longitude,
+          lat: parseFloat(13.845931502442474),
+          lng: parseFloat(100.57119222183442),
         };
 
         // Create marker for user's location
