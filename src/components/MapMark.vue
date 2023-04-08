@@ -640,7 +640,6 @@ export default {
   },
 
   mounted() {
-    console.log(process.env.VUE_APP_API_KEY)
     /* eslint-disable */
     const loader = new Loader({
       apiKey: process.env.VUE_APP_API_KEY,
