@@ -480,7 +480,7 @@ export default {
     showMarkers(place) {
       /* eslint-disable */
       const loader = new Loader({
-        apiKey: process.env.API_KEY,
+        apiKey: process.env.VUE_APP_API_KEY,
         version: "weekly",
         libraries: ["places"],
       });
@@ -640,9 +640,10 @@ export default {
   },
 
   mounted() {
+    console.log(process.env.VUE_APP_API_KEY)
     /* eslint-disable */
     const loader = new Loader({
-      apiKey: process.env.API_KEY,
+      apiKey: process.env.VUE_APP_API_KEY,
       version: "weekly",
       libraries: ["places"],
     });
